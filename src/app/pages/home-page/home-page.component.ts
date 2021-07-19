@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
 
 
   public SETTINGS: string[] = [];
+  public SETTINGS2: string[] = [];
   
   constructor(private $cart: CartService) { 
     this.isCartOpen$ = this.$cart.isOpen$;
