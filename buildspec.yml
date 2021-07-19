@@ -1,6 +1,8 @@
 version: 0.2
 phases:
   install:
+    runtime-versions:
+      nodejs: 12.14
     commands:
       - echo installing dependencies...
       - npm i -g @angular/cli
@@ -13,4 +15,7 @@ phases:
       - ng build --aot
   post_build:
     commands:
-      - aws s3 sync dist/ s3://ng-bsc --delete
+      - echo Build of BSC Angular App completed on `date`
+  artifacts:
+    files:
+      - dist/**/*

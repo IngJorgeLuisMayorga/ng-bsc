@@ -5,3 +5,6 @@
 5. ProductDuo, añadir a Wishlist, por el setTimeout, se rompe luego de añadir y quitar, revisar lo de los timepos y quitarlos.
 6. Si esta Auth, en el carrito reemplazar Tu Carrito BubbleLover por el nombre de usuario. 
 7. Tener en cuenta el max de stock por producto, para cuando se hace el + y  - del carrito. No dejar agregar mas de max de stock disponible
+
+
+      - aws s3 sync dist/ s3://ng-bsc --delete
