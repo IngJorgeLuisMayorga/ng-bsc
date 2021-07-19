@@ -16,6 +16,6 @@ phases:
   post_build:
     commands:
       - echo Build of BSC Angular App completed on `date`
-  artifacts:
-    files:
-      - dist/**/*
+artifacts:
+  files:
+    - dist/**/*
