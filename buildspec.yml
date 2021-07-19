@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo installing dependencies...
+      - npm i -g @angular/cli
+      - npm install --save-dev @angular-devkit/build-angular
+      - npm install
+  build:
+    commands:
+      - echo testing...
+      - echo building...
+      - ng build --aot
+  post_build:
+    commands:
+      - aws s3 sync dist/ s3://ng-bsc --delete

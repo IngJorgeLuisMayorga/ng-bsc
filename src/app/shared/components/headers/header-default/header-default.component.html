@@ -1,0 +1,77 @@
+<header class="header-nav">
+    <ul class="header-nav--row">
+        <li>
+            <img class="bsc-waves" src="../../../../../assets/header-waves.png">
+        </li>
+        <li>
+            <ul class="header-nav--menu">
+                <li class="menu-wrapper">
+                    <div class="menu-title"> <span>PRODUCTOS</span></div>
+                    <ul class="menu-items">
+                        <li>PRODUCT 1</li>
+                        <li>PRODUCT 2</li>
+                        <li>PRODUCT 3</li>
+                        <li>PRODUCT 4</li>
+                    </ul>
+                </li>
+                <li class="menu-wrapper">
+                    <div class="menu-title"> <span>RUTINA</span></div>
+                    <ul class="menu-items">
+                        <li>PRODUCT 1</li>
+                        <li>PRODUCT 2</li>
+                        <li>PRODUCT 3</li>
+                        <li>PRODUCT 4</li>
+                    </ul>
+                </li>
+                <li class="menu-wrapper">
+                    <div class="menu-title"> <span>¿TIPO DE PIEL?</span> </div>
+                    <ul class="menu-items">
+                        <li>PRODUCT 1</li>
+                        <li>PRODUCT 2</li>
+                        <li>PRODUCT 3</li>
+                        <li>PRODUCT 4</li>
+                    </ul>
+                </li>
+                <li class="menu-wrapper">
+                    <div class="menu-title"> <span>MARCAS</span> </div>
+                    <ul class="menu-items">
+                        <li>PRODUCT 1</li>
+                        <li>PRODUCT 2</li>
+                        <li>PRODUCT 3</li>
+                        <li>PRODUCT 4</li>
+                    </ul>
+                </li>
+                <li class="menu-wrapper">
+                    <div class="menu-title"><span>PUNTOS</span></div>
+                    <ul class="menu-items">
+                        <li>PRODUCT 1</li>
+                        <li>PRODUCT 2</li>
+                        <li>PRODUCT 3</li>
+                        <li>PRODUCT 4</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <ul class="heaver-icons-row" style="width: 100%;">
+                <li><img class="bsc-logo" src="../../../../../assets/header-bsc.png" (click)="goHome()"></li>
+                <li class="bsc-icon anim-hover" (click)="doOpenSearchSidebar()">
+                    <img class="anim-hover--on-hover" src="../../../../../assets/header-icon-lupa--hover.jpg">
+                    <img class="anim-hover--off-hover" src="../../../../../assets/header-icon-lupa.png">
+                </li>
+                <li class="bsc-icon anim-hover" (click)="doOpenProfileSidebar()">
+                    <img class="anim-hover--on-hover" src="../../../../../assets/header-icon-persona--hover.jpg">
+                    <img class="anim-hover--off-hover" src="../../../../../assets/header-icon-persona.png">
+                </li>
+
+                <li class="bsc-icon anim-hover" (click)="doOpenCartSidebar()">
+                    <img class="anim-hover--on-hover" src="../../../../../assets/header-icon-cart--hover.jpg">
+                    <img class="anim-hover--off-hover" src="../../../../../assets/header-icon-cart.png">
+                    <div class="notification-label" *ngIf="(cartSize$ | async)">
+                        <span>{{ (cartSize$ | async) }}</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</header>

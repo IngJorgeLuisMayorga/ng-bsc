@@ -1,0 +1,138 @@
+<div class="page home-page">
+
+    <div class="page-header">
+        <app-header-ad></app-header-ad>
+        <app-header-default></app-header-default>
+    </div>
+
+    <div class="page-sidebar" [ngClass]="{'active': (isCartOpen$ | async) }">
+        <app-cart-sidebar *ngIf="(isCartOpen$ | async)"></app-cart-sidebar>
+        <app-profile-sidebar *ngIf="false"></app-profile-sidebar>
+        <app-search-sidebar *ngIf="false"></app-search-sidebar>
+    </div>
+
+    <div class="page-container">
+
+        <section class="section--cover">
+            <img src="../../../assets/home-cover-placeholder.png">
+        </section>
+
+        <section class="section--duo">
+
+            <div class="section-title">
+                <h1>Duo del Mes</h1>
+                <img src="../../../assets/section-title-line.png">
+            </div>
+
+            <div class="section-content">
+                <ul>
+                    <li *ngFor="let product of products | filterByDuo">
+                        <app-product-duo-card 
+                            [id]="product.id" 
+                            [product]="product" 
+                            [price]="product.duo.price"
+                            [discount]="product.duo.discount"
+                            [productA]="products | filterById : product.duo.productA_id"
+                            [productB]="products | filterById : product.duo.productB_id"></app-product-duo-card>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+
+        <section class="section--3-product">
+            <div class="section-title">
+                <h1>Bubble Box</h1>
+                <img src="../../../assets/section-title-line.png">
+            </div>
+
+            <div class="section-content">
+                <ul class="x3-products">
+                    <li *ngFor="let product of products | filterByHomeCards">
+                        <app-product-card [product]="product"></app-product-card>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section--info">
+
+            <div class="section-content">
+                <ul class="info-ul">
+            
+                    <li>
+                        <div class="bsc-icon anim-hover">
+                            <img class="anim-hover--on-hover" src="../../../../../assets/info/envios_02k.png">
+                            <img class="anim-hover--off-hover" src="../../../../../assets/info/envios_01k.png">
+                        </div>
+                        <h1>Envíos a toda Colombia</h1>
+                        <h2>gratis a partir de $300.000 COP</h2>
+                    </li>
+                    <li>
+                    <div class="bsc-icon anim-hover">
+                        <img class="anim-hover--on-hover" src="../../../../../assets/info/puntos_02k.png">
+                        <img class="anim-hover--off-hover" src="../../../../../assets/info/puntos_01k.png">
+                    </div>
+                    <h1>Sumas puntos BSC</h1>
+                    <h2>con cada compra que hagas</h2>
+                </li>
+                <li>
+                    <div class="bsc-icon anim-hover">
+                        <img class="anim-hover--on-hover" src="../../../../../assets/info/muestras_02k.png">
+                        <img class="anim-hover--off-hover" src="../../../../../assets/info/muestras_01k.png">
+                    </div>
+                    <h1>Muestras gratis</h1>
+                    <h2>en todos los pedidos</h2>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+
+        <section class="section--products-slider">
+
+            <div class="section-title TabHeaders">
+                <div class="swiperTab TabHeader" [ngClass]="{'active': swiperTab === 'NEWS'}" (click)="swiperTab = 'NEWS'">
+                    <h1>Nuevos</h1>
+                    <img src="../../../assets/section-title-line.png">
+                </div>
+                <div class="line"></div>
+                <div class="swiperTab TabHeader" [ngClass]="{'active': swiperTab === 'FAVS'}" (click)="swiperTab = 'FAVS'">
+                    <h1>Favoritos</h1>
+                    <img src="../../../assets/section-title-line.png">
+                </div>
+            </div>
+
+            <div class="section-content TabSwiper">
+                <ul *ngIf="swiperTab === 'NEWS'">
+                    <swiper [slidesPerView]="4" [spaceBetween]="30" (swiper)="onSwiper($event)"
+                        (slideChange)="onSlideChange()">
+                        <ng-template swiperSlide *ngFor="let product of products | filterByHomeNews">
+                            <li>
+                                <app-product-card [product]="product"></app-product-card>
+                            </li>
+                        </ng-template>
+                    </swiper>
+                </ul>
+                <ul *ngIf="swiperTab === 'FAVS'">
+                    <swiper [slidesPerView]="4" [spaceBetween]="30" (swiper)="onSwiper($event)"
+                        (slideChange)="onSlideChange()">
+                        <ng-template swiperSlide *ngFor="let product of products | filterByHomeFavs">
+                            <li>
+                                <app-product-card [product]="product"></app-product-card>
+                            </li>
+                        </ng-template>
+                    </swiper>
+                </ul>
+            </div>
+        </section>
+
+        <section></section>
+
+    </div>
+
+    <div class="page-footer">
+        <app-footer-default></app-footer-default>
+    </div>
+
+</div>

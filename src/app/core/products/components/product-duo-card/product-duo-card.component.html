@@ -1,0 +1,123 @@
+<div class="card duo-card">
+
+    <div class="card-a">
+        <app-product-card [product]="productA" [discount]="(duo.discount || 0)" [mode]="'minified'"></app-product-card>
+    </div>
+
+    <div class="symbol-add">
+        <span>+</span>
+    </div>
+
+    <div class="card-b">
+        <app-product-card [product]="productB" [discount]="(duo.discount || 0)" [mode]="'minified'"></app-product-card>
+    </div>
+
+    <div class="symbol-equal">
+        <span>=</span>
+    </div>
+
+    <div class="info">
+        
+   
+        <div class="card-bottom" *ngIf="duo">
+
+            <h1 class="card-bottom--discounted-price" >
+                {{ ( ( (productA.price + productB.price) || 0)*(1 - (duo?.discount || 0)) | currency:'$':'symbol':'2.0') }}
+            </h1>
+
+            <h1 class="card-bottom--original-price" style="opacity: 1;">
+                {{ ( (productA.price + productB.price) | currency:'$':'symbol':'2.0') }}
+            </h1>
+
+            <h1 class="card-bottom--original-price" style="display: none;">
+                {{ (duo.price | currency:'$':'symbol':'2.0') }}
+            </h1>
+        
+            <h1 class="card-bottom--label-name">
+                {{ (product?.name) }}
+            </h1>
+        
+
+            <div class="card-bottom--line">
+               
+            </div>
+        <div>
+            
+        <h1 class="card-bottom--btn btn-add" [ngClass]="{ 
+            'black': status === 'none' , 
+            'spinning': status === 'waiting' , 
+            'pink': status === 'added'
+        }">
+            <span class="spinner" *ngIf="(cartIsUpdating$ | async) === product.id">
+                <img src="http://shop.bubblesskincare.com/wp-content/uploads/2020/12/spinner-1.gif">
+            </span>
+
+           
+            <div class="not-spinner" (click)="addToCart()"
+                *ngIf="!((cartIsUpdating$ | async) === product.id) && ((cartProductItems$ | async) || 0) === 0">
+                <div><span>!Lo quiero!</span></div>
+                <div>
+                    <div class="hvr">
+                        <img class="on-hvr" src="../../../../../assets/5_BSC.png">
+                        <img class="off-hvr"
+                            src="../../../../../assets/Carro de compra_blanco50.png">
+                    </div>
+                </div>
+            </div>
+
+            <span class="label-agregado"
+                *ngIf="!((cartIsUpdating$ | async) === product.id) && ((cartProductItems$ | async) || 0) > 0">
+                ¡AGREGADO!
+            </span>
+        </h1>
+
+        
+        <h1 class="card-bottom--btn btn-add-to-wishlist" [ngClass]="{'inWishlist': (inWishlist$ | async) }"
+        (click)="toogleToWishlist()">
+
+        <div>
+            <div class="add-to-wishlist-img anim-hover">
+                <img class="anim-hover--on-hover" src="../../../../../assets/2_BSC.png">
+                <img class="anim-hover--off-hover" src="../../../../../assets/1_BSC.png">
+            </div>
+        </div>
+        <div>
+            <a class="add-to-wishlist-a"> Añadir a favoritos </a>
+        </div>
+
+
+        <div>
+            <div class="remove-to-wishlist-img anim-hover">
+                <img class="anim-hover--on-hover" src="../../../../../assets/4_BSC.png">
+                <img class="anim-hover--off-hover" src="../../../../../assets/3_BSC.png">
+            </div>
+        </div>
+        <div>
+            <a class="remove-to-wishlist-a"> Eliminar de favoritos </a>
+        </div>
+
+    </h1>
+
+        <h1 class="card-bottom--btn btn-add-menu" *ngIf="((cartProductItems$ | async) || 0) > 0">
+            <div class="ctrls-qty">
+                <span class="qty">
+                    {{
+                    ((cartProductItems$ | async | json))
+                    }}
+                </span>
+
+                <button class="min" (click)="removeFromCart()"> <span> - </span> </button>
+                <button class="add" (click)="addToCart()"> <span> + </span> </button>
+
+            </div>
+        </h1>
+
+    </div>
+        
+        </div>
+    
+
+    </div>
+
+
+</div>

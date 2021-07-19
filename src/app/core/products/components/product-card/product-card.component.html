@@ -1,0 +1,142 @@
+<div class="card product-card">
+
+    <div class="card-wrapper">
+        <div class="card-upper">
+
+            <div class="card-picture">
+                <div class="card-picture--front">
+                    <img [src]="product.image_src">
+                </div>
+                <div class="card-picture--back" [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (inCartlist$ | async)}"></div>
+            </div>
+
+
+            <div class="card-discount" *ngIf="(discount || product?.discount)">
+                -{{ (discount || product.discount) * 100 | number }}%
+            </div>
+
+
+            <div class="card-wishlist" *ngIf="true || !(mode === 'minified')"
+                [ngClass]="{'inWishlist': (inWishlist$ | async) }">
+               
+                <div class="card-wishlist--wrapper anim-hover" (click)="toogleToWishlist()">
+                    <img class="anim-hover--on-hover" src="../../../../../assets/heart.png">
+                    <img class="anim-hover--off-hover" src="../../../../../assets/heart_gray.png">
+                </div>
+
+            </div>
+
+        </div>
+        <div class="card-bottom">
+
+            <h1 class="card-bottom--discounted-price">
+                {{ (
+                (product?.price || 0)*(1 - ( discount || product?.discount || 0))
+                | currency:'$':'symbol':'2.0'
+                ) }}
+            </h1>
+
+            <h1 class="card-bottom--original-price" [ngClass]="{ 'color' : isProductDiscount(product) } ">
+                {{ (product?.price | currency:'$':'symbol':'2.0') }}
+            </h1>
+
+            <h1 class="card-bottom--label-name">
+                <!--  BUBBLE BOX PIEL SECA BUBBLE BOX PIEL SECA BUBBLEAB -->
+                {{ (product?.name) }} 
+
+                <br>
+
+                <strong>// {{ 'BSC' }}</strong>
+
+            </h1>
+
+
+            <div class="card-bottom--line" *ngIf="!(mode === 'minified')">
+            </div>
+
+            <div *ngIf="!(mode === 'minified')">
+                <h1 class="card-bottom--btn btn-add" [ngClass]="{ 
+                    'black': status === 'none' , 
+                    'spinning': status === 'waiting' , 
+                    'pink': status === 'added'
+                }">
+                    <span class="spinner" *ngIf="(cartIsUpdating$ | async) === product.id">
+                        <img src="http://shop.bubblesskincare.com/wp-content/uploads/2020/12/spinner-1.gif">
+                    </span>
+
+                    <div class="not-spinner" (click)="addToCart()"
+                        *ngIf="!((cartIsUpdating$ | async) === product.id) && ((cartProductItems$ | async) || 0) === 0">
+                        <div><span>!Lo quiero!</span></div>
+                        <div>
+                            <div class="hvr">
+                                <img class="on-hvr" src="../../../../../assets/5_BSC.png">
+                                <img class="off-hvr"
+                                    src="../../../../../assets/Carro de compra_blanco50.png">
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="label-agregado add-to-wishlist-amin"
+                         (click)="removeAllFromCart()"
+                        *ngIf="!((cartIsUpdating$ | async) === product.id) && ((cartProductItems$ | async) || 0) > 0">
+                        
+                        <div>
+                            <a class="add-to-wishlist-amin--hover-on"> ¡Eliminar!</a>
+                            <a class="add-to-wishlist-amin--hover-off"> ¡Agregado! </a>
+                        </div>
+    
+                        <img class="no-hvr" src="../../../../../assets/CARITA_BLANCO_BSC.png">
+                        <img class="hvr" src="../../../../../assets/CARITA_GRIS_BSC.png">
+                    </span>
+                </h1>
+
+                <h1 class="card-bottom--btn btn-add-menu" *ngIf="((cartProductItems$ | async) || 0) > 0">
+
+                    <div class="ctrls-qty">
+                        
+                        <span class="qty">
+                            {{
+                            ((cartProductItems$ | async | json))
+                            }}
+                        </span>
+
+                        <button class="min" (click)="removeFromCart()"> <span> - </span> </button>
+                        <button class="add" (click)="addToCart()"> <span> + </span> </button>
+
+                    </div>
+
+                </h1>
+
+
+                <h1 class="card-bottom--btn btn-add-to-wishlist" [ngClass]="{'inWishlist': (inWishlist$ | async) }"
+                    (click)="toogleToWishlist()">
+
+                    <div>
+                        <div class="add-to-wishlist-img anim-hover">
+                            <img class="anim-hover--on-hover" src="../../../../../assets/2_BSC.png">
+                            <img class="anim-hover--off-hover" src="../../../../../assets/1_BSC.png">
+                        </div>
+                    </div>
+                    <div>
+                        <a class="add-to-wishlist-a"> Añadir a favoritos </a>
+                    </div>
+
+
+                    <div>
+                        <div class="remove-to-wishlist-img anim-hover">
+                            <img class="anim-hover--on-hover" src="../../../../../assets/4_BSC.png">
+                            <img class="anim-hover--off-hover" src="../../../../../assets/3_BSC.png">
+                        </div>
+                    </div>
+                    <div>
+                        <a class="remove-to-wishlist-a"> Eliminar de favoritos </a>
+                    </div>
+
+                </h1>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

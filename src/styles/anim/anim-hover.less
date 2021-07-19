@@ -1,0 +1,28 @@
+.anim-hover{
+
+}
+
+.anim-hover .anim-hover--on-hover, .anim-hover .anim-hover--off-hover{
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.anim-hover .anim-hover--on-hover{
+    opacity: 0;
+}
+.anim-hover .anim-hover--off-hover{
+    opacity: 1;
+}
+.anim-hover:hover .anim-hover--on-hover{
+    opacity: 1;
+}
+.anim-hover:hover .anim-hover--off-hover{
+    opacity: 0;
+}
