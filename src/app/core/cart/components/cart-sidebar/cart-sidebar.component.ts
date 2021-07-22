@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import products from 'src/app/config/products';
 import { IProduct } from 'src/app/core/products/models/IProduct.model';
 import { CartService } from '../../services/cart.service';
-const MAX_FREE_SHIPPING = 6 * 100000;
+const MAX_FREE_SHIPPING = 3 * 100000;
 @Component({
   selector: 'app-cart-sidebar',
   templateUrl: './cart-sidebar.component.html',

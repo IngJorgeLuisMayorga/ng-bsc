@@ -64,11 +64,20 @@
                     </div>
                 </div>
             </div>
-
-            <span class="label-agregado"
-                *ngIf="!((cartIsUpdating$ | async) === product.id) && ((cartProductItems$ | async) || 0) > 0">
-                ¡AGREGADO!
+            
+            <span class="label-agregado add-to-wishlist-amin"
+                         (click)="removeAllFromCart()"
+                        *ngIf="!((cartIsUpdating$ | async) === product.id) && ((cartProductItems$ | async) || 0) > 0">
+                        
+                        <div>
+                            <a class="add-to-wishlist-amin--hover-on"> ¡Eliminar!</a>
+                            <a class="add-to-wishlist-amin--hover-off"> ¡Agregado! </a>
+                        </div>
+    
+                        <img class="no-hvr" src="../../../../../assets/CARITA_BLANCO_BSC.png">
+                        <img class="hvr" src="../../../../../assets/CARITA_GRIS_BSC.png">
             </span>
+
         </h1>
 
         
