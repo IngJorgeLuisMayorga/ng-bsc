@@ -89,7 +89,7 @@
     width: 100%;
     box-sizing: border-box;
     padding: 0.5em;
-    background-color: @color-clear-gray;
+    background-color: @color-mega-clear-gray;
     border: 1px dotted black;
   }
 
@@ -146,8 +146,8 @@
 
   .progress-wrapper--row img {
     display: block;
-    width: 2em;
-    height: 2em;
+    width: 3em;
+    height: 3em;
     object-fit: contain;
     object-position: center;
     z-index: 10;
@@ -345,7 +345,7 @@
   -ms-flex-align: center;
   align-items: center;
 
-  span{
+  span.eliminar{
     -webkit-order: 0;
     -ms-flex-order: 0;
     order: 0;
@@ -360,6 +360,13 @@
     
     letter-spacing: 1px;
     font-style: italic;
+
+    color: @color-black;
+    
+    font-size: 8px;
+    position: relative;
+    top: 7px;
+
 
   }
 
@@ -490,7 +497,7 @@
     &.tachado {
       font-family: 'Helvetica';
       font-weight: 600;
-      font-size: 14px;
+      font-size: 10px;
       letter-spacing: 1px;
       text-decoration: line-through;
       text-align: center;
@@ -502,9 +509,10 @@
       opacity: 0;
 
       text-align: left;
-      color: black;
       opacity: 1;
-      padding-top: 5px;
+      padding-top: 0px;
+
+      color: @color-black;
 
     }
   }
@@ -547,7 +555,7 @@
       border-bottom: 1px dotted @color-black;
       font-family: "Helvetica";
       font-weight: 300;
-      font-size: 18px;
+      font-size: 16px;
       display: inline-block;
       width: 1.5em;
       padding: 0.38em 0px;
@@ -555,6 +563,8 @@
       margin: 0px;
       background-color: rgba(0, 0, 0, 0);
       color: #333333;
+
+      font-style: normal;
     }
 
     button {
@@ -567,7 +577,7 @@
 
       display: inline-block;
       width: 2em;
-      padding: 0.2em 0.75em;
+      padding: 0.15em 0em;
 
       margin: 0px;
       margin: 0em;
@@ -681,6 +691,12 @@
   font-family: "Helvetica";
   font-size: 16px;
   text-align: center;
+  &.m1{
+    position: relative;
+    padding-left: 45px;
+    top: 10px;
+    font-size: 11px;
+  }
 }
 strong{
   font-weight: 900;
@@ -700,4 +716,19 @@ strong{
   margin: 0 auto;
   padding: 10px 0px;
   border: 1px dotted @color-black;
+}
+
+.msg-0{
+    padding-left: 46px !important;
+    font-weight: 900 !important;
+    font-size: 16px !important;
+    position: relative !important;
+    top: -10px !important;
+}
+.msg-300{
+    padding-right: 6px !important;
+    font-weight: 900 !important;
+    font-size: 16px !important;
+    position: relative !important;
+    top: -10px !important;
 }

@@ -32,7 +32,7 @@
                             <button class="min" (click)="removeFromCart(product)"> <span> - </span> </button>
                             <button class="add" (click)="addToCart(product)"> <span> + </span> </button>
 
-                            <span>eliminar</span>
+                            <span class="eliminar">eliminar</span>
     
                         </div>
 
@@ -57,8 +57,8 @@
         <div class="sidebar-progress">
             <div class="progress-wrapper">
                 <div class="progress-wrapper--row">
-                    <h5 class="sidebar--message" *ngIf="cartTotal < 300000">Te faltan {{ (300000 - cartTotal) | currency:'USD':'symbol' }} para que tu envio sea gratis</h5>
-                    <h5 class="sidebar--message" *ngIf="cartTotal >= 300000" style="padding-left: 25px;font-weight: 900;">Yei! Tienes envio gratis!</h5>
+                    <h5 class="sidebar--message m1" *ngIf="cartTotal < 300000">Te faltan {{ (300000 - cartTotal) | currency:'USD':'symbol' }} para que tu envio sea gratis</h5>
+                    <h5 class="sidebar--message m2" *ngIf="cartTotal >= 300000" style="padding-left: 25px;font-weight: 900;">Yei! Tienes envio gratis!</h5>
                 </div>
                 <div class="progress-wrapper--row">
                     <img src="../../../../../assets/header-ad-smile.png">
@@ -70,8 +70,8 @@
                     </div>
                 </div>
                 <div class="progress-wrapper--row">
-                    <h1>$0</h1>
-                    <h1>$300.000</h1>
+                    <h1 class="msg-0">$0</h1>
+                    <h1 class="msg-300">$300.000</h1>
                 </div>
             </div>
         </div>
