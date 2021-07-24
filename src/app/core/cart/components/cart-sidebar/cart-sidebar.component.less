@@ -195,9 +195,11 @@
   font-size: 12px;
   padding: 0.5em;
 
+
   display: block;
   width: 100%;
   box-sizing: border-box;
+  font-weight: 600;
 
   background-color: white;
   border-top: 1px dotted black;
@@ -206,13 +208,28 @@
 
   h1 {
     font-family: "Helvetica";
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 12px;
+    font-weight: 600;
     padding-bottom: 0.5em;
+    padding-top: 8px;
+    letter-spacing: 1px;
+    color: @color-black;
   }
 
   input[type="radio"] {
     cursor: pointer;
+    position: relative;
+    left: -5px;
+  }
+
+  label{
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 300;
+    color: @color-black;
+    strong{
+      font-size: 14px;
+    }
   }
 }
 
@@ -234,7 +251,8 @@
 .sidebar.cart-sidebar .sidebar-code {
   font-family: "Helvetica";
   font-size: 12px;
-  padding: 0.5em;
+  padding: 0em;
+
 
   display: block;
   width: 100%;
@@ -246,6 +264,8 @@
   background-color: white;
   color: black;
   border: 1px dotted black;
+
+  margin-top: 15px;
 
   .code-wrapper {
     display: -ms-flexbox;
@@ -279,16 +299,25 @@
     -ms-flex-item-align: auto;
     align-self: auto;
     padding: 1em;
+    border: none;
   }
 
   button {
     width: 80px;
+    font-weight: 600;
     color: @color-black;
     background-color: @color-mega-clear-gray;
     height: 100%;
     padding: 13px 0em;
     outline: none;
     border: none;
+
+    &:hover{
+      color: white;
+      background-color: @color-black;
+      font-weight: 600;
+    }
+
   }
 }
 
@@ -322,6 +351,15 @@
     border: none;
     padding: 1em;
     border: 1px solid black;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 300;
+
+    &:hover{
+      color: white;
+      font-weight: 600;
+      background-color: @color-black;
+    }
   }
 }
 
@@ -602,6 +640,7 @@
 
       &.min {
         margin-left: 12px;
+        border-right: 0px;
       }
 
       display: -ms-flexbox;
@@ -628,7 +667,9 @@
 
 .full-cart {
   width: 100%;
-  height: calc(100vh - 572px);
+  height: fit-content;
+  min-height: 150px;
+  max-height: calc(100vh - 572px);
   overflow-y: scroll;
 
   display: -ms-flexbox;
@@ -652,7 +693,9 @@
 }
 .empty-cart {
   width: 100%;
-  height: calc(100vh - 572px);
+  height: fit-content;
+  min-height: 200px;
+  max-height: calc(100vh - 572px);
 
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -693,9 +736,18 @@
   text-align: center;
   &.m1{
     position: relative;
-    padding-left: 45px;
+    padding-left: 48px;
     top: 10px;
-    font-size: 11px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+  &.m2{
+    position: relative;
+    padding-left: 48px;
+    top: 10px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    font-weight:600;
   }
 }
 strong{
@@ -716,19 +768,34 @@ strong{
   margin: 0 auto;
   padding: 10px 0px;
   border: 1px dotted @color-black;
+  h1{
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: @color-black;
+  }
+  h3{
+    position: relative;
+    padding-left: 0px;
+    top: 0px;
+    font-size: 10px;
+    letter-spacing: 0.5px;  
+    padding-top: 5px;
+  }
 }
 
 .msg-0{
-    padding-left: 46px !important;
+    padding-left: 48px !important;
     font-weight: 900 !important;
-    font-size: 16px !important;
+    font-size: 13px !important;
     position: relative !important;
     top: -10px !important;
+    color: @color-black;
 }
 .msg-300{
-    padding-right: 6px !important;
+    padding-right: 8px !important;
     font-weight: 900 !important;
-    font-size: 16px !important;
+    font-size: 13px !important;
     position: relative !important;
     top: -10px !important;
+    color: @color-black;
 }

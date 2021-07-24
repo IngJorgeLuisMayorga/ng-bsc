@@ -58,7 +58,7 @@
             <div class="progress-wrapper">
                 <div class="progress-wrapper--row">
                     <h5 class="sidebar--message m1" *ngIf="cartTotal < 300000">Te faltan {{ (300000 - cartTotal) | currency:'USD':'symbol' }} para que tu envio sea gratis</h5>
-                    <h5 class="sidebar--message m2" *ngIf="cartTotal >= 300000" style="padding-left: 25px;font-weight: 900;">Yei! Tienes envio gratis!</h5>
+                    <h5 class="sidebar--message m2" *ngIf="cartTotal >= 300000">Yei! Tienes envio gratis!</h5>
                 </div>
                 <div class="progress-wrapper--row">
                     <img src="../../../../../assets/header-ad-smile.png">
@@ -93,7 +93,7 @@
                 <input type="text" placeholder="¿Tienes un código de descuento?">
                 <button style="    height: 46px;
                 position: relative;
-                left: -4px;">Aplicar</button>
+                left: 0px;">Aplicar</button>
             </div>
         </div>
         <div class="sidebar-total">
