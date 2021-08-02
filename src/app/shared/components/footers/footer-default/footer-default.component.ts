@@ -179,6 +179,10 @@ export class FooterDefaultComponent implements OnInit {
     },
   ]
 
+  isFB_Hover = false;
+  isTikTok_Hover = false;
+  isInstagram_Hover = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -188,5 +192,26 @@ export class FooterDefaultComponent implements OnInit {
     return (menu.css && menu.css.css_class) ? menu.css.css_class : '';
     //return '';
   } 
+
+  setFB_Hover(){
+    this.isFB_Hover = true;
+  }
+  resetFB_Hover(){
+    this.isFB_Hover = false;
+  }
+
+  setTIKTOK_Hover(){
+    this.isTikTok_Hover = true;
+  }
+  resetTIKTOK_Hover(){
+    this.isTikTok_Hover = false;
+  }
+
+  setInstagram_Hover(){
+    this.isInstagram_Hover = true;
+  }
+  resetInstagram_Hover(){
+    this.isInstagram_Hover = false;
+  }
 
 }

@@ -10,7 +10,7 @@
                 </div>
                 
                 <br>
-                
+
                 <div class="footer-menu--items">
                     <ul>
                         <li *ngFor="let item of menu.items">
@@ -22,5 +22,25 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="wrapper social">
+        <img class="logo" src="../../../../../assets/footer/BSC LOGO.png">
+        
+        <div class="fb" (mouseenter) ="setInstagram_Hover() "  (mouseleave) ="resetInstagram_Hover()">
+            <img *ngIf="!isInstagram_Hover"class="hover-off" src="../../../../../assets/footer/IG BLANCO.png">
+            <img *ngIf="isInstagram_Hover" class="hover-on" src="../../../../../assets/footer/IG ROSADO.png">
+        </div>
+        
+        <div class="tiktok" (mouseenter) ="setTIKTOK_Hover() "  (mouseleave) ="resetTIKTOK_Hover()">
+            <img *ngIf="!isTikTok_Hover"class="hover-off" src="../../../../../assets/footer/FB BLANCO.png">
+            <img *ngIf="isTikTok_Hover" class="hover-on" src="../../../../../assets/footer/FB ROSADO.png">
+        </div>
+        
+        <div class="fb" (mouseenter) ="setFB_Hover() "  (mouseleave) ="resetFB_Hover()">
+            <img *ngIf="!isFB_Hover"class="hover-off" src="../../../../../assets/footer/FB BLANCO.png">
+            <img *ngIf="isFB_Hover" class="hover-on" src="../../../../../assets/footer/FB ROSADO.png">
+        </div>
+    
+       
     </div>
 </footer>
