@@ -1,15 +1,16 @@
 <footer>
     <div class="wrapper">
         <div class="footer-title">
-            <h1>Bubbles Skin Care  3</h1>
-            <img src="../../../../../assets/linedots2.png">
+            <h1 class="section-title">Bubbles Skin Care </h1>
         </div>
         <div class="footer-menus">
             <div class="footer-menu" *ngFor="let menu of menus" [ngClass]="getMenuCssClass(menu)">
                 <div class="footer-menu--title">
                     {{menu.title}}
-                    <img src="../../../../../assets/linedots2.png">
                 </div>
+                
+                <br>
+                
                 <div class="footer-menu--items">
                     <ul>
                         <li *ngFor="let item of menu.items">

@@ -7,7 +7,7 @@ export default [
         price:  184800,
         discount:  0.09,
         name: 'BUBBLE BOX PIEL SECA // BSC',
-        image_src: 'http://shop.bubblesskincare.com/wp-content/uploads/2020/11/ProductB.png',
+        image_src:  'https://source.unsplash.com/1600x900/?beauty&v='+Math.random(),
         quantity: 2,
         category: 'PIEL_SECA',
         isInHome: true
@@ -18,7 +18,7 @@ export default [
         price:  284800,
         discount:  0.05,
         name: 'BUBBLE BOX PIEL GRASA // BSC',
-        image_src: 'http://shop.bubblesskincare.com/wp-content/uploads/2020/11/Foto_1.jpg',
+        image_src:  'https://source.unsplash.com/1600x900/?beauty&v='+Math.random(),
         quantity: 9,
         category: 'PIEL_GRASA',
         isInHome: true
@@ -29,7 +29,7 @@ export default [
         price:  184800,
         discount:  0.21,
         name: 'BUBBLE BOX PIEL SECA // BSC',
-        image_src: 'http://shop.bubblesskincare.com/wp-content/uploads/2020/11/New-Project-2.png',
+        image_src: 'https://source.unsplash.com/1600x900/?beauty&v='+Math.random(),
         quantity: 2,
         category: 'PIEL_MIXTA',
         isInHome: true
@@ -40,7 +40,7 @@ export default [
         price:  184800,
         discount:  0.21,
         name: 'BUBBLE BOX PIEL SECA 2',
-        image_src: 'http://shop.bubblesskincare.com/wp-content/uploads/2020/11/New-Project-2.png',
+        image_src:  'https://source.unsplash.com/1600x900/?beauty&v='+Math.random(),
         quantity: 2,
         category: 'PIEL_MIXTA',
         isInHome: false
@@ -66,7 +66,7 @@ export default [
         price:  124800,
         discount:  0,
         name: 'BUBBLE BOX PIEL SECA BUBBLE BOX PIEL',
-        image_src: 'http://shop.bubblesskincare.com/wp-content/uploads/2020/11/ProductB.png',
+        image_src:  'https://source.unsplash.com/1600x900/?beauty&v='+Math.random(),
         quantity: 2,
         category: 'PIEL_SECA',
         isInHome: false
@@ -77,7 +77,7 @@ export default [
         price:  184800,
         discount:  0,
         name: 'BUBBLE BOX PIEL SECA',
-        image_src: 'http://shop.bubblesskincare.com/wp-content/uploads/2020/11/ProductB.png',
+        image_src:  'https://source.unsplash.com/1600x900/?beauty&v='+Math.random(),
         quantity: 2,
         category: 'PIEL_SECA',
         isInHome: false
@@ -88,7 +88,7 @@ export default [
         price:  184800,
         discount:  0.02,
         name: 'BUBBLE BOX PIEL SECA',
-        image_src: 'http://shop.bubblesskincare.com/wp-content/uploads/2020/11/ProductB.png',
+        image_src:  'https://source.unsplash.com/1600x900/?beauty&v='+Math.random(),
         quantity: 2,
         category: 'PIEL_SECA',
         isInHome: false
@@ -99,7 +99,7 @@ export default [
         price:  114300,
         discount:  0.59,
         name: 'BUBBLE BOX PIEL SECA',
-        image_src: 'http://shop.bubblesskincare.com/wp-content/uploads/2020/11/ProductB.png',
+        image_src: 'https://source.unsplash.com/1600x900/?beauty&v='+Math.random(),
         quantity: 2,
         category: 'PIEL_SECA',
         isInHome: false

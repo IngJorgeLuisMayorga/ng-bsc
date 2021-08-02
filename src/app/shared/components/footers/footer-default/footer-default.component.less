@@ -9,7 +9,6 @@ footer {
 
     background-size    : cover;
     background-position: center;
-    background-image   : url('../../../../../assets/home-cover-bg.png');
 
     width: 100%;
 }
@@ -27,6 +26,18 @@ footer .wrapper .footer-title{
     font-weight: 900;
     letter-spacing: 1px;
     color: white;
+    width: 100%;
+    box-sizing: border-box;
+    .section-title{
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+        color: white;
+        text-align: left;
+        padding-bottom: 1em;
+        border-bottom: 1px dotted white;
+    }
 }
 footer .wrapper .footer-menus{
 
@@ -66,6 +77,22 @@ footer .wrapper .footer-menus{
             padding: 1em 0em;
             text-decoration: none;
         }
+        &--title{
+            font-family: 'Helvetica';
+            font-size: 15px;
+            letter-spacing: 1px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+            padding-top: 0px;
+            padding-bottom: 15px;
+            color: white;
+            text-align: left;
+            border-bottom: 1px dotted white;
+        }
+
+        
     }
 
     .footer-menu.marcas {
@@ -98,4 +125,54 @@ footer .wrapper .footer-menus{
         width: 33.3333%;
     }
 
+}
+
+
+.footer-menu--items li{
+    font-family: 'Helvetica';
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+    padding-top: 7px;
+    padding-bottom: 2px;
+    line-height: 1.25em;
+    min-height: 0.5em;
+    color: white;
+    text-align: left;
+    padding: 0.2em 0em !important;
+}
+
+.footer-menu:nth-child(1) .footer-menu--title {
+    width: 139px;
+}
+
+.footer-menu:nth-child(2) .footer-menu--title {
+    width: 76px;
+}
+
+
+.footer-menu:nth-child(3) .footer-menu--title {
+    width: 124px;
+}
+
+
+.footer-menu:nth-child(4) .footer-menu--title {
+    width: 345px;
+}
+
+
+.footer-menu:nth-child(5) .footer-menu--title {
+    width: 100px;
+}
+
+
+.footer-menu:nth-child(1){
+    width: 200px !important;
+}
+
+.footer-menu:nth-child(2){
+    width: 141px !important;
 }
