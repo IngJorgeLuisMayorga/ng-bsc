@@ -15,10 +15,14 @@ footer {
 
 footer .wrapper {
     display: block;
-    width: 1400px;
+    width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 2em;
+    padding: 3em;
+    padding-bottom: 0em;
+    &.social{
+        padding-top: 1.5em;
+    }
 }
 
 footer .wrapper .footer-title{
@@ -55,9 +59,9 @@ footer .wrapper .footer-menus{
     -webkit-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-align-content: center;
     -ms-flex-line-pack: center;
     align-content: center;
@@ -102,23 +106,23 @@ footer .wrapper .footer-menus{
     .footer-menu.marcas .footer-menu--items ul{
         width: 100%;
         display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-align-content: flex-start;
-    -ms-flex-line-pack: start;
-    align-content: flex-start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-align-content: flex-start;
+        -ms-flex-line-pack: start;
+        align-content: flex-start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
     }
 
     .footer-menu.marcas .footer-menu--items ul li{
@@ -145,41 +149,38 @@ footer .wrapper .footer-menus{
     padding: 0.2em 0em !important;
 }
 
+.footer-menu:nth-child(1) { width: 139px !important ;}
 .footer-menu:nth-child(1) .footer-menu--title {
     width: 139px;
 }
 
+.footer-menu:nth-child(2) { width: 79px !important ;}
 .footer-menu:nth-child(2) .footer-menu--title {
     width: 76px;
 }
 
-
+.footer-menu:nth-child(3) { width: 124px !important ;}
 .footer-menu:nth-child(3) .footer-menu--title {
     width: 124px;
 }
 
-
+.footer-menu:nth-child(4) { width: 345px !important ;}
 .footer-menu:nth-child(4) .footer-menu--title {
     width: 345px;
 }
 
-
+.footer-menu:nth-child(5) { width: 100px !important ;}
 .footer-menu:nth-child(5) .footer-menu--title {
     width: 100px;
 }
 
 
-.footer-menu:nth-child(1){
-    width: 200px !important;
-}
 
-.footer-menu:nth-child(2){
-    width: 141px !important;
-}
 
 
 .footer-menus{
     border-bottom: 1px dotted white;
+    
 }
 
 footer .wrapper.social{
@@ -208,26 +209,177 @@ footer .wrapper.social{
 
     .logo{
         width: 180px;
+        opacity: 1;
+        cursor: pointer;
+        &:hover{
+            opacity: 0.7;
+        }
     }
     .fb {
         padding-left: 1em;
         cursor: pointer;
         img {
-            width: 25px;
+            width: 22px;
         }
     }
     .tiktok {
         padding-left: 1em;
         cursor: pointer;
         img {
-            width: 25px;
+            width: 22px;
         }
     }
     .instagram {
-        padding-left: 1em;
+        padding-left: 3em;
         cursor: pointer;
         img {
-            width: 25px;
+            width: 22px;
+        }
+    }
+}
+
+.linea{  
+    display: block;
+    width: 1px;
+    border-right: 1px dotted white;
+
+    margin-left: 1em;
+    position: relative;
+    top: -5px;
+    height: 16px;
+}
+
+.link{
+    &:hover{
+        color: @color-pink !important
+    }
+}
+
+.footer-derechos{
+    
+    color: white;
+    
+    font-family: 'Helvetica';
+    font-size: 11px;
+
+    padding-left: 3em;
+    line-height: 1.25em;
+    letter-spacing: 1px;
+
+    strong{
+        font-weight: bold;
+    }
+}
+
+.floating{
+    position: fixed !important;
+
+    bottom: 8px !important;
+    right: 50px !important;
+    z-index: 10000 !important;
+    padding:  0px !important;
+    width: auto !important;
+
+    
+    display: -ms-flexbox  !important;
+    display: -webkit-flex  !important;
+    display: flex  !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+}
+
+.floating--card{
+
+    width: 137.156px;
+    height: 28.5px;
+
+    cursor: pointer;
+    padding: 0.75em 1.5em;
+    box-sizing: border-box;
+
+    font-size: 14px;
+    font-family: 'Helvetica';
+    letter-spacing: 2px;
+
+    background-color:@color-black;
+    &:hover{
+        background-color: @color-pink;;
+    }
+
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    img{
+        height: 1.25em;
+        padding-right: 0.5em;
+    }
+
+    h1{
+        color: white;
+        font-weight: normal;
+        padding-right: 0em;
+        letter-spacing: 2px;
+    }
+    &:hover h1{
+        color:@color-black;
+        font-weight: normal;
+
+        letter-spacing: 2px;
+    }
+
+
+    &.wp{
+        padding-left: 16px !important;
+    }
+
+    &.soporte{
+        margin-left: 2em;
+
+        background-color: @color-pink;
+
+        h1 {
+        color: @color-black;
+        font-weight: normal;
+        }
+
+  
+
+        &:hover{
+            background-color: @color-black;
+            h1{
+        font-weight: normal;
+            color: white;
+            }
         }
     }
 }

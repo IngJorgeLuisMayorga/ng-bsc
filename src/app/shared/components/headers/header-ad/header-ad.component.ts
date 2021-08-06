@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderAdComponent implements OnInit {
 
+  hover = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+
+  setHover(){ this.hover = true; }
+  resetHover(){ this.hover = false; }
 }

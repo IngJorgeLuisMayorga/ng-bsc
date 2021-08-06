@@ -98,7 +98,7 @@
         </div>
         <div class="sidebar-total">
             <div class="total-wrapper">
-                <h1>Total <strong>{{ cartTotal | currency:'USD':'symbol' }} </strong> + envío</h1>
+                <h1>Total <strong>{{ cartTotal | currency:'USD':'symbol' }} </strong> <span *ngIf="cartTotal < 300000"> + envío</span> </h1>
                 <h3>Puntos con esta compra {{ cartTotal / 100 | number: '1.0-0' }}
                 </h3>
             </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer-default',
@@ -180,10 +181,14 @@ export class FooterDefaultComponent implements OnInit {
   ]
 
   isFB_Hover = false;
+  isWP_Hover = false;
   isTikTok_Hover = false;
   isInstagram_Hover = false;
 
-  constructor() { }
+
+  year = new Date().getFullYear();
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -212,6 +217,19 @@ export class FooterDefaultComponent implements OnInit {
   }
   resetInstagram_Hover(){
     this.isInstagram_Hover = false;
+  }
+
+  setWP_Hover(){
+   this.isWP_Hover = true;
+  }
+
+  resetWP_Hover(){
+    this.isWP_Hover =  false;
+  }
+
+  goHome(){
+    this.router.navigateByUrl('/');
+    window.scroll(0,0);
   }
 
 }
