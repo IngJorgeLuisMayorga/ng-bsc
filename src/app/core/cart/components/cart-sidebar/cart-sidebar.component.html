@@ -75,7 +75,8 @@
                 </div>
             </div>
         </div>
-        <div class="sidebar-shipping" *ngIf="cartTotal < 300000">
+        
+        <div class="sidebar-shipping" *ngIf="cartTotal < 300000 && false">
             <h1>COSTO DE ENVIO</h1>
             
             <input type="radio" id="shippingBogota" name="shippingMethodCart" value="Bogota">
@@ -88,7 +89,7 @@
             <br>
 
         </div>
-        <div class="sidebar-code">
+        <div class="sidebar-code" *ngIf="false">
             <div class="code-wrapper">
                 <input type="text" placeholder="¿Tienes un código de descuento?">
                 <button style="    height: 46px;
@@ -96,6 +97,7 @@
                 left: 0px;">Aplicar</button>
             </div>
         </div>
+
         <div class="sidebar-total">
             <div class="total-wrapper">
                 <h1>Total <strong>{{ cartTotal | currency:'USD':'symbol' }} </strong> <span *ngIf="cartTotal < 300000"> + envío</span> </h1>
