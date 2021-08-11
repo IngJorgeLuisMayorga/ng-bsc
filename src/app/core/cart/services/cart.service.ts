@@ -23,6 +23,10 @@ export class CartService {
     this._isOpen.next(false);
   }
 
+  public isCartEmpty(){
+    return this._cart.getValue().length === 0;
+  }
+
   public sync(){
     return this.cart$;
   }
