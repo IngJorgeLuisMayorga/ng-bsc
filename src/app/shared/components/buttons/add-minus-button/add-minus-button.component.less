@@ -1,0 +1,93 @@
+@import (reference) '../../../../../styles/_index.less';
+
+.ctrls-qty {
+
+    display                : -ms-flexbox;
+    display                : -webkit-flex;
+    display                : flex;
+    -webkit-flex-direction : row;
+    -ms-flex-direction     : row;
+    flex-direction         : row;
+    -webkit-flex-wrap      : nowrap;
+    -ms-flex-wrap          : nowrap;
+    flex-wrap              : nowrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack          : center;
+    justify-content        : center;
+    -webkit-align-content  : center;
+    -ms-flex-line-pack     : center;
+    align-content          : center;
+    -webkit-align-items    : center;
+    -ms-flex-align         : center;
+    align-items            : center;
+    padding-top: 0em;
+    padding-bottom: 0em;
+
+    .qty {
+        text-align: center;
+        border-bottom: 1px dotted @color-black;
+        font-family: 'Helvetica';
+        font-weight: 300;
+        font-size: 18px;
+        display: inline-block;
+        width: 1.5em;
+        padding: 0.38em 0px;
+        margin-right: 1em;
+        margin: 0px;
+        background-color: rgba(0, 0, 0, 0);
+        color: #333333;
+    }
+
+    button {
+
+      
+
+        &:hover {
+            background-color: @color-clear-gray;
+            color           : @color-black;
+            font-weight     : 600;
+            cursor          : pointer;
+        }
+
+        display          : inline-block;
+        width            : 2em;
+        padding          : 0.2em 0.75em;
+
+        margin           : 0px;
+        margin           : 0em;
+        background-color : rgba(0, 0, 0, 0);
+        color            : @color-black;
+        border           : 1px solid #8D8D8D;
+        border-color     : @color-black;
+        border-radius    : 0px;
+
+        font-size: 20px;
+
+        &:last-child {
+            border-left: 0px solid black;
+        }
+
+        &.min {
+            margin-left: 12px;
+        }
+
+        display                : -ms-flexbox;
+        display                : -webkit-flex;
+        display                : flex;
+        -webkit-flex-direction : column;
+        -ms-flex-direction     : column;
+        flex-direction         : column;
+        -webkit-flex-wrap      : nowrap;
+        -ms-flex-wrap          : nowrap;
+        flex-wrap              : nowrap;
+        -webkit-justify-content: center;
+        -ms-flex-pack          : center;
+        justify-content        : center;
+        -webkit-align-content  : center;
+        -ms-flex-line-pack     : center;
+        align-content          : center;
+        -webkit-align-items    : center;
+        -ms-flex-align         : center;
+        align-items            : center;
+    }
+}

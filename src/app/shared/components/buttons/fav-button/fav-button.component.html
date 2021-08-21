@@ -1,0 +1,26 @@
+<div class="button" (click)="toogleToWishlist()" *ngIf="!(inWishlist$ | async)">
+
+    <div class="hvr" >
+        <img class="on-hvr" src="../../../../../assets/2_BSC.png">
+        <img class="off-hvr" src="../../../../../assets/1_BSC.png">
+    </div>
+    
+    <h5> Añadir a favoritos </h5>
+
+
+
+</div>
+
+<div class="button" (click)="toogleToWishlist()" *ngIf="(inWishlist$ | async)">
+
+    
+    <div class="hvr">
+        <img class="on-hvr" src="../../../../../assets/4_BSC.png">
+        <img class="off-hvr" src="../../../../../assets/3_BSC.png">
+    </div>
+
+    <h5> Remover de favoritos </h5>
+
+    
+</div>
+

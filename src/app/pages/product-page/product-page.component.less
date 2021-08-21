@@ -1,0 +1,336 @@
+@import (reference) "../../../styles.less";
+
+/**
+  VARIABLES 
+*/
+@page-max-w: 1000px;
+
+@poster-offset: 12px;
+@poster-w: 100%;
+@poster-h: 397px;
+
+
+/**
+  STLYES 
+*/
+
+.page {
+  position: relative;
+  padding-top: 5em;
+  width: calc(100vw - 20px);
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.page-sidebar {
+  position: fixed;
+  right: -50vw;
+
+  z-index: 10000000;
+}
+.page-sidebar.active {
+  position: fixed;
+  right: 0vw;
+}
+
+.page-header {
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  z-index: 10000000;
+}
+
+.section--product-info{
+  display: block;
+  width: 100%;
+  max-width: @page-max-w;
+  margin: 0 auto;
+}
+
+.section-row{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+}
+
+.col-gallery{
+  width: 50%;
+
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+
+}
+.col-info{
+  width: 50%;
+  box-sizing: border-box;
+  padding-left: 2em;
+}
+
+
+.col-thumbs{
+  width: 100px;
+}
+.col-picture{
+  width: calc(100% - 50px);
+}
+
+.thumb{
+  display:block;
+  width: 100%;
+  height: @poster-h/4 + 0.25*@poster-offset + 1px;
+  object-fit: cover;
+  object-position: center;
+  box-sizing: border-box;
+  padding: 0.25em;
+  padding-top: 0em;
+}
+
+
+
+.section--breadcumbs{
+    width: 100%;
+    max-width: @page-max-w;
+    margin:  0 auto;
+}
+.section--breadcumbs ul {
+  width: 100%;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.section--breadcumbs ul li{
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.section--breadcumbs ul li:not(:first-child):before{
+  content: "/";
+  margin-right: 5px;
+}
+.section--breadcumbs ul li a{
+  padding: 5px;
+  color: @color-clear-gray;
+  &:hover{
+    color:black;
+  }
+}
+
+
+
+.picture-wrapper{
+  display: block;
+  width: 100%;
+  position: relative;
+}
+.picture-wrapper .picture-back{
+
+  width: ~"calc(100% - @{poster-offset})";
+  height: @poster-h;
+
+  position: absolute;
+  top: @poster-offset;
+  left: @poster-offset;
+
+  background-color: white;
+  border:1px solid black;
+}
+.picture-wrapper .picture-front{
+  position: absolute;
+
+  width: ~"calc(100% - @{poster-offset})";
+  height: @poster-h;
+
+  background-color: white;
+  border:1px solid black;
+  top: 0px;
+  left: 0px;
+
+  box-sizing: border-box;
+  padding: 0px;
+
+  .picture{
+    display:block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.font--helvetica-medium { 
+    font-size: 14px;
+    font-family: 'Helvetica';
+    font-weight: 600;
+}
+
+.row-title {
+  border-bottom: 1px dotted black;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.row-title h1{
+  font-size: 35px;
+  letter-spacing: 2px;
+  text-transform: capitalize; 
+}
+
+.row-price{
+  font-family: 'Helvetica';
+  font-size: 15px;
+  letter-spacing: 0px;
+  text-transform: capitalize; 
+
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+}
+.row-price h2{
+  font-weight: 300;
+  strong{
+    font-weight: 300;
+    font-size: 25px;
+    margin-right: 0.5em;
+    &.discount{
+      font-weight: 300;
+    font-size: 15px;
+    padding-bottom: 1em;
+    text-decoration: line-through;
+    color: gray;
+    }
+  }
+}
+
+
+
+.row-buttons{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+
+  padding-top: 1em;
+  padding-bottom: 1em;
+ 
+  div {
+    padding-left: 1em;
+  }
+}
+
+
+.tabs-header{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.tab-header{
+  font-family: 'Helvetica';
+  font-size: 15px;
+  letter-spacing: 0px;
+
+  padding: 10px;
+
+  border-bottom: 1px dotted white;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  
+  cursor: pointer
+  ;
+  &.active{
+    font-weight: 600;
+    border-bottom: 1px dotted @color-black;
+  }
+}
+
+.tab-content{
+  font-family: 'Helvetica';
+  font-size: 15px;
+  letter-spacing: 0px;
+
+  padding: 10px;
+}

@@ -5,6 +5,7 @@ import { IProduct } from '../../models/IProduct.model';
 
 import { map } from 'rxjs/operators';
 import { WishlistService } from 'src/app/core/wishlist/services/wishlist.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -32,7 +33,10 @@ export class ProductCardComponent implements OnInit {
   public cartIsUpdating$: Observable<number>;
   public cartProductItems$: Observable<number>;
 
-  constructor(private $cart: CartService, private $wishlist: WishlistService) {
+  constructor(
+    private route: Router,
+    private $cart: CartService, 
+    private $wishlist: WishlistService) {
 
     this.cart$ = this.$cart.sync();
     this.wishlist$ = this.$wishlist.sync();
@@ -77,6 +81,10 @@ export class ProductCardComponent implements OnInit {
       if(cartSize > 0) this.status = 'added';
       if(cartSize == 0) this.status = 'none';
     })
+  }
+
+  goToProductPage(productId: any){
+    this.route.navigateByUrl('/products/'+productId)
   }
 
   async addToCart(){

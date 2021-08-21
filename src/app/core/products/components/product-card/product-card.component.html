@@ -3,7 +3,7 @@
     <div class="card-wrapper">
         <div class="card-upper">
 
-            <div class="card-picture">
+            <div class="card-picture" (click)="goToProductPage(product.id)">
                 <div class="card-picture--front">
                     <img [src]="product.image_src">
                 </div>

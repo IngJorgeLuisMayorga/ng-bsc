@@ -1,0 +1,148 @@
+<div class="page product-page">
+
+    <div class="page-header">
+        <app-header-ad></app-header-ad>
+        <app-header-default></app-header-default>
+    </div>
+
+    <div class="page-sidebar" [ngClass]="{'active': (isCartOpen$ | async) }">
+        <app-cart-sidebar *ngIf="(isCartOpen$ | async)"></app-cart-sidebar>
+        <app-profile-sidebar *ngIf="false"></app-profile-sidebar>
+        <app-search-sidebar *ngIf="false"></app-search-sidebar>
+    </div>
+
+    <div class="page-container">
+
+        <br>
+        <br>
+        <section class="section--breadcumbs" *ngIf="product">
+            <ul>
+                <li *ngFor="let breadcumb of breadcumbs">
+                    <a class="font--helvetica-medium" [routerLink]="breadcumb.path">{{ breadcumb.text }}</a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section--product-info" *ngIf="product">
+           <div class="section-row">
+               <div class="section-col col-gallery">
+                   <div class="gallery-col col-thumbs">
+                       <img class="thumb" [src]="product.image_src">
+                       <img class="thumb" [src]="product.image_src">
+                       <img class="thumb" [src]="product.image_src">
+                       <img class="thumb" [src]="product.image_src">
+                   </div>
+                   <div class="gallery-col col-picture">
+
+                       <div class="picture-wrapper">
+                           <div class="picture-back"></div>
+                           <div class="picture-front">
+                                <img class="picture"  [src]="product.image_src">
+                           </div>
+                       </div>
+                       
+                   </div>
+               </div>
+               <div class="section-col col-info">
+                   <div class="info-row">
+                       <img>
+                   </div>
+                   <div class="info-row row-title">
+                       <h1 class="font--helvetica-medium">
+                          {{ product.name }}
+                       </h1>
+                   </div>
+                   <div class="info-row row-price">
+                        <h2> 
+
+                            <strong *ngIf="product.discount" class="discount">
+                                 {{ ((product.price) | currency:'$':'symbol':'2.0') }} <br>
+                            </strong> 
+
+                            <strong *ngIf="product.discount">
+                                {{ ((product.price || 0)*(1 - (product.discount || 0)) | currency:'$':'symbol':'2.0') }}
+                           </strong> 
+
+                           <strong *ngIf="!product.discount">
+                            {{ ((product.price || 0)*(1 - (product.discount || 0)) | currency:'$':'symbol':'2.0') }}
+                            </strong> 
+
+                        </h2>
+                        <h2> // 3.5ml 1.18 fl.oz </h2>
+                    </div>
+                    <div class="info-row row-buttons">
+                            <app-add-minus-button
+                                [value]="12"
+                            ></app-add-minus-button>
+                        <div>
+                            <app-dark-button
+                                [icon]="'cart:icon'"
+                                [text]="'¡Lo quiero!'"
+                            ></app-dark-button>
+                            <app-fav-button
+                                [product]="product"
+                            ></app-fav-button>
+                        </div>
+                    </div>
+                    <div class="info-row row-tabs">
+                        <div class="tabs-header">
+                            <div class="tab-header" (click)="setTab('description')" [ngClass]="{'active': tab === 'description'}">
+                                Descripción
+                            </div>
+                            <div class="tab-header" (click)="setTab('ingredients')" [ngClass]="{'active': tab === 'ingredients'}">
+                                Ingredientes
+                            </div>
+                            <div class="tab-header" (click)="setTab('how-to')" [ngClass]="{'active': tab === 'how-to'}">
+                                ¿Como se usa?
+                            </div>
+                        </div>
+                        <div class="tabs-content">
+                            <div class="tab-content" *ngIf="tab === 'description'">
+                                <p>
+                                        Serum antioxidante, diseñado con ingredientes naturalmente efectivos que son seguros y no irritantes. Además, energiza
+                                        y rejuvenece la piel con el poder de la Vitamina C pura al
+                                        5%, lo suficientemente suave y eficaz para todos los tipos
+                                        de piel, incluidas las más sensibles
+                                </p> 
+                            </div>
+                            <div class="tab-content" *ngIf="tab === 'ingredients'">
+                                Water, Propylen Glycol, Ascorbic Acid, Hydroxyethylcellulose, Centella Asiatica Extract, Citrus Junos Fruit Extract, Illicium Verum(Anise)
+                                Fruit Extract, Citrus Paradisi(Grapefruit) Fruit Extract, Nelumbium Speciosum Flower Extract, Paeonia Suffruticosa Root Extract, Scutellaria
+                                Baicalensis Root Extract, Polysorbate 60, Brassica Oleracea Italica (Broccoli) Extract, Chaenomeles Sinensis Fruit Extract, Citrus Aurantium
+                                Dulcis (Orange) Oil, Sodium Acrylate/Sodium Acryloyldimethyl Taurate Copolymer, Disodium EDTA, Lavandula Angustifolia (Lavender) Oil,
+                                Camellia Sinensis Callus Culture Extract, Larix Europaea Wood Extract, Chrysanthellum Indicum Extract, Rheum Palmatum Root Extract,
+                                Asarum Sieboldi Root Extract, Quercus Mongolia Leaf Extract, Persicaria Hydropiper Extract, Corydalis Turtschaninovii Root Extract, Coptis
+                                Chinensis Root Extract, Magnolia Obovata Bark Extract, Lysine HCL, Proline, Sodium Ascorbyl Phosphate, Acetyl Methionine, Theanine,
+                                Lecithin, Acetyl Glutamine, SH-Olgopeptide-1, SH-Olgopeptide-2, SH-Polypeptide-1, SH Polypeptide-9, SH-Polypeptide-11, Bacillus/Folic Acid
+                                Soybean Ferment Extract, Sodium Hyaluronate, Caprylyl Glycol, Butylene Glycol, 1,2-Hexanediol, Limonen.
+                            </div>
+                            <div class="tab-content" *ngIf="tab === 'how-to'">
+                                <h4>PASO 7: Serum</h4>
+                                <p>
+                                    Serum antioxidante, diseñado con ingredientes naturalmente
+efectivos que son seguros y no irritantes. Además, energiza
+y rejuvenece la piel con el poder de la Vitamina C pura al
+5%, lo suficientemente suave y eficaz para todos los tipos
+de piel, incluidas las más sensibles
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-row row-icons">
+                        <h1></h1>
+                    </div>
+               </div>
+           </div>
+        </section>
+
+        <section class="section--recommended">
+           
+        </section>
+
+    </div>
+
+    <div class="page-footer">
+        <app-footer-default></app-footer-default>
+    </div>
+
+</div>
