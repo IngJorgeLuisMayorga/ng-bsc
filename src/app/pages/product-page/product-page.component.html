@@ -39,6 +39,9 @@
                            <div class="picture-front">
                                 <img class="picture"  [src]="product.image_src">
                            </div>
+                           <div class="card-discount">
+                            -{{ (product.discount) * 100 | number }}%
+                           </div>
                        </div>
                        
                    </div>
@@ -68,12 +71,16 @@
                             </strong> 
 
                         </h2>
-                        <h2> // 3.5ml 1.18 fl.oz </h2>
+                        <h2 class="sizes"> // 3.5ml 1.18 fl.oz </h2>
                     </div>
                     <div class="info-row row-buttons">
+
                             <app-add-minus-button
-                                [value]="12"
+                                (onMin)="removeFromCart()"
+                                (onMax)="addToCart()"
+                                [value]="(cartlist$ | async)"
                             ></app-add-minus-button>
+
                         <div>
                             <app-dark-button
                                 [icon]="'cart:icon'"

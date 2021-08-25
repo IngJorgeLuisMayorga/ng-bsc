@@ -28,7 +28,7 @@ export default [
         sku: 222372,
         price:  184800,
         discount:  0.21,
-        name: 'BUBBLE BOX PIEL SECA // BSC',
+        name: 'Freshly Juiced Vitamin Drop Serum Klairs',
         image_src: 'https://source.unsplash.com/1600x900/?beauty&v='+Math.random(),
         quantity: 2,
         category: 'PIEL_MIXTA',

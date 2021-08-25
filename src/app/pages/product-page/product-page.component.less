@@ -7,7 +7,7 @@
 
 @poster-offset: 12px;
 @poster-w: 100%;
-@poster-h: 397px;
+@poster-h: 450px;
 
 
 /**
@@ -67,7 +67,6 @@
 
 .col-gallery{
   width: 50%;
-
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
@@ -77,12 +76,15 @@
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-align-content: stretch;
-  -ms-flex-line-pack: stretch;
-  align-content: stretch;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
 
 }
 .col-info{
@@ -96,18 +98,23 @@
   width: 100px;
 }
 .col-picture{
-  width: calc(100% - 50px);
+  width: calc(100% - 120px);
 }
 
 .thumb{
   display:block;
-  width: 100%;
-  height: @poster-h/4 + 0.25*@poster-offset + 1px;
+  width: calc(100% - 0.5em);
+  height: @poster-h/4 + 0.25*@poster-offset - 5px;
   object-fit: cover;
   object-position: center;
   box-sizing: border-box;
-  padding: 0.25em;
+  padding: 0em;
   padding-top: 0em;
+  border: 1px solid @color-black;
+
+  margin: 0.25em;
+  margin-top: 0px;
+  margin-bottom: 0.5em;
 }
 
 
@@ -116,6 +123,9 @@
     width: 100%;
     max-width: @page-max-w;
     margin:  0 auto;
+    font-family: 'Helvetica';
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 .section--breadcumbs ul {
   width: 100%;
@@ -142,14 +152,21 @@
   padding: 5px;
   cursor: pointer;
   margin-bottom: 10px;
+  &:last-child a{
+    font-weight: 900;
+  }
 }
 .section--breadcumbs ul li:not(:first-child):before{
   content: "/";
-  margin-right: 5px;
+  margin-right: 2px;
 }
 .section--breadcumbs ul li a{
   padding: 5px;
-  color: @color-clear-gray;
+  color: @color-black;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 300;
+  padding-right: 0px;
   &:hover{
     color:black;
   }
@@ -207,12 +224,13 @@
   border-bottom: 1px dotted black;
   padding-bottom: 10px;
   margin-bottom: 10px;
+  width: 376px;
 }
 
 .row-title h1{
-  font-size: 35px;
+  font-size: 24px;
   letter-spacing: 2px;
-  text-transform: capitalize; 
+  line-height: 1.25em;
 }
 
 .row-price{
@@ -243,19 +261,36 @@
 .row-price h2{
   font-weight: 300;
   strong{
-    font-weight: 300;
-    font-size: 25px;
-    margin-right: 0.5em;
+    font-family: 'Helvetica';
+    font-weight: 600;
+    font-size: 21px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-right: 0.35em;
     &.discount{
+      font-family: 'Helvetica';
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-decoration: line-through;
+      text-align: center;
+      margin: 0;
+      padding: 0;
       font-weight: 300;
-    font-size: 15px;
-    padding-bottom: 1em;
-    text-decoration: line-through;
-    color: gray;
+      padding-top: 0px;
+      padding-bottom: 0px;
     }
   }
+
 }
 
+.sizes{
+  letter-spacing: 1px;
+}
 
 
 .row-buttons{
@@ -333,4 +368,24 @@
   letter-spacing: 0px;
 
   padding: 10px;
+}
+
+.card-discount {
+  display: block;
+  position: absolute;
+  top: 1.5em;
+  right: calc(-2em + 16px);
+  z-index: 100;
+  background-color: white;
+  border: 1px solid black;
+  border-color: #333333;
+  font-weight: 900;
+  font-family: 'Helvetica';
+  color: #333333;
+  width: 3em;
+  text-align: center;
+  height: auto;
+  letter-spacing: 2px;
+  padding: 0.3em;
+  padding-top: 0.4em;
 }

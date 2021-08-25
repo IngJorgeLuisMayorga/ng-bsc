@@ -3,17 +3,10 @@
         <li>
             <img class="bsc-waves" src="../../../../../assets/header-waves.png">
         </li>
-        <li>
+        <li style="
+        position: relative;
+left: 45px;">
             <ul class="header-nav--menu">
-                <li class="menu-wrapper">
-                    <div class="menu-title"> <span>PRODUCTOS</span></div>
-                    <ul class="menu-items">
-                        <li>PRODUCT 1</li>
-                        <li>PRODUCT 2</li>
-                        <li>PRODUCT 3</li>
-                        <li>PRODUCT 4</li>
-                    </ul>
-                </li>
                 <li class="menu-wrapper">
                     <div class="menu-title"> <span>RUTINA</span></div>
                     <ul class="menu-items">
@@ -24,7 +17,16 @@
                     </ul>
                 </li>
                 <li class="menu-wrapper">
-                    <div class="menu-title"> <span>¿TIPO DE PIEL?</span> </div>
+                    <div class="menu-title"> <span>TIPO DE PIEL</span></div>
+                    <ul class="menu-items">
+                        <li>PRODUCT 1</li>
+                        <li>PRODUCT 2</li>
+                        <li>PRODUCT 3</li>
+                        <li>PRODUCT 4</li>
+                    </ul>
+                </li>
+                <li class="menu-wrapper">
+                    <div class="menu-title"> <span>NECESIDADES</span> </div>
                     <ul class="menu-items">
                         <li>PRODUCT 1</li>
                         <li>PRODUCT 2</li>
@@ -42,7 +44,7 @@
                     </ul>
                 </li>
                 <li class="menu-wrapper">
-                    <div class="menu-title"><span>PUNTOS</span></div>
+                    <div class="menu-title"><span>PUNTOS BSC</span></div>
                     <ul class="menu-items">
                         <li>PRODUCT 1</li>
                         <li>PRODUCT 2</li>
@@ -52,7 +54,19 @@
                 </li>
             </ul>
         </li>
-        <li>
+        <li style="
+
+               -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        -webkit-align-self: auto;
+        -ms-flex-item-align: auto;
+        align-self: auto;
+        
+        ">
             <ul class="heaver-icons-row" style="width: 100%;">
                 <li><img class="bsc-logo" src="../../../../../assets/header-bsc.png" (click)="goHome()"></li>
                 <li class="bsc-icon anim-hover" (click)="doOpenSearchSidebar()">
