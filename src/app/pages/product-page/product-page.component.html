@@ -27,21 +27,38 @@
            <div class="section-row">
                <div class="section-col col-gallery">
                    <div class="gallery-col col-thumbs">
-                       <img class="thumb" [src]="product.image_src">
-                       <img class="thumb" [src]="product.image_src">
-                       <img class="thumb" [src]="product.image_src">
-                       <img class="thumb" [src]="product.image_src">
+                       <img class="thumb" [ngClass]="{'active': activeThumb === 0}" [src]="product.image_src" (click)="setThumb(0)">
+                       <img class="thumb" [ngClass]="{'active': activeThumb === 1}"[src]="product.image_src" (click)="setThumb(1)">
+                       <img class="thumb" [ngClass]="{'active': activeThumb === 2}"[src]="product.image_src" (click)="setThumb(2)">
+                       <img class="thumb" [ngClass]="{'active': activeThumb === 3}" [src]="product.image_src" (click)="setThumb(3)">
                    </div>
-                   <div class="gallery-col col-picture">
+                   <div class="gallery-col col-picture"  [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (cartlist$ | async) > 0}">
 
                        <div class="picture-wrapper">
+
                            <div class="picture-back"></div>
+
                            <div class="picture-front">
                                 <img class="picture"  [src]="product.image_src">
-                           </div>
+                                <div class="card-fav" *ngIf="(inWishlist$ | async)">
+                                
+
+                                    <div class="card-wishlist" >
+                                        <div class="card-wishlist--wrapper anim-hover" (click)="toogleToWishlist()">
+                                            <img class="anim-hover--on-hover" src=".../../../../../assets/heart.png">
+                                            <img class="anim-hover--off-hover" src=".../../../../../assets/heart_gray.png">
+                                        </div>
+                                    </div>
+    
+    
+                               </div>
+                            </div>
                            <div class="card-discount">
                             -{{ (product.discount) * 100 | number }}%
                            </div>
+
+                        
+
                        </div>
                        
                    </div>
@@ -76,19 +93,39 @@
                     <div class="info-row row-buttons">
 
                             <app-add-minus-button
-                                (onMin)="removeFromCart()"
-                                (onMax)="addToCart()"
+                                style="padding-right: 10px;"
+                                *ngIf="( cartlist$ | async) > 0"
+                                (onMin)="removeFromCart2()"
+                                (onMax)="addToCart2()"
                                 [value]="(cartlist$ | async)"
                             ></app-add-minus-button>
 
                         <div>
-                            <app-dark-button
-                                [icon]="'cart:icon'"
-                                [text]="'¡Lo quiero!'"
-                            ></app-dark-button>
+
+                            <div style="padding-bottom: 0.5em;">
+                        
+                                <app-dark-button
+                                    *ngIf="( cartlist$ | async) === 0"
+                                    [icon]="'cart:icon'"
+                                    [text]="'¡Lo quiero!'"
+                                    (nClick)="addToCart2()"
+                                ></app-dark-button>
+
+                                <app-pink-button
+                                    *ngIf="( cartlist$ | async) > 0"
+                                    [text]="'¡Agregado!'"
+                                    [icon]="'cart:face:white'"
+                                    [hover_text]="'¡Eliminar!'"
+                                    [hover_icon]="'cart:face:gray'"
+                                    (nClick)="removeAllFromCart()"
+                                ></app-pink-button>
+                            </div>
+
                             <app-fav-button
                                 [product]="product"
+                                (nClick)="toogleToWishlist()"
                             ></app-fav-button>
+
                         </div>
                     </div>
                     <div class="info-row row-tabs">
@@ -100,38 +137,22 @@
                                 Ingredientes
                             </div>
                             <div class="tab-header" (click)="setTab('how-to')" [ngClass]="{'active': tab === 'how-to'}">
-                                ¿Como se usa?
+                                ¿Cómo se usa?
                             </div>
                         </div>
                         <div class="tabs-content">
                             <div class="tab-content" *ngIf="tab === 'description'">
-                                <p>
-                                        Serum antioxidante, diseñado con ingredientes naturalmente efectivos que son seguros y no irritantes. Además, energiza
-                                        y rejuvenece la piel con el poder de la Vitamina C pura al
-                                        5%, lo suficientemente suave y eficaz para todos los tipos
-                                        de piel, incluidas las más sensibles
-                                </p> 
+                                <p class="product-description" *ngIf="product.description"> <strong>Soy antes de la coma</strong>, {{ product.description }}</p> 
                             </div>
                             <div class="tab-content" *ngIf="tab === 'ingredients'">
-                                Water, Propylen Glycol, Ascorbic Acid, Hydroxyethylcellulose, Centella Asiatica Extract, Citrus Junos Fruit Extract, Illicium Verum(Anise)
-                                Fruit Extract, Citrus Paradisi(Grapefruit) Fruit Extract, Nelumbium Speciosum Flower Extract, Paeonia Suffruticosa Root Extract, Scutellaria
-                                Baicalensis Root Extract, Polysorbate 60, Brassica Oleracea Italica (Broccoli) Extract, Chaenomeles Sinensis Fruit Extract, Citrus Aurantium
-                                Dulcis (Orange) Oil, Sodium Acrylate/Sodium Acryloyldimethyl Taurate Copolymer, Disodium EDTA, Lavandula Angustifolia (Lavender) Oil,
-                                Camellia Sinensis Callus Culture Extract, Larix Europaea Wood Extract, Chrysanthellum Indicum Extract, Rheum Palmatum Root Extract,
-                                Asarum Sieboldi Root Extract, Quercus Mongolia Leaf Extract, Persicaria Hydropiper Extract, Corydalis Turtschaninovii Root Extract, Coptis
-                                Chinensis Root Extract, Magnolia Obovata Bark Extract, Lysine HCL, Proline, Sodium Ascorbyl Phosphate, Acetyl Methionine, Theanine,
-                                Lecithin, Acetyl Glutamine, SH-Olgopeptide-1, SH-Olgopeptide-2, SH-Polypeptide-1, SH Polypeptide-9, SH-Polypeptide-11, Bacillus/Folic Acid
-                                Soybean Ferment Extract, Sodium Hyaluronate, Caprylyl Glycol, Butylene Glycol, 1,2-Hexanediol, Limonen.
+                                <p class="product-ingredients">
+                                    {{ product.ingredients | slice:0: 120 }}
+                                </p>
+                                <span>ver mas</span>
                             </div>
                             <div class="tab-content" *ngIf="tab === 'how-to'">
-                                <h4>PASO 7: Serum</h4>
-                                <p>
-                                    Serum antioxidante, diseñado con ingredientes naturalmente
-efectivos que son seguros y no irritantes. Además, energiza
-y rejuvenece la piel con el poder de la Vitamina C pura al
-5%, lo suficientemente suave y eficaz para todos los tipos
-de piel, incluidas las más sensibles
-                                </p>
+                                <h4 class="product-how-to-h4"> <a [routerLink]="'/paso/7'">Paso 7: Serum</a> </h4>
+                                <p class="product-how-to-p">Serum antioxidante, diseñado con ingredientes naturalmente efectivos que son seguros y no irritantes. Además, energiza y rejuvenece la piel con el poder de la Vitamina C pura al 5%, lo suficientemente suave y eficaz para todos los tipos</p>
                             </div>
                         </div>
                     </div>

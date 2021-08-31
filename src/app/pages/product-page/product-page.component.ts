@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartService } from 'src/app/core/cart/services/cart.service';
 import { IProduct } from 'src/app/core/products/models/IProduct.model';
+import { WishlistService } from 'src/app/core/wishlist/services/wishlist.service';
 import Products from '../../../app/config/products';
 
 @Component({
@@ -15,6 +16,9 @@ import Products from '../../../app/config/products';
 export class ProductPageComponent implements OnInit {
 
   public tab = 'description';
+  
+  public wishlist$: Observable<IProduct[]>;
+  public inWishlist$: Observable<boolean>;
 
   public products: IProduct[] = [];
   public productId: number = 0;
@@ -25,9 +29,24 @@ export class ProductPageComponent implements OnInit {
   public isCartOpen$ :  Observable<boolean>;
   public cartlist$: Observable<number>;
 
-  constructor(private route: ActivatedRoute, private $cart: CartService) { 
+  public numberToAddCart = 1;
+  public activeThumb = 0;
+
+  constructor(private route: ActivatedRoute, private $cart: CartService, private $wishlist: WishlistService) { 
       this.isCartOpen$ = this.$cart.isOpen$;
-      
+      this.wishlist$ = this.$wishlist.sync();
+
+      this.inWishlist$ = this.$wishlist.sync().pipe(
+        map((products: IProduct[]) => 
+          {
+            if((products && products.length > 0 && products.find(product => product.id === this.product.id))){
+              return true;
+            } else {
+              return false;
+            }
+          }
+        )
+      )
   }
 
   ngOnInit(): void {
@@ -51,32 +70,42 @@ export class ProductPageComponent implements OnInit {
       text: this.product.name,
       path: '/product/' + this.product.id,
     },
-  ]
+    ]
 
-  this.cartlist$ = this.$cart.sync().pipe(
-    map((products: IProduct[]) => 
-      {
-        if(
-          products && 
-          products.find(product => product.id === this.product.id) &&
-          (products.find(product => product.id === this.product.id) as any).cart?.quantity > 0
-          ){
-          return products.find(product => product.id === this.product.id).cart?.quantity;
-        } else {
-          return 0;
+    this.cartlist$ = this.$cart.sync().pipe(
+      map((products: IProduct[]) => 
+        {
+          if(
+            products && 
+            products.find(product => product.id === this.product.id) &&
+            (products.find(product => product.id === this.product.id) as any).cart?.quantity > 0
+            ){
+            return products.find(product => product.id === this.product.id).cart?.quantity;
+          } else {
+            return 0;
+          }
         }
-      }
+      )
     )
-  )
+    
   }
-
+  setThumb(index: number){
+    this.activeThumb = index;
+  }
 
   setTab(tabname: string){
     this.tab = tabname;
   }
 
+
+  addToCart(){
+    this.numberToAddCart = this.numberToAddCart + 1;
+  }
+  removeFromCart(){
+    this.numberToAddCart = Math.max(0, this.numberToAddCart - 1);
+  }
   
-  async addToCart(){
+  async addToCart2(){
 
     const isCartEmpty = this.$cart.isCartEmpty();
     const product = JSON.parse(JSON.stringify(this.product) + '');
@@ -86,9 +115,16 @@ export class ProductPageComponent implements OnInit {
     }
 
   }
-  async removeFromCart(){
+  async removeFromCart2(){
     const product = JSON.parse(JSON.stringify(this.product) + '');
     this.$cart.removeToCart(product);
   }
-
+  async removeAllFromCart(){
+    const product = JSON.parse(JSON.stringify(this.product) + '');
+    this.$cart.removeAllToCart(product);
+  }
+  async toogleToWishlist(){
+    const product = JSON.parse(JSON.stringify(this.product) + '');
+    this.$wishlist.toogleToWishlist(product);
+  }
 }

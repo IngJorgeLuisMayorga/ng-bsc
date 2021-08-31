@@ -9,6 +9,7 @@ export interface IProduct {
     image_src: string;
     quantity: number;
     category: string;
+    ingredients?: string;
 
     isInHome?: boolean;
 

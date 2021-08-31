@@ -99,6 +99,14 @@
 }
 .col-picture{
   width: calc(100% - 120px);
+  &.inWishlist {
+
+  }
+  &.inCartlist{
+    .picture-back{ 
+      background-color: @color-black;
+    }
+  }
 }
 
 .thumb{
@@ -115,6 +123,13 @@
   margin: 0.25em;
   margin-top: 0px;
   margin-bottom: 0.5em;
+
+  opacity: 0.5;
+
+  cursor: pointer;
+  &.active{
+    opacity: 1;
+  }
 }
 
 
@@ -317,7 +332,7 @@
   padding-bottom: 1em;
  
   div {
-    padding-left: 1em;
+    padding-left: 0em;
   }
 }
 
@@ -345,20 +360,30 @@
 
 .tab-header{
   font-family: 'Helvetica';
-  font-size: 15px;
-  letter-spacing: 0px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: @color-black;
 
   padding: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-right: 25px;
 
   border-bottom: 1px dotted white;
   padding-bottom: 10px;
   margin-bottom: 10px;
   
-  cursor: pointer
-  ;
+  cursor: pointer;
+  opacity: 0.6;
+
   &.active{
+    opacity: 1;
     font-weight: 600;
     border-bottom: 1px dotted @color-black;
+  }
+
+  &:hover{
+    opacity: 1;
   }
 }
 
@@ -368,6 +393,8 @@
   letter-spacing: 0px;
 
   padding: 10px;
+  padding-left: 0px;
+  padding-top: 0px;
 }
 
 .card-discount {
@@ -388,4 +415,92 @@
   letter-spacing: 2px;
   padding: 0.3em;
   padding-top: 0.4em;
+}
+
+.card-fav{
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  right: calc(-2em + 8px);
+  z-index: 100;
+  
+  padding: 8px;
+  width: 22px;
+  height: 22px;
+
+  background-color: white;
+  border:1px solid @color-black;
+
+  &:hover{
+    filter : grayscale(100%);
+  }
+
+  img{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+  }
+
+}
+
+
+.product-description{
+  font-family: 'Helvetica';
+  color: @color-black;
+  line-height: 1.15em;
+  letter-spacing: 0px;
+  font-size: 12px;
+  width: 376px;
+
+  strong {
+    font-weight: 900;
+  }
+}
+
+.product-ingredients{
+  font-family: 'Helvetica';
+  color: @color-black;
+  line-height: 1.25em;
+  letter-spacing: 0px;
+  font-size: 10px;
+  width: 600px;
+
+  strong {
+    font-weight: 900;
+  }
+}
+
+.product-how-to-p{
+  font-family: 'Helvetica';
+  color: @color-black;
+  line-height: 1.25em;
+  letter-spacing: 0px;
+  font-size: 12px;
+  width: 376px;
+
+  strong {
+    font-weight: 900;
+  }
+}
+.product-how-to-h4{
+  font-family: 'Helvetica';
+  color: @color-black;
+  line-height: 1.15em;
+  letter-spacing: 0px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: @color-yellow;
+  width: fit-content;
+  margin-bottom: 5px;
+  a{
+    color: @color-black;
+    text-decoration: none;
+  }
+
+  &:hover{
+    a{
+      opacity: 0.5;
+    }
+    background-color: white;
+  }
 }

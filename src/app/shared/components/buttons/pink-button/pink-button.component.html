@@ -1,0 +1,14 @@
+<div class="button" (click)="doClick()" (mouseover)="setHover()" (mouseleave)="resetHover()">
+
+    <div class="hover-off" *ngIf="!isHover">  
+        <h5> {{ text }} </h5>
+        <img src="../../../../../assets/CARITA_BLANCO_BSC.png">
+    </div>
+
+    
+    <div class="hover-on" *ngIf="isHover">  
+        <h5> {{ hover_text }} </h5>
+        <img src="../../../../../assets/CARITA_GRIS_BSC.png">
+    </div>
+
+</div>

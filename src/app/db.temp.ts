@@ -25,10 +25,18 @@ export default interface {
 
     category_skin_type: string; => id, texto, src , src_hover
     category_main_ingredient: string;  => id, texto, src , src_hover
-    category_soluction: string;  => id, texto, src , src_hover
+    category_solution: string;  => id, texto, src , src_hover
     category_step: string;  => id, texto, src , src_hover
     category_brand: string;  => id, texto, src , src_hover
 
+}
+
+Categrory {   
+    type:  string;
+    text: string;
+    icon: string;
+    banner: string;
+    description: string;
 }
 
 
