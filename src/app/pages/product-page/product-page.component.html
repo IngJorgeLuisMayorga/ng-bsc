@@ -161,14 +161,15 @@
                     <div class="info-row row-icons">
 
                         <div class="icon icon-skin" *ngFor="let category of sortBy(product.categories | keyvalue) ">
+                            
                             <div class="icon-wrapper">
                                 <div class="icon-img">
                                     <img class="icon-hv" src="{{ category.value.src_hv }}">
                                     <img class="icon-no-hv" src="{{ category.value.src }}">
                                 </div>
-                                <h2 *ngIf="category.key === 'brand'"> Marca <br> {{ category.value.title  }}</h2>
-                                <h2 *ngIf="category.key !== 'brand'"> {{ category.value.title  }}</h2>
+                                <h2> {{ category.value.title  }}</h2>
                             </div>
+
                         </div>
 
                     </div>
