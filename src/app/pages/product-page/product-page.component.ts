@@ -31,6 +31,9 @@ export class ProductPageComponent implements OnInit {
 
   public numberToAddCart = 1;
   public activeThumb = 0;
+  
+  public MAX_INGREDIENTS_SIZE = 400;
+  public maxIngredientSize = this.MAX_INGREDIENTS_SIZE;
 
   constructor(private route: ActivatedRoute, private $cart: CartService, private $wishlist: WishlistService) { 
       this.isCartOpen$ = this.$cart.isOpen$;
@@ -89,12 +92,29 @@ export class ProductPageComponent implements OnInit {
     )
     
   }
+
+  toogleVerMas(){
+    if(this.maxIngredientSize === this.MAX_INGREDIENTS_SIZE){
+      this.maxIngredientSize = 1000;
+    } else {
+      this.maxIngredientSize = this.MAX_INGREDIENTS_SIZE;
+    }
+  }
   setThumb(index: number){
     this.activeThumb = index;
   }
 
   setTab(tabname: string){
+    this.maxIngredientSize = this.MAX_INGREDIENTS_SIZE;
     this.tab = tabname;
+  }
+
+  sortBy(items: any[]) {
+    return items.sort(function( a , b){
+      if(a.value.index > b.value.index ) return 1;
+      if(a.value.index  < b.value.index ) return -1;
+      return 0;
+    });
   }
 
 

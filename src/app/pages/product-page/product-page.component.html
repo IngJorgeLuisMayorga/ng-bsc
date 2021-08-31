@@ -128,7 +128,7 @@
 
                         </div>
                     </div>
-                    <div class="info-row row-tabs">
+                    <div class="info-row row-tabs" [ngClass]="{'fixH': maxIngredientSize === MAX_INGREDIENTS_SIZE}">
                         <div class="tabs-header">
                             <div class="tab-header" (click)="setTab('description')" [ngClass]="{'active': tab === 'description'}">
                                 Descripción
@@ -146,9 +146,11 @@
                             </div>
                             <div class="tab-content" *ngIf="tab === 'ingredients'">
                                 <p class="product-ingredients">
-                                    {{ product.ingredients | slice:0: 120 }}
+                                    {{ product.ingredients | slice: 0: maxIngredientSize }}
+                                    <span *ngIf="maxIngredientSize === MAX_INGREDIENTS_SIZE">...</span>
                                 </p>
-                                <span>ver mas</span>
+                                <span class="ver-mas" (click)="toogleVerMas()" *ngIf="maxIngredientSize === MAX_INGREDIENTS_SIZE">Ver más</span>
+                                <span class="ver-mas" (click)="toogleVerMas()" *ngIf="maxIngredientSize > MAX_INGREDIENTS_SIZE">Ver menos</span>
                             </div>
                             <div class="tab-content" *ngIf="tab === 'how-to'">
                                 <h4 class="product-how-to-h4"> <a [routerLink]="'/paso/7'">Paso 7: Serum</a> </h4>
@@ -157,7 +159,18 @@
                         </div>
                     </div>
                     <div class="info-row row-icons">
-                        <h1></h1>
+
+                        <div class="icon icon-skin" *ngFor="let category of sortBy(product.categories | keyvalue) ">
+                            <div class="icon-wrapper">
+                                <div class="icon-img">
+                                    <img class="icon-hv" src="{{ category.value.src_hv }}">
+                                    <img class="icon-no-hv" src="{{ category.value.src }}">
+                                </div>
+                                <h2 *ngIf="category.key === 'brand'"> Marca <br> {{ category.value.title  }}</h2>
+                                <h2 *ngIf="category.key !== 'brand'"> {{ category.value.title  }}</h2>
+                            </div>
+                        </div>
+
                     </div>
                </div>
            </div>

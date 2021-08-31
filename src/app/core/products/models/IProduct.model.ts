@@ -10,6 +10,13 @@ export interface IProduct {
     quantity: number;
     category: string;
     ingredients?: string;
+    categories?: {
+        skin: { src: string;  src_hv: string; title: string },
+        main_ingredient: { src: string; src_hv: string; title: string },
+        solution: { src: string; src_hv: string; title: string },
+        step: { src: string; src_hv: string; title: string },
+        brand: { src: string; src_hv: string; title: string },
+    }
 
     isInHome?: boolean;
 

@@ -36,6 +36,39 @@ export default [
 
         description: "  Serum antioxidante, diseñado con ingredientes naturalmente efectivos que son seguros y no irritantes. Además, energizay rejuvenece la piel con el poder de la Vitamina C pura al5%, lo suficientemente suave y eficaz para todos los tiposde piel, incluidas las más sensibles",
         ingredients: "Water, Propylen Glycol, Ascorbic Acid, Hydroxyethylcellulose, Centella Asiatica Extract, Citrus Junos Fruit Extract, Illicium Verum(Anise) Fruit Extract, Citrus Paradisi(Grapefruit) Fruit Extract, Nelumbium Speciosum Flower Extract, Paeonia Suffruticosa Root Extract, Scutellaria Baicalensis Root Extract, Polysorbate 60, Brassica Oleracea Italica (Broccoli) Extract, Chaenomeles Sinensis Fruit Extract, Citrus Aurantium Dulcis (Orange) Oil, Sodium Acrylate/Sodium Acryloyldimethyl Taurate Copolymer, Disodium EDTA, Lavandula Angustifolia (Lavender) Oil, Camellia Sinensis Callus Culture Extract, Larix Europaea Wood Extract, Chrysanthellum Indicum Extract, Rheum Palmatum Root Extract, Asarum Sieboldi Root Extract, Quercus Mongolia Leaf Extract, Persicaria Hydropiper Extract, Corydalis Turtschaninovii Root Extract, Coptis Chinensis Root Extract, Magnolia Obovata Bark Extract, Lysine HCL, Proline, Sodium Ascorbyl Phosphate, Acetyl Methionine, Theanine, Lecithin, Acetyl Glutamine, SH-Olgopeptide-1, SH-Olgopeptide-2, SH-Polypeptide-1, SH Polypeptide-9, SH-Polypeptide-11, Bacillus/Folic Acid Soybean Ferment Extract, Sodium Hyaluronate, Caprylyl Glycol, Butylene Glycol, 1,2-Hexanediol, Limonen."
+        ,
+        categories: {
+            skin: { 
+                index: 0,
+                src: "../../../assets/categorias/piel sensible 1.png",  
+                src_hv: "../../../assets/categorias/piel sensible 2.png",  
+                title: "Apto para piel sensible" 
+            },
+            main_ingredient: { 
+                index: 1,
+                src: "../../../assets/categorias/vitaminac 1.png",  
+                src_hv: "../../../assets/categorias/vitaminac 2.png", 
+                title: "Ácido Ascórbico" 
+            },
+            solution: { 
+                index: 2,
+                src: "../../../assets/categorias/antioxidante 1.png",  
+                src_hv: "../../../assets/categorias/antioxidante 2.png",  
+                title: "Producto Antioxidante" 
+            },
+            step: { 
+                index: 3,
+                src: "../../../assets/categorias/serum 1.png",  
+                src_hv: "../../../assets/categorias/serum 2.png", 
+                title: "Paso 7 Serum" 
+             },
+            brand: {
+                index: 4, 
+                src: "../../../assets/categorias/klairs 1.png",  
+                src_hv: "../../../assets/categorias/klairs 2.png",  
+                title: "Klairs" 
+            },
+        }
     },
     {
         id: 4,
