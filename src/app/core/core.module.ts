@@ -10,6 +10,8 @@ import { FilterByDuoPipe } from './products/pipes/filterByDuo.pipe';
 import { filterByIdPipe } from './products/pipes/filterById.pipe';
 import { FilterByHomeNewsPipe } from './products/pipes/filterByHomeNews.pipe';
 import { FilterByHomeFavsPipe } from './products/pipes/filterByHomeFavs.pipe';
+import { ProductRecommendedCardComponent } from './products/components/product-recommended-card/product-recommended-card.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 const COMPONENTS = [
@@ -17,7 +19,8 @@ const COMPONENTS = [
   ProfileSidebarComponent,
   SearchSidebarComponent, 
   ProductCardComponent,
-  ProductDuoCardComponent
+  ProductDuoCardComponent,
+  ProductRecommendedCardComponent
 ]
 
 const PIPES = [
@@ -32,7 +35,8 @@ const PIPES = [
   declarations: [...COMPONENTS, ...PIPES ],
   exports: [...COMPONENTS, ...PIPES],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class CoreModule { }

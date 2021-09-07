@@ -160,7 +160,7 @@
                     </div>
                     <div class="info-row row-icons">
 
-                        <div class="icon icon-skin" *ngFor="let category of sortBy(product.categories | keyvalue) ">
+                        <div class="icon icon-skin" *ngFor="let category of sortBy(product.categories | keyvalue)">
                             
                             <div class="icon-wrapper">
                                 <div class="icon-img">
@@ -178,7 +178,26 @@
         </section>
 
         <section class="section--recommended">
-           
+
+            <div class="title">
+                <h1> <strong>Recomendados</strong> para ti </h1>
+                <img src="../../../assets/section-title-line.png">
+            </div>
+
+            <div class="cards">
+                <app-product-recommended-card
+                    [product]="product"
+                ></app-product-recommended-card>
+
+                <app-product-recommended-card
+                    [product]="product"
+                ></app-product-recommended-card>
+
+                <app-product-recommended-card
+                    [product]="product"
+                ></app-product-recommended-card>
+            </div>
+
         </section>
 
     </div>

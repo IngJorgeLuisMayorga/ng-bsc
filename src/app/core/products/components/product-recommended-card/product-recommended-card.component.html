@@ -1,0 +1,76 @@
+<div class="card" [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (cartlist$ | async) > 0}">
+
+    <div class="card-back"></div>
+
+    <div class="card-front">
+        <div class="card-top">
+            <div class="photo">
+                <img [src]="product.image_src">
+
+                <div class="card-fav">                 
+                    <div class="card-wishlist" >
+                        <div class="card-wishlist--wrapper anim-hover" (click)="toogleToWishlist()">
+                            <img class="anim-hover--on-hover" src=".../../../../../assets/heart.png">
+                            <img class="anim-hover--off-hover" src=".../../../../../assets/heart_gray.png">
+                        </div>
+                    </div>
+               </div>
+
+
+            </div>
+            <div class="label"></div>
+        </div>
+        <div class="card-bottom">
+
+            <div class="info">
+                <h1 class="price"> 
+
+                    <strong *ngIf="product.discount" class="discount">
+                        {{ ((product.price) | currency:'$':'symbol':'2.0') }}
+                   </strong> 
+
+                   <strong *ngIf="product.discount">
+                       {{ ((product.price || 0)*(1 - (product.discount || 0)) | currency:'$':'symbol':'2.0') }}
+                  </strong> 
+
+                  <strong *ngIf="!product.discount">
+                   {{ ((product.price || 0)*(1 - (product.discount || 0)) | currency:'$':'symbol':'2.0') }}
+                   </strong> 
+
+                </h1>
+                <h1 class="name">
+                    {{ product.name }}
+                 </h1>
+            </div>
+        
+            <app-dark-button
+                *ngIf="( cartlist$ | async) === 0"
+                [icon]="'cart:icon'"
+                [text]="'¡Lo quiero!'"
+                (nClick)="addToCart2()"
+            ></app-dark-button>
+
+            <app-pink-button
+                *ngIf="( cartlist$ | async) > 0"
+                [text]="'¡Agregado!'"
+                [icon]="'cart:face:white'"
+                [hover_text]="'¡Eliminar!'"
+                [hover_icon]="'cart:face:gray'"
+                (nClick)="removeAllFromCart()"
+            ></app-pink-button>
+
+            <br>
+
+            <app-add-minus-button
+                *ngIf="( cartlist$ | async) > 0"
+                (onMin)="removeFromCart2()"
+                (onMax)="addToCart2()"
+                [value]="(cartlist$ | async)"
+             ></app-add-minus-button>
+
+        </div>
+    </div>
+    
+    <div class="card-discount"></div>
+    <div class="card-heart"></div>
+</div>
