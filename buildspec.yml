@@ -16,4 +16,4 @@ phases:
   post_build:
     commands:
       - echo Build of BSC Angular App completed on `date` V1
-      - aws s3 sync dist/ s3://ng-bsc --delete
+      - aws s3 sync dist/ s3://"$BUCKET" --delete
