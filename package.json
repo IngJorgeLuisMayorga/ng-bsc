@@ -9,7 +9,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy::s3": "git add * && git commit -m 'Update All' && git push && ng build --prod --aot && aws s3 sync --delete dist/ s3://ng-bsc",
-    "deploy": "ng build && node deploy"
+    "deploy": "ng build && node deploy",
+    "start:local": "ng serve -c=dev --port=5200",
+    "start:dev": "ng serve -c=dev --port=5201",
+    "start:prod": "ng serve -c=prod --port=5202"
   },
   "private": true,
   "dependencies": {
