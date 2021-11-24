@@ -32,3 +32,40 @@ export interface IProduct {
         discount: number;
     };
 }
+
+export type Product = {
+    id: number;
+    name: string;
+    description: string;
+    ingredients: string;
+    image1_src: string;
+    image2_src: string;
+    image3_src: string;
+    image4_src: string;
+    sku: number;
+    price: number;
+    discount: number;
+    quantity: number;
+
+    category_skin_id: number;
+    category_main_ingredient_id: number;
+    category_solution_id: number;
+    category_step_id: number;
+    category_brand_id: number;
+
+    category_skin: Category;
+    category_main_ingredient: Category;
+    category_solution: Category;
+    category_step: Category;
+    category_brand: Category;
+
+}
+
+
+export type Category = {
+    id: number;
+    name: string;
+    type: 'SKIN' | 'MAIN_INGREDIENT' | 'SOLUTION' | 'STEP' | 'BRAND';
+    picture_normal: string;
+    picture_hover: string;
+}

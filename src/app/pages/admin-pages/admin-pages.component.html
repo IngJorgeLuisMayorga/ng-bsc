@@ -1,0 +1,42 @@
+<div class="admin admin-page">
+
+    <header class="header">
+        <app-header-default></app-header-default>
+    </header>
+
+    <div class="container">
+
+        <menu>
+            <ul>
+                <li>
+                    <a [routerLink]="'/admin/users'" routerLinkActive="active-link">Usuarios</a>
+                </li>
+                <li>
+                    <a [routerLink]="'/admin/products'" routerLinkActive="active-link">Productos</a>
+                </li>
+                <li>
+                    <a [routerLink]="'/admin/orders'" routerLinkActive="active-link">Ordenes</a>
+                </li>
+                <li>
+                    <a [routerLink]="'/admin/coupons'" routerLinkActive="active-link">Cupones</a>
+                </li>
+                <li>
+                    <a [routerLink]="'/admin/payments'" routerLinkActive="active-link">Pagos</a>
+                </li>
+                <li>
+                    <a [routerLink]="'/admin/categories'" routerLinkActive="active-link">Categorias</a>
+                </li>
+            </ul>
+        </menu>
+
+        <main >
+            <router-outlet></router-outlet>
+        </main>
+
+    </div>
+
+    <footer class="footer">
+            <app-footer-default></app-footer-default>
+    </footer>
+
+</div>

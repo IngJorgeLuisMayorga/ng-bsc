@@ -1,0 +1,59 @@
+@import (reference) '../../../styles/_index.less';
+
+.container{
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding-top: 0em;
+
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+
+}
+
+menu{
+    display: block;
+    width: 120px;
+    padding: 1em;
+    background-color: @color-pink;
+    color: white;
+    ul{
+        display: block;
+        width: 100%;
+    }
+    li {
+        display: block;
+        width: 100%; 
+        a{
+            color: @color-black;
+            font-family: 'Helvetica' ;
+            text-decoration: none;
+            padding: 0.5em;
+            position: relative;
+            display: block;
+        }
+        a.active-link{
+            font-weight: 900;
+        }
+    }
+}
+
+main{
+    padding: 1em;
+    width: 100%;
+    height: 100%;
+}

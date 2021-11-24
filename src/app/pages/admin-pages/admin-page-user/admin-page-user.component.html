@@ -1,0 +1,111 @@
+<form *ngIf="!user" class="loading">
+    <img src="../../../../assets/Spin-1s-200px.gif">
+</form>
+
+<form *ngIf="user">
+    <div class="bsc-row x3 basic-info">
+        <div class="bsc-col w25">
+            <div class="photo">
+                <img [src]="user.photo" style="width: 100%;">
+            </div>
+        </div>
+        <div class="bsc-col w75" style="padding-left: 1em;">
+            <div class="bsc-col col-1">
+                <div class="p-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" pInputText [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}"/>
+                </div>
+                <div class="p-field">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" pInputText [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}"/>
+                </div>
+                <div class="bsc-row flex-start">
+                    <div class="p-field" style="width: fit-content; padding-right: 1em;">
+                        <label for="nid_type" style="min-width: 85px;">NID Type</label>
+                        <p-dropdown [options]="nid_types" [(ngModel)]="nid_type" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                    </div>
+                    <div class="p-field">
+                        <label for="nid_number">NID Number</label>
+                        <input id="nid_number" type="text" pInputText [(ngModel)]="user.nid_number" [ngModelOptions]="{standalone: true}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="bsc-col col-2">
+                <div class="p-field">
+                    <label for="phone">Phone</label>
+                    <input id="phone" type="text" pInputText [(ngModel)]="user.phone" [ngModelOptions]="{standalone: true}"/>
+                </div>
+                <div class="p-field">
+                    <label for="city">City</label>
+                    <input id="city" type="text" pInputText [(ngModel)]="user.city" [ngModelOptions]="{standalone: true}"/>
+                </div>
+                <div class="p-field">
+                    <label for="address">Address</label>
+                    <input id="address" type="text" pInputText [(ngModel)]="user.address" [ngModelOptions]="{standalone: true}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bsc-row contact-info">
+        <label for="comments">Comments</label> <br>
+        <textarea pInputTextarea [rows]="5" [(ngModel)]="user.comments" style="width: 100%;"></textarea>
+    </div>
+    <br>
+    <div class="bsc-row submit">
+        <button pButton type="button" label="Save" ></button>
+    </div>
+</form>
+
+<br>
+<br>
+
+<form *ngIf="user && orders && orders.length > 0">
+    <div class="bsc-row orders">
+            <p-table 
+
+            [value]="orders" 
+            responsiveLayout="scroll"
+
+            dataKey="code"
+            styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
+            [value]="orders"
+            [autoLayout]="true"
+            [paginator]="true" [rows]="10" 
+            [globalFilterFields]="['name','email','phone','nid','points','city','address']"
+            [showCurrentPageReport]="true" 
+            [rowsPerPageOptions]="[10,25,50]"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+
+            >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon> </th>
+                        <th pSortableColumn="ordered_at">OrderedAt <p-sortIcon field="ordered_at"></p-sortIcon></th>
+                        <th>Status</th>
+                        <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+                        <th pSortableColumn="points">Points <p-sortIcon field="points"></p-sortIcon></th> 
+                        <th pSortableColumn="phone">Phone <p-sortIcon field="phone"></p-sortIcon></th>
+                        <th pSortableColumn="city">City <p-sortIcon field="city"></p-sortIcon></th>
+                        <th pSortableColumn="address">Address <p-sortIcon field="address"></p-sortIcon></th>
+                        <th>Invoice (PDF)</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-order>
+                    <tr>
+                        <td >{{order.id}} </td>
+                        <td >{{order.ordered_at}} </td>
+                        <td > STATUS </td>
+                        <td >{{order.total}} </td>
+                        <td >{{order.points}} </td>
+                        <td >{{order.phone}}</td>
+                        <td >{{order.city}}</td>
+                        <td >{{order.address}}</td>
+                        <td>PDF</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+    </div>
+    
+    <div class="bsc-row whislist"></div>
+
+</form>
