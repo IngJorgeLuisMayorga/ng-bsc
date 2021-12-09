@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { IProduct } from '../../products/models/IProduct.model';
+import { Wishlist } from '../Wishlist.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,12 +25,21 @@ export class WishlistService {
   );
   public isUpdating$ = this._isUpdating.asObservable();
 
-  constructor() {
+  constructor(private $http: HttpClient) {
     this._wishlist.next([]);
     this._isUpdating.next(0);
     this._isOpen.next(false);
   }
 
+
+  async getByUserId(id: number): Promise<Wishlist[]> {
+    const orders = await this.$http.get<Wishlist[]>(`${environment.server}/wishlist/by/user/${id}`).toPromise();
+    return orders;
+  }
+
+
+
+  
   public sync() {
     return this.wishlist$;
   }

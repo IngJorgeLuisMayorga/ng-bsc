@@ -1,1 +1,65 @@
-<p>admin-page-products works!</p>
+
+<div class="card">
+    <p-table #dt1 
+        dataKey="code"
+        styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
+        [value]="products"
+        [autoLayout]="true"  
+        [loading]="loading"  
+        [paginator]="true" [rows]="15" 
+        [globalFilterFields]="['name','price','discount','quantity']"
+        [showCurrentPageReport]="true" 
+        [rowsPerPageOptions]="[10,25,50]"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+        >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <button pButton label="Clear" class="p-button-outlined"  icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                <span class="p-input-icon-left p-ml-auto" style="position: absolute; right: 25px;">
+                    <i class="pi pi-search"></i>
+                    <input class="p-inputtext p-component p-element" pInputText type="text" (input)="dt1.filterGlobal(getTargetValue($event), 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th></th>
+                <th pSortableColumn="id">id</th>
+                <th pSortableColumn="photo">Photo</th>
+                <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="price">Price<p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="quantity">Stock<p-sortIcon field="quantity"></p-sortIcon></th>
+                <th pSortableColumn="category_skin">C:Skin<p-sortIcon field="category_skin"></p-sortIcon></th>
+                <th pSortableColumn="category_main_ingredient">C:Ingredient<p-sortIcon field="category_main_ingredient"></p-sortIcon></th>
+                <th pSortableColumn="category_solution">C:Solution<p-sortIcon field="category_solution"></p-sortIcon></th>
+                <th pSortableColumn="category_step">C:Step<p-sortIcon field="category_step"></p-sortIcon></th>
+                <th pSortableColumn="category_brand">C:Extra<p-sortIcon field="category_brand"></p-sortIcon></th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td style="vertical-align:middle; min-width: 10px">
+                    <p-button type="button" icon="pi pi-pencil" styleClass="p-button-text" (click)="doOpenEdit(product.id)"></p-button>
+                </td>
+                <td style="vertical-align:middle; min-width: 10px">{{product.id}}</td>
+                <td style="vertical-align:middle; min-width: 10px"> <img src="{{product.image1_src}}" style="width: 50px; height: 50px; object-fit: cover;"/> </td>
+                <td style="vertical-align:middle; min-width: 100px">{{product.name}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{product.price*(1 - 0.01*product.discount) | currency:'$' }}</td>
+                <td style="vertical-align:middle; min-width: 100px; text-align: center;">{{product.quantity }}</td>
+                <td style="vertical-align:middle; min-width: 100px"><img src="{{product.category_skin.picture_normal}}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
+                <td style="vertical-align:middle; min-width: 100px"><img src="{{product.category_main_ingredient.picture_normal}}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
+                <td style="vertical-align:middle; min-width: 100px"><img src="{{product.category_solution.picture_normal}}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
+                <td style="vertical-align:middle; min-width: 80px"><img src="{{product.category_step.picture_normal}}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
+                <td style="vertical-align:middle; min-width: 80px"><img src="{{product.category_extra.picture_normal}}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" (click)="doOpenAdd()"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+</div>
+

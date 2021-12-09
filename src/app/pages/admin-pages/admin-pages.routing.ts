@@ -4,8 +4,8 @@ import { AdminPageCategoriesComponent } from './admin-page-categories/admin-page
 import { AdminPageCouponsComponent } from './admin-page-coupons/admin-page-coupons.component';
 import { AdminPageOrdersComponent } from './admin-page-orders/admin-page-orders.component';
 import { AdminPagePaymentsComponent } from './admin-page-payments/admin-page-payments.component';
+import { AdminPageProductComponent } from './admin-page-product/admin-page-product.component';
 import { AdminPageProductsComponent } from './admin-page-products/admin-page-products.component';
-
 import { AdminPageUserComponent } from './admin-page-user/admin-page-user.component';
 import { AdminPageUsersComponent } from './admin-page-users/admin-page-users.component';
 
@@ -27,6 +27,10 @@ export const routes = [
         {
             path: 'products',
             component: AdminPageProductsComponent,
+        },
+        {
+          path: 'products/:id',
+           component: AdminPageProductComponent,
         },
         {
             path: 'coupons',

@@ -1,1 +1,64 @@
-<p>admin-page-users works!</p>
+
+<div class="card">
+    <p-table #dt1 
+        dataKey="code"
+        styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
+        [value]="users"
+        [autoLayout]="true"  
+        [loading]="loading"  
+        [paginator]="true" [rows]="15" 
+        [globalFilterFields]="['name','email','phone','nid','points','city','address']"
+        [showCurrentPageReport]="true" 
+        [rowsPerPageOptions]="[10,25,50]"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+        >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <button pButton label="Clear" class="p-button-outlined"  icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                <span class="p-input-icon-left p-ml-auto" style="position: absolute; right: 25px;">
+                    <i class="pi pi-search"></i>
+                    <input class="p-inputtext p-component p-element" pInputText type="text" (input)="dt1.filterGlobal(getTargetValue($event), 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th></th>
+                <th pSortableColumn="id">id</th>
+                <th pSortableColumn="photo">Photo</th>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="nid">Nid <p-sortIcon field="nid"></p-sortIcon></th>
+                <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+                <th pSortableColumn="phone">Phone <p-sortIcon field="phone"></p-sortIcon></th>
+                <th pSortableColumn="points">Points <p-sortIcon field="points"></p-sortIcon></th>
+                <th pSortableColumn="orders">Orders<p-sortIcon field="points"></p-sortIcon></th>
+                <th pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
+                <th pSortableColumn="address">Address <p-sortIcon field="address"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td style="vertical-align:middle; min-width: 10px">
+                    <p-button type="button" icon="pi pi-pencil" styleClass="p-button-text" (click)="doOpenEdit(user.id)"></p-button>
+                </td>
+                <td style="vertical-align:middle; min-width: 10px">{{user.id}}</td>
+                <td style="vertical-align:middle; min-width: 10px"> <img src="{{user.photo}}" style="width: 50px; height: 50px; object-fit: cover;"/> </td>
+                <td style="vertical-align:middle; min-width: 100px">{{user.name}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{user.nid}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{user.email}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{user.phone}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{user.points}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{user.points}}</td>
+                <td style="vertical-align:middle; min-width: 80px">{{user.city}}</td>
+                <td style="vertical-align:middle; min-width: 120px">{{user.address}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" (click)="doOpenAdd()"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+</div>
+

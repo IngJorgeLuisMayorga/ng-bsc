@@ -1,1 +1,169 @@
-<p>admin-page-product works!</p>
+
+<form *ngIf="!product" class="loading">
+    <img src="../../../../assets/Spin-1s-200px.gif">
+</form>
+
+
+
+<form *ngIf="product">
+    <div class="bsc-row x3 basic-info">
+        <div class="bsc-col wf300 photos">
+            <div class="photo-main">
+                <img *ngIf="thumb == 0" [src]="product.image1_src" style="width: 100%;">
+                <img *ngIf="thumb == 1" [src]="product.image2_src" style="width: 100%;">
+                <img *ngIf="thumb == 2" [src]="product.image3_src" style="width: 100%;">
+                <img *ngIf="thumb == 3" [src]="product.image4_src" style="width: 100%;">
+            </div>
+            <div class="photo-thumbs">
+
+                <div class="photo-thumb"  [ngClass]="{'active': thumb == 0}" (mouseenter)="thumb = 0">
+                    <input type="file" id="file-ip-1" accept="image/*" (change)="showPreview($event,0);">
+                    <label for="file-ip-1">
+                        <img [src]="product.image1_src" id="file-ip-1-preview">
+                    </label>
+                </div>
+
+                <div class="photo-thumb" [ngClass]="{'active': thumb == 1}" (mouseenter)="thumb = 1" >
+                    <input type="file" id="file-ip-2" accept="image/*" (change)="showPreview($event,1);">
+                    <label for="file-ip-2">
+                        <img [src]="product.image2_src" id="file-ip-2-preview">
+                    </label>
+                </div>
+
+                <div class="photo-thumb" [ngClass]="{'active': thumb == 2}" (mouseenter)="thumb = 2">
+                    <input type="file" id="file-ip-3" accept="image/*" (change)="showPreview($event,2);">
+                    <label for="file-ip-3">
+                        <img [src]="product.image3_src" id="file-ip-3-preview">
+                    </label>
+                </div>
+
+                <div class="photo-thumb" [ngClass]="{'active': thumb == 3}" (mouseenter)="thumb = 3">
+                    <input type="file" id="file-ip-4" accept="image/*" (change)="showPreview($event,3);">
+                    <label for="file-ip-4">
+                        <img [src]="product.image4_src" id="file-ip-4-preview">
+                    </label>
+                </div>
+
+            </div>
+        </div>
+        <div class="bsc-col w75" style="padding-left: 1em;">
+            <div class="bsc-col col-1">
+                <div class="p-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" pInputText [(ngModel)]="product.name" [ngModelOptions]="{standalone: true}"/>
+                </div>
+                <div class="p-field">
+                    <label for="email">Description</label>
+                    <input id="email" type="text" pInputText [(ngModel)]="product.description" [ngModelOptions]="{standalone: true}"/>
+                </div>
+                <div class="bsc-row flex-start">
+                    <div class="p-field">
+                        <label for="ingredients">Ingredients</label>
+                        <input id="ingredients" type="text" pInputText [(ngModel)]="product.ingredients" [ngModelOptions]="{standalone: true}"/>
+                    </div>
+                    <div class="p-field">
+                        <label for="sku">SKU</label>
+                        <input id="sku" type="text" pInputText [(ngModel)]="product.sku" [ngModelOptions]="{standalone: true}"/>
+                    </div>
+                </div>
+                
+                <div class="bsc-row flex-start">
+                    <div class="bsc-col col-2">
+                        <div class="p-field">
+                            <label for="type">Skin</label>
+                            <p-dropdown [options]="categorySkins" optionLabel="name" [(ngModel)]="categorySkin"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="bsc-col col-2">
+                        <div class="p-field">
+                            <label for="type">Ingredient</label>
+                            <p-dropdown [options]="categoryMainIngredients" optionLabel="name" [(ngModel)]="categoryMainIngredient"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="bsc-col col-2">
+                        <div class="p-field">
+                            <label for="type">Solution</label>
+                            <p-dropdown [options]="categorySolutions" optionLabel="name" [(ngModel)]="categorySolution"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="bsc-col col-2">
+                        <div class="p-field">
+                            <label for="type">Step</label>
+                            <p-dropdown [options]="categorySteps" optionLabel="name" [(ngModel)]="categoryStep"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                        </div>
+                    </div>´
+                    <div class="bsc-col col-2">
+                        <div class="p-field">
+                            <label for="type">Extra</label>
+                            <p-dropdown [options]="categoryExtras" optionLabel="name" [(ngModel)]="categoryExtra"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                        </div>
+                    </div>´
+                    
+                </div>
+
+                <div class="bsc-row flex-start">
+                    <div class="bsc-col col-2">
+                        <div class="p-field">
+                            <label for="type">Type</label>
+                            <p-dropdown [options]="productTypes" [(ngModel)]="productType"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="bsc-col col-2">
+                <div class="p-field">
+                    <label for="price">Price</label>
+                    <input id="price" type="text" pInputText [(ngModel)]="product.price" [ngModelOptions]="{standalone: true}"/>
+                </div>
+                <div class="p-field">
+                    <label for="discount">Discount %</label>
+                    <input id="discount" type="text" pInputText [(ngModel)]="product.discount" [ngModelOptions]="{standalone: true}"/>
+                </div>
+                <div class="p-field">
+                    <label for="quantity">Quantity</label>
+                    <input id="quantity" type="number" pInputText [(ngModel)]="product.quantity" [ngModelOptions]="{standalone: true}"/>
+                </div>
+            </div>
+            
+        </div>
+
+
+    </div>
+
+    <br>
+
+    <div>
+
+        <h1>IS DUO</h1>
+        <br>
+        <p-inputSwitch (onChange)="nChangeDuo($event)" [(ngModel)]="checked" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+        <br>
+        <br>
+
+        <div class="" *ngIf="checked">
+            <div class="p-d-flex" style="display: block;">
+                <div class="p-mr-2"  style="display: inline-block;">
+                    <h1> PRODUCT A </h1>
+                    <div class="flex-inline">
+                        <img *ngIf="productA" [src]="productA.image1_src">
+                        <p-dropdown [options]="products" [(ngModel)]="productA" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                    </div>
+                </div>
+                <div class="p-mr-2" style="display: inline-block;">
+                    <h1> PRODUCT B </h1>
+                    <div class="flex-inline">
+                        <img *ngIf="productB" [src]="productB.image1_src">
+                        <p-dropdown [options]="products" [(ngModel)]="productB" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="bsc-row submit">
+        <button pButton type="button" label="Save" (click)="save()"></button>
+    </div>
+</form>
