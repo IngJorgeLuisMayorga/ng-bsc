@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { User } from 'src/app/core/users/user.model';
 import { UsersService } from 'src/app/core/users/users.service';
-
 
 
 @Component({
@@ -12,6 +12,7 @@ import { UsersService } from 'src/app/core/users/users.service';
   styleUrls: ['./admin-page-users.component.less']
 })
 export class AdminPageUsersComponent implements OnInit {
+
 
   users: User[];
   loading: boolean = true;

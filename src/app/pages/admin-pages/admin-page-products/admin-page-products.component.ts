@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { User } from 'src/app/core/users/user.model';

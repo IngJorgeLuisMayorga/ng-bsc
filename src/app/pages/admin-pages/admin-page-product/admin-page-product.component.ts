@@ -18,6 +18,7 @@ import { Wishlist } from 'src/app/core/wishlist/Wishlist.model';
 })
 export class AdminPageProductComponent implements OnInit {
 
+
   public thumb = 0;
   private productId: number | null;
 
@@ -150,6 +151,5 @@ export class AdminPageProductComponent implements OnInit {
       productA_id: this.productA.id,
       productB_id: this.productB.id,
     });
-  }
 
 }

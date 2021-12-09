@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/core/orders/orders.model';
@@ -68,7 +69,6 @@ export class AdminPageUserComponent implements OnInit {
       }
     }
 
- 
 
   }
 

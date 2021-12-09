@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AdminPagesComponent } from './admin-pages.component';
@@ -16,6 +17,7 @@ import { AdminPageCategoryComponent } from './admin-page-category/admin-page-cat
 import { AdminPageOrderComponent } from './admin-page-order/admin-page-order.component';
 import { AdminPagePaymentComponent } from './admin-page-payment/admin-page-payment.component';
 import { AdminPageProductComponent } from './admin-page-product/admin-page-product.component';
+
 
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -49,7 +51,7 @@ const pages = [
 ];
 
 @NgModule({
-  declarations: [...pages ],
+  declarations: [...pages, AdminPageUserComponent, AdminPageCouponComponent, AdminPageCategoryComponent, AdminPageOrderComponent, AdminPagePaymentComponent, AdminPageProductComponent],
   exports: [...pages],
   imports: [
     CommonModule,
@@ -67,6 +69,7 @@ const pages = [
     BrowserAnimationsModule,
     AdminPagesRoutingModule,
     InputSwitchModule
+    AdminPagesRoutingModule
   ]
 })
 export class AdminPagesModule { }
