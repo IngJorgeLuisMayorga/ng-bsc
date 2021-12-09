@@ -35,4 +35,31 @@ export class ProductsService {
     return product;
   }
 
+  async saveProduct(id: number, product: Product){
+    const myFormData = new FormData();
+    myFormData.append('image1', (product as any).image1_src_blob);
+    myFormData.append('image2', (product as any).image2_src_blob);
+    myFormData.append('image3', (product as any).image3_src_blob);
+    myFormData.append('image4', (product as any).image4_src_blob);
+    myFormData.append('product', product.id + '');
+    
+    let pictures = {
+      'image1': '',
+      'image2': '',
+      'image3': '',
+      'image4': '',
+    }
+    if((product as any).image1_src_blob || (product as any).image2_src_blob  || (product as any).image3_src_blob || (product as any).image4_src_blob){
+      const _pictures = await this.$http.post<any>(`${environment.server}/products/upload/picture`, myFormData).toPromise();
+      pictures = _pictures;
+      if(pictures.image1) product.image1_src = `${environment.server}/images/${pictures.image1}`;
+      if(pictures.image2) product.image2_src = `${environment.server}/images/${pictures.image2}`;
+      if(pictures.image3) product.image3_src = `${environment.server}/images/${pictures.image3}`;
+      if(pictures.image4) product.image4_src = `${environment.server}/images/${pictures.image4}`;
+    }
+
+    const _product = await this.$http.patch<Product>(`${environment.server}/products/${id}`, product).toPromise();
+    return _product;
+  }
+
 }

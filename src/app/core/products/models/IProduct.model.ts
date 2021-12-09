@@ -47,17 +47,24 @@ export type Product = {
     discount: number;
     quantity: number;
 
+    isDuo?: boolean;
+    type?: string;
+    productA_id?:number;
+    productB_id?:number;
+
     category_skin_id: number;
     category_main_ingredient_id: number;
     category_solution_id: number;
     category_step_id: number;
     category_brand_id: number;
+    category_extra_id: number;
 
     category_skin: Category;
     category_main_ingredient: Category;
     category_solution: Category;
     category_step: Category;
     category_brand: Category;
+    category_extra: Category;
 
 }
 
@@ -65,7 +72,7 @@ export type Product = {
 export type Category = {
     id: number;
     name: string;
-    type: 'SKIN' | 'MAIN_INGREDIENT' | 'SOLUTION' | 'STEP' | 'BRAND';
+    type: 'SKIN' | 'MAIN_INGREDIENT' | 'SOLUTION' | 'STEP' | 'BRAND' | 'EXTRA';
     picture_normal: string;
     picture_hover: string;
 }

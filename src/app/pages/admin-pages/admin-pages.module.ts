@@ -30,6 +30,7 @@ import {RippleModule} from 'primeng/ripple';
 import {TabViewModule} from 'primeng/tabview';
 import { FormsModule } from '@angular/forms';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 const pages = [
   AdminPageUserComponent, 
@@ -64,7 +65,8 @@ const pages = [
     DropdownModule,
     InputTextareaModule,
     BrowserAnimationsModule,
-    AdminPagesRoutingModule
+    AdminPagesRoutingModule,
+    InputSwitchModule
   ]
 })
 export class AdminPagesModule { }

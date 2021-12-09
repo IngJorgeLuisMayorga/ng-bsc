@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server: 'http://127.0.0.1:8000',
+  server: ' ip-172-31-43-139.us-east-2.compute.internal',
 };
