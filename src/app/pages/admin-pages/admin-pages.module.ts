@@ -69,7 +69,6 @@ const pages = [
     BrowserAnimationsModule,
     AdminPagesRoutingModule,
     InputSwitchModule
-    AdminPagesRoutingModule
   ]
 })
 export class AdminPagesModule { }

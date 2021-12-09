@@ -151,5 +151,6 @@ export class AdminPageProductComponent implements OnInit {
       productA_id: this.productA.id,
       productB_id: this.productB.id,
     });
+  }
 
 }
