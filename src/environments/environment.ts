@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  server: 'http://127.0.0.1:8000'
+  server: 'https://ec2-3-131-94-227.us-east-2.compute.amazonaws.com/'
 };
 
 /*
