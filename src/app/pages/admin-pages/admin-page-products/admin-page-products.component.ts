@@ -30,6 +30,7 @@ export class AdminPageProductsComponent implements OnInit {
     console.log(' ')
     console.log(' ')
  
+    debugger;
 
     this.loading = false;
   }
