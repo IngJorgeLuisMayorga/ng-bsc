@@ -1,1 +1,57 @@
-<p>admin-page-orders works!</p>
+<form *ngIf="!(orders && orders.length > 0)" class="loading">
+    <img src="../../../../assets/Spin-1s-200px.gif">
+</form>
+
+
+<form *ngIf="orders && orders.length > 0">
+    <div class="bsc-row orders">
+            <p-table 
+
+            [value]="orders" 
+            responsiveLayout="scroll"
+
+            dataKey="code"
+            styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
+            [value]="orders"
+            [autoLayout]="true"
+            [paginator]="true" [rows]="10" 
+            [globalFilterFields]="['name','email','phone','nid','points','city','address']"
+            [showCurrentPageReport]="true" 
+            [rowsPerPageOptions]="[10,25,50]"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+
+            >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon> </th>
+                        <th pSortableColumn="ordered_at">OrderedAt <p-sortIcon field="ordered_at"></p-sortIcon></th>
+                        <th>Status</th>
+                        <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+                        <th pSortableColumn="points">Points <p-sortIcon field="points"></p-sortIcon></th> 
+                        <th pSortableColumn="phone">Phone <p-sortIcon field="phone"></p-sortIcon></th>
+                        <th pSortableColumn="city">City <p-sortIcon field="city"></p-sortIcon></th>
+                        <th pSortableColumn="address">Address <p-sortIcon field="address"></p-sortIcon></th>
+                        <th>Invoice (PDF)</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-order>
+                    <tr>
+                        <td >{{order.id}} </td>
+                        <td >{{order.ordered_at}} </td>
+                        <td > STATUS </td>
+                        <td >{{order.total}} </td>
+                        <td >{{order.points}} </td>
+                        <td >{{order.phone}}</td>
+                        <td >{{order.city}}</td>
+                        <td >{{order.address}}</td>
+                        <td>
+                            <a [href]="getInvoicePDF(order.id)">PDF</a>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+    </div>
+    
+    <div class="bsc-row whislist"></div>
+
+</form>

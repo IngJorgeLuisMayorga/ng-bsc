@@ -14,6 +14,10 @@ export class OrdersService {
     const orders = await this.$http.get<Order[]>(`${environment.server}/orders/by/user/${id}`).toPromise();
     return orders;
   }
+  async getAll(): Promise<Order[]> {
+    const orders = await this.$http.get<Order[]>(`${environment.server}/orders`).toPromise();
+    return orders;
+  }
   
   
 
