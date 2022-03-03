@@ -1,1 +1,162 @@
-<p>admin-page-coupon works!</p>
+<form *ngIf="!coupon" class="loading">
+    <img src="../../../../assets/Spin-1s-200px.gif">
+</form>
+
+
+
+<form *ngIf="coupon">
+    <div class="bsc-row x2 basic-info">   
+        
+            <div class="bsc-col col-1">
+                <div class="p-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" pInputText [(ngModel)]="coupon.name" [ngModelOptions]="{standalone: true}"/>
+                </div>
+                
+                <div class="bsc-row flex-start">
+                    <div class="p-field">
+                        <label for="from_date">From Date</label>
+                        <input id="from_date" type="date" pInputText [(ngModel)]="coupon.from_date" [ngModelOptions]="{standalone: true}"/>
+                    </div>
+                    <div class="p-field">
+                        <label for="to_date">To Date</label>
+                        <input id="to_date" type="date" pInputText [(ngModel)]="coupon.to_date" [ngModelOptions]="{standalone: true}"/>
+                    </div>
+                </div>
+            
+
+               
+                
+            </div>
+
+            <div class="bsc-col col-2">
+
+                <div class="p-field">
+                    <label for="code">Code</label>
+                    <input id="code" type="text" pInputText [(ngModel)]="coupon.code" [ngModelOptions]="{standalone: true}"/>
+                </div>
+            
+                <div class="p-field">
+                    <label for="type">Type</label>
+                    <p-dropdown [style]="{'height':'40px', 'padding-top':'2px'}" [options]="couponTypes" [(ngModel)]="couponType"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+           
+
+            </div>
+            
+       
+    </div>
+
+    <br>
+
+
+    <div *ngIf="couponType === 'BY_PRODUCT'">
+        <div class="bsc-row x3">  
+            <div class="bsc-col col-1">
+                <div class="p-field">
+                    <label for="variable_give_product_A_id">variable_give_product_A_id</label>
+                    <p-dropdown [style]="{'height':'40px', 'padding-top':'2px'}"  placeholder="Select a ProductA" [showClear]="true" optionLabel="name" [options]="products" [(ngModel)]="productA"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+            </div>
+            <div class="bsc-col col-2">
+                <div class="p-field">
+                    <label for="variable_give_product_B_id">variable_give_product_b_id</label>
+                    <p-dropdown [style]="{'height':'40px', 'padding-top':'2px'}" placeholder="Select a ProductB" [showClear]="true" optionLabel="name" [options]="products" [(ngModel)]="productB"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+            </div>
+            <div class="bsc-col col-3">
+                <div class="p-field">
+                    <label for="variable_give_product_C_id">variable_give_product_c_id</label>
+                    <p-dropdown [style]="{'height':'40px', 'padding-top':'2px'}" placeholder="Select a ProductC" [showClear]="true" optionLabel="name" [options]="products" [(ngModel)]="productC"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="couponType === 'BY_TOTAL_BIGGER'">
+        <div class="bsc-row x3">  
+            <div class="bsc-col col-1">
+                <div class="p-field">
+                    <label for="variable_by_total_bigger_than">variable_by_total_bigger_than</label>
+                    <input id="variable_by_total_bigger_than" type="text" pInputText [(ngModel)]="coupon.variable_by_total_bigger_than" [ngModelOptions]="{standalone: true}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="couponType === 'BY_BRAND'">
+        <div class="bsc-row x3">  
+            <div class="bsc-col col-1">
+                <div class="p-field">
+                    <label for="variable_by_brand_equal">variable_by_brand_equal</label>
+                    <p-dropdown [style]="{'height':'40px', 'padding-top':'2px'}" [options]="brands" [(ngModel)]="coupon.variable_by_brand_equal"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div *ngIf="couponType === 'BY_FIRST_N'">
+        <div class="bsc-row x2">  
+            <div class="bsc-col col-1">
+                <div class="p-field">
+                    <label for="variable_by_first_N_orders_today_by_N">variable_by_first_N_orders_today_by_N</label>
+                    <input id="variable_by_first_N_orders_today_by_N" type="number" pInputText [(ngModel)]="coupon.variable_by_first_N_orders_today_by_N" [ngModelOptions]="{standalone: true}"/>
+                </div>
+            </div>
+            <div class="bsc-col col-1">
+                <div class="p-field">
+                    <label for="variable_by_first_N_orders_today_by_productId">variable_by_first_N_orders_today_by_productId</label>
+                    <p-dropdown id="variable_by_first_N_orders_today_by_productId" [style]="{'height':'40px', 'padding-top':'2px'}" [options]="products"  optionLabel="name" [(ngModel)]="coupon.variable_by_first_N_orders_today_by_productId"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="couponType === 'BY_2_PRODUCTS_SAME_BRAND'">
+        <div class="p-field">
+            <label for="variable_by_2_products_same_brand_brand">variable_by_2_products_same_brand_brand</label>
+            <p-dropdown [style]="{'height':'40px', 'padding-top':'2px'}" [options]="brands" optionLabel="name" [(ngModel)]="coupon.variable_by_2_products_same_brand_brand"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+        </div>
+
+        <div class="p-field">
+            <label for="variable_by_2_products_same_brand_give_3rd_discount">variable_by_2_products_same_brand_give_3rd_discount</label>
+            <input id="variable_by_2_products_same_brand_give_3rd_discount" type="text" pInputText [(ngModel)]="coupon.variable_by_2_products_same_brand_give_3rd_discount" [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="bsc-row x3">  
+        <div class="bsc-col col-1">
+            <div class="p-field">
+                <label for="discount_percentage">Discount %</label>
+                <input id="discount_percentage" type="number" pInputText [(ngModel)]="coupon.discount_percentage" [ngModelOptions]="{standalone: true}" [disabled]="coupon.discount_amount || coupon.free_shipping " />
+            </div>
+        </div>
+        <div class="bsc-col col-2">
+            <div class="p-field">
+                <label for="discount_amount">Discount $</label>
+                <input id="discount_amount" type="number" pInputText [(ngModel)]="coupon.discount_amount" [ngModelOptions]="{standalone: true}" [disabled]="coupon.discount_percentage || coupon.free_shipping"/>
+            </div>
+        </div>
+        <div class="bsc-col col-3">
+            <div class="p-field">
+                <label for="free_shipping">Free Shipping</label>
+                <p-inputSwitch id="free_shipping" (onChange)="nChangeDuo($event)" [(ngModel)]="coupon.free_shipping" [ngModelOptions]="{standalone: true}" [disabled]="coupon.discount_amount || coupon.discount_percentage"></p-inputSwitch>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="bsc-row submit">
+        <button pButton type="button" label="Save" (click)="save()"></button>
+    </div>
+
+</form>

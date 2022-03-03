@@ -9,7 +9,9 @@
 
             [value]="orders" 
             responsiveLayout="scroll"
-
+            [resizableColumns]="true" 
+            [autoLayout]="true"
+            
             dataKey="code"
             styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
             [value]="orders"
@@ -26,6 +28,7 @@
                         <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon> </th>
                         <th pSortableColumn="ordered_at">OrderedAt <p-sortIcon field="ordered_at"></p-sortIcon></th>
                         <th>Status</th>
+                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
                         <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
                         <th pSortableColumn="points">Points <p-sortIcon field="points"></p-sortIcon></th> 
                         <th pSortableColumn="phone">Phone <p-sortIcon field="phone"></p-sortIcon></th>
@@ -38,8 +41,29 @@
                     <tr>
                         <td >{{order.id}} </td>
                         <td >{{order.ordered_at}} </td>
-                        <td > STATUS </td>
+                        <td >  
+                           
+                            <p-selectButton 
+                            optionLabel="state"
+                            [ngModelOptions]="{standalone: true}" 
+                            [options]="statesOptions" 
+                            [(ngModel)]="order.state" 
+                            (onChange)="onSelectButton(order.state)"
+                            (onOptionClick)="onSelectButton(order)"
+                            >
+                                <ng-template let-item>
+                                    <i [class]="item.icon"></i>
+                                </ng-template>
+                            </p-selectButton>
+
+                           
+
+                            <input (change)="setShippingCode($event.target, order.id)" placeholder="Ingresa Codigo de Envio" *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')" type="text" pInputText  [value]="order.shipping_code || ''"/>
+                            <input disabled *ngIf="(order.state === 'DELIVERED' || order.state.state === 'DELIVERED')" type="text" pInputText [value]="order.shipping_code || ''">
+                            
+                        </td>
                         <td >{{order.total}} </td>
+                        <td >{{order | json}} </td>
                         <td >{{order.points}} </td>
                         <td >{{order.phone}}</td>
                         <td >{{order.city}}</td>

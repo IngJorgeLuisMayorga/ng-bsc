@@ -12,11 +12,35 @@ export class OrdersService {
 
   async getByUserId(id: number): Promise<Order[]> {
     const orders = await this.$http.get<Order[]>(`${environment.server}/orders/by/user/${id}`).toPromise();
-    return orders;
+    const out: Order[] = orders.map((order:Order) => {
+      if(order.ordered_at && !order.shipped_at && ! order.delivered_at){
+        order.state = "ORDERED"
+      }
+      if(order.ordered_at && order.shipped_at && ! order.delivered_at){
+        order.state = "SHIPPED"
+      }
+      if(order.ordered_at && order.shipped_at &&  order.delivered_at){
+        order.state = "DELIVERED"
+      }
+       return order
+    })
+   return out;
   }
   async getAll(): Promise<Order[]> {
     const orders = await this.$http.get<Order[]>(`${environment.server}/orders`).toPromise();
-    return orders;
+    const out: Order[] = orders.map((order:Order) => {
+      if(order.ordered_at && !order.shipped_at && ! order.delivered_at){
+        order.state = "ORDERED"
+      }
+      if(order.ordered_at && order.shipped_at && ! order.delivered_at){
+        order.state = "SHIPPED"
+      }
+      if(order.ordered_at && order.shipped_at &&  order.delivered_at){
+        order.state = "DELIVERED"
+      }
+       return order
+    })
+   return out;
   }
   
   
