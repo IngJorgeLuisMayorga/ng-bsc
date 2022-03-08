@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IProduct } from '../../products/models/IProduct.model';
+import { Product } from '../../products/models/IProduct.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  private _cart: BehaviorSubject<IProduct[]> = new BehaviorSubject([] as IProduct[])
+  private _cart: BehaviorSubject<Product[]> = new BehaviorSubject([] as Product[])
   public cart$ = this._cart.asObservable();
 
   private _isOpen: BehaviorSubject<boolean> = new BehaviorSubject(false as boolean)
@@ -33,7 +33,7 @@ export class CartService {
 
   public syncCartSize(){
     return this.cart$.pipe(
-      map((products: IProduct[]) => {
+      map((products: Product[]) => {
         let cartSize = 0;
         for(let k = 0 ; k < products.length ; k++){
           const product = products[k].cart;
@@ -47,11 +47,11 @@ export class CartService {
   }
   public syncCartTotal(){
     return this.cart$.pipe(
-      map((products: IProduct[]) => {
+      map((products: Product[]) => {
         let cartSize = 0;
         for(let k = 0 ; k < products.length ; k++){
           const product = products[k].cart;
-          const price = products[k].price * (1 - products[k].discount);
+          const price = products[k].price * (1 - 0.01*products[k].discount);
           if(product) {
             if(product.quantity) cartSize = cartSize + price * product.quantity;
           }
@@ -69,13 +69,13 @@ export class CartService {
     return this._isUpdating;
   }
 
-  public async addToCart(product: IProduct){
+  public async addToCart(product: Product){
 
     this._isUpdating.next(product.id);
     let products = JSON.parse(JSON.stringify(this._cart.getValue()) + '')
-    let isNewAdd = !products.find((_product: IProduct) => _product.id === product.id);
+    let isNewAdd = !products.find((_product: Product) => _product.id === product.id);
     if(!isNewAdd){
-      products.map((_product: IProduct) => {
+      products.map((_product: Product) => {
         if(product.id === _product.id){
           
           if(_product.cart) _product.cart.quantity += 1;  
@@ -95,12 +95,12 @@ export class CartService {
 
   }
 
-  public async removeToCart(product: IProduct){
+  public async removeToCart(product: Product){
 
 
     this._isUpdating.next(product.id);
     let products = JSON.parse(JSON.stringify(this._cart.getValue()) + '')
-    let productInCart = products.find((_product: IProduct) => _product.id === product.id);
+    let productInCart = products.find((_product: Product) => _product.id === product.id);
    
     if(productInCart){
       if(productInCart.cart.quantity > 0){
@@ -118,12 +118,12 @@ export class CartService {
     }, 1000)
  
   }
-  public async removeAllToCart(product: IProduct){
+  public async removeAllToCart(product: Product){
 
 
     this._isUpdating.next(product.id);
     let products = JSON.parse(JSON.stringify(this._cart.getValue()) + '')
-    let productInCart = products.find((_product: IProduct) => _product.id === product.id);
+    let productInCart = products.find((_product: Product) => _product.id === product.id);
    
     if(productInCart){
       if(productInCart.cart.quantity > 0){

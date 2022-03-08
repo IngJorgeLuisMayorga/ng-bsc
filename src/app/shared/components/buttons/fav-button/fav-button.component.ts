@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IProduct } from 'src/app/core/products/models/IProduct.model';
+import { IProduct, Product } from 'src/app/core/products/models/IProduct.model';
 import { WishlistService } from 'src/app/core/wishlist/services/wishlist.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class FavButtonComponent implements OnInit {
 
  
   @Input()
-  product: IProduct;
+  product: Product;
 
   public inWishlist$: Observable<boolean>;
 
@@ -21,7 +21,7 @@ export class FavButtonComponent implements OnInit {
 
     
     this.inWishlist$ = this.$wishlist.sync().pipe(
-      map((products: IProduct[]) => 
+      map((products: Product[]) => 
         {
           if((products && products.length > 0 && products.find(product => product.id === this.product.id))){
             return true;

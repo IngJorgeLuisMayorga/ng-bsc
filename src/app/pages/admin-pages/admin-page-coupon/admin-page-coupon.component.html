@@ -1,9 +1,6 @@
 <form *ngIf="!coupon" class="loading">
     <img src="../../../../assets/Spin-1s-200px.gif">
 </form>
-
-
-
 <form *ngIf="coupon">
     <div class="bsc-row x2 basic-info">   
         
@@ -23,9 +20,6 @@
                         <input id="to_date" type="date" pInputText [(ngModel)]="coupon.to_date" [ngModelOptions]="{standalone: true}"/>
                     </div>
                 </div>
-            
-
-               
                 
             </div>
 
@@ -129,31 +123,59 @@
 
     <br>
     <br>
+
+    <div class="bsc-row x3">  
+        <div class="bsc-col col-1">
+            <div class="p-field">
+                <label for="discount_percentage">Discount %</label>
+                <input id="discount_percentage" type="number" pInputText [(ngModel)]="coupon.discount_percentage"
+                 [ngModelOptions]="{standalone: true}" 
+                [disabled]="
+                (
+                    (coupon.free_shipping) || 
+                    (coupon.discount_amount && coupon.discount_amount > 0)
+                )
+                " />
+            </div>
+        </div>
+        <div class="bsc-col col-2">
+            <div class="p-field">
+                <label for="discount_amount">Discount $</label>
+                <input id="discount_amount" type="number" pInputText [(ngModel)]="coupon.discount_amount" [ngModelOptions]="{standalone: true}" 
+                [disabled]="  (
+                    (coupon.free_shipping) || 
+                    (coupon.discount_percentage && coupon.discount_percentage > 0)
+                )"/>
+            </div>
+        </div>
+        <div class="bsc-col col-3">
+            <div class="p-field">
+                <label for="free_shipping">Free Shipping</label>
+                <p-inputSwitch id="free_shipping" (onChange)="nChangeDuo($event)"
+                 [(ngModel)]="couponFreeShipping" [ngModelOptions]="{standalone: true}" 
+                 [disabled]="
+                    (
+                        (coupon.discount_amount && coupon.discount_amount > 0) || 
+                        (coupon.discount_percentage && coupon.discount_percentage > 0)
+                    )
+                 "></p-inputSwitch>
+            </div>
+        </div>
+    </div>
+
     <br>
     <br>
 
     <div class="bsc-row x3">  
         <div class="bsc-col col-1">
             <div class="p-field">
-                <label for="discount_percentage">Discount %</label>
-                <input id="discount_percentage" type="number" pInputText [(ngModel)]="coupon.discount_percentage" [ngModelOptions]="{standalone: true}" [disabled]="coupon.discount_amount || coupon.free_shipping " />
-            </div>
-        </div>
-        <div class="bsc-col col-2">
-            <div class="p-field">
-                <label for="discount_amount">Discount $</label>
-                <input id="discount_amount" type="number" pInputText [(ngModel)]="coupon.discount_amount" [ngModelOptions]="{standalone: true}" [disabled]="coupon.discount_percentage || coupon.free_shipping"/>
-            </div>
-        </div>
-        <div class="bsc-col col-3">
-            <div class="p-field">
-                <label for="free_shipping">Free Shipping</label>
-                <p-inputSwitch id="free_shipping" (onChange)="nChangeDuo($event)" [(ngModel)]="coupon.free_shipping" [ngModelOptions]="{standalone: true}" [disabled]="coupon.discount_amount || coupon.discount_percentage"></p-inputSwitch>
+                <label for="enable">Enable</label>
+                <p-inputSwitch id="enable" [(ngModel)]="coupon.enable" [ngModelOptions]="{standalone: true}"></p-inputSwitch>            
             </div>
         </div>
     </div>
 
-
+    <br>
 
     <div class="bsc-row submit">
         <button pButton type="button" label="Save" (click)="save()"></button>

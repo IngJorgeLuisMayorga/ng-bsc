@@ -5,14 +5,14 @@
 
             <div class="card-picture" (click)="goToProductPage(product.id)">
                 <div class="card-picture--front">
-                    <img [src]="product.image_src">
+                    <img [src]="product?.image1_src || ''">
                 </div>
                 <div class="card-picture--back" [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (inCartlist$ | async)}"></div>
             </div>
 
 
             <div class="card-discount" *ngIf="(discount || product?.discount)">
-                -{{ (discount || product.discount) * 100 | number }}%
+                -{{ (discount || 0.01*product.discount) * 100 | number }}%
             </div>
 
 

@@ -34,6 +34,10 @@ export class ProductsService {
     const product = await this.$http.get<Product>(`${environment.server}/products/${id}`).toPromise();
     return product;
   }
+  async getProductsRecommended(product: Product): Promise<Product[]> {
+    const products = await this.$http.get<Product[]>(`${environment.server}/products/recommended/${product.id}`).toPromise();
+    return products;
+  }
 
   async saveProduct(id: number, product: Product){
     const myFormData = new FormData();

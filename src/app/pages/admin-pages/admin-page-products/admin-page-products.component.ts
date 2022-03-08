@@ -21,17 +21,7 @@ export class AdminPageProductsComponent implements OnInit {
   constructor(private $products: ProductsService, private router: Router) { }
 
   async ngOnInit() {
-
     this.products = await this.$products.getProducts();
-
-    console.log(' ')
-    console.log(' this.products ')
-    console.log(this.products)
-    console.log(' ')
-    console.log(' ')
- 
-    debugger;
-
     this.loading = false;
   }
 
@@ -73,6 +63,10 @@ export class AdminPageProductsComponent implements OnInit {
   }
 
   doOpenAdd(){
+    this.router.navigateByUrl('/admin/products/-1')
+  }
+  
+  doUploadCSV(){
     this.router.navigateByUrl('/admin/products/-1')
   }
 

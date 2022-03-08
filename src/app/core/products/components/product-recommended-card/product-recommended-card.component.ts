@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartService } from 'src/app/core/cart/services/cart.service';
 import { WishlistService } from 'src/app/core/wishlist/services/wishlist.service';
-import { IProduct } from '../../models/IProduct.model';
+import { IProduct, Product } from '../../models/IProduct.model';
 
 @Component({
   selector: 'app-product-recommended-card',
@@ -14,14 +14,14 @@ import { IProduct } from '../../models/IProduct.model';
 export class ProductRecommendedCardComponent implements OnInit {
 
   @Input()
-  product: IProduct;
+  product: Product;
 
-  public wishlist$: Observable<IProduct[]>;
+  public wishlist$: Observable<Product[]>;
   public inWishlist$: Observable<boolean>;
   public inCartlist$: Observable<boolean>;
   public cartlist$: Observable<number>;
 
-  public cart$: Observable<IProduct[]>;
+  public cart$: Observable<Product[]>;
   public status = 'none';
 
   public cartIsUpdating$: Observable<number>;
@@ -37,13 +37,13 @@ export class ProductRecommendedCardComponent implements OnInit {
 
     this.cartIsUpdating$ = this.$cart.syncIsUpdating();
     this.cartProductItems$ = this.$cart.sync().pipe(
-      map((products: IProduct[]) => 
+      map((products: Product[]) => 
         ((products.find(product => product.id === this.product.id) || {quantity: 0}).cart?.quantity || 0)
       )
     )
 
     this.inWishlist$ = this.$wishlist.sync().pipe(
-      map((products: IProduct[]) => 
+      map((products: Product[]) => 
         {
           if((products && products.length > 0 && products.find(product => product.id === this.product.id))){
             return true;
@@ -54,7 +54,7 @@ export class ProductRecommendedCardComponent implements OnInit {
       )
     )
     this.inCartlist$ = this.$cart.sync().pipe(
-      map((products: IProduct[]) => 
+      map((products: Product[]) => 
         {
           if(
             products && 
@@ -71,7 +71,7 @@ export class ProductRecommendedCardComponent implements OnInit {
 
     
     this.cartlist$ = this.$cart.sync().pipe(
-      map((products: IProduct[]) => 
+      map((products: Product[]) => 
         {
           if(
             products && 

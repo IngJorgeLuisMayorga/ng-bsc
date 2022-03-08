@@ -13,14 +13,14 @@
                 <div class="sidebar-product-wrapper">
                     <div class="row">
                     <div class="col">
-                        <img [src]="product.image_src">
+                        <img [src]="product?.image1_src">
                     </div>
                     <div class="col">
 
                         <h1> {{ 'BSC' }}</h1>
 
                         <h2>{{ product.name }} </h2>
-                        <h3>{{  (product.price)*(1 - product.discount)| currency:'$':'symbol':'2.0' }}</h3>
+                        <h3>{{  (product.price)*(1 - 0.01*product.discount)| currency:'$':'symbol':'2.0' }}</h3>
                         <h3 class="tachado">{{ (product.price) | currency:'$':'symbol':'2.0' }}</h3>
 
                         <div class="ctrls-qty">

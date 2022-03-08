@@ -3,15 +3,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { IProduct } from '../../products/models/IProduct.model';
+import { IProduct, Product } from '../../products/models/IProduct.model';
 import { Wishlist } from '../Wishlist.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WishlistService {
-  private _wishlist: BehaviorSubject<IProduct[]> = new BehaviorSubject(
-    [] as IProduct[]
+  private _wishlist: BehaviorSubject<Product[]> = new BehaviorSubject(
+    [] as Product[]
   );
   public wishlist$ = this._wishlist.asObservable();
 
@@ -47,7 +47,7 @@ export class WishlistService {
     return this._isUpdating;
   }
 
-  public async addToWishlist(product: IProduct) {
+  public async addToWishlist(product: Product) {
     this._isUpdating.next(product.id);
     let products = JSON.parse(
       JSON.stringify(this._wishlist.getValue() || []) + ''
@@ -76,27 +76,27 @@ export class WishlistService {
     }, 150);
   }
 
-  public async removeToWishlist(product: IProduct) {
+  public async removeToWishlist(product: Product) {
     this._isUpdating.next(product.id);
     let products = JSON.parse(JSON.stringify(this._wishlist.getValue()) + '');
     let productInCart = products.find(
-      (_product: IProduct) => _product.id === product.id
+      (_product: Product) => _product.id === product.id
     );
 
     if (productInCart) {
       this._wishlist.next(
-        products.find((_product: IProduct) => _product.id !== product.id)
+        products.find((_product: Product) => _product.id !== product.id)
       );
       this._isUpdating.next(0);
     } else {
       this._wishlist.next(
-        products.find((_product: IProduct) => _product.id !== product.id)
+        products.find((_product: Product) => _product.id !== product.id)
       );
       this._isUpdating.next(0);
     }
   }
 
-  public async toogleToWishlist(product: IProduct) {
+  public async toogleToWishlist(product: Product) {
     this._isUpdating.next(product.id);
     let products =
       JSON.parse(JSON.stringify(this._wishlist.getValue() || []) + '') || [];
@@ -109,7 +109,7 @@ export class WishlistService {
     
     if (products) {
       let productInWishlist = products.find(
-        (_product: IProduct) => _product.id === product.id
+        (_product: Product) => _product.id === product.id
       );
       if (productInWishlist) {
         await this.removeToWishlist(product);

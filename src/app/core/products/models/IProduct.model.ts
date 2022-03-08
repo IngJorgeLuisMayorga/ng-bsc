@@ -66,6 +66,27 @@ export type Product = {
     category_brand: Category;
     category_extra: Category;
 
+    cart?: {
+        quantity: number;
+        updated_at: Date;
+    }
+
+    categories?: {
+        skin: { src: string;  src_hv: string; title: string },
+        main_ingredient: { src: string; src_hv: string; title: string },
+        solution: { src: string; src_hv: string; title: string },
+        step: { src: string; src_hv: string; title: string },
+        brand: { src: string; src_hv: string; title: string },
+    }
+
+    duo?: {
+        productA_id:number;
+        productB_id:number;
+        price: number;
+        discount: number;
+    };
+
+
 }
 
 

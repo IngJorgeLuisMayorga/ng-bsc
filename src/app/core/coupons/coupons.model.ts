@@ -3,19 +3,23 @@ export type Coupon = {
     name: string;
     code: string;
 
-    enable: string;
+    free_shipping: boolean,
+    discount_percentage: number;
+    discount_amount : number;
+    enable: boolean;
 
     from_date: Date;
     to_date:Date;
 
-    type: string;
+    type: 'BY_PRODUCT' | 'BY_TOTAL_BIGGER' | 'BY_BRAND' | 'BY_FIRST_N' | 'BY_2_PRODUCTS_SAME_BRAND';
 
     variable_give_product_A_id: number;
     variable_give_product_B_id: number;
     variable_give_product_C_id: number;
 
-    variable_give_discount: number;
-    variable_give_free_shipping: number;
+    variable_give_discount_percentage: number;
+    variable_give_discount_amount: number;
+    variable_give_free_shipping: boolean;
 
     variable_by_brand_equal: string;
     variable_by_total_bigger_than: number;
@@ -26,6 +30,36 @@ export type Coupon = {
     variable_by_2_products_same_brand_brand: number;
     variable_by_2_products_same_brand_give_3rd_discount: number;
 
+}
+
+export const NULL_COUPON:Coupon = {
+    id: -1,
+    name: '',
+    code: '',
+    enable: false,
+    free_shipping: false,
+    from_date: new Date,
+    to_date: new Date,
+    type: 'BY_PRODUCT',
+    discount_percentage: 0,
+    discount_amount : 0,
+
+    variable_give_product_A_id:  0,
+    variable_give_product_B_id:  0,
+    variable_give_product_C_id:  0,
+
+    variable_give_discount_percentage: 0,
+    variable_give_discount_amount: 0,
+    variable_give_free_shipping: false,
+
+    variable_by_brand_equal: '',
+    variable_by_total_bigger_than: 0,
+
+    variable_by_first_N_orders_today_by_N: 0,
+    variable_by_first_N_orders_today_by_productId: 0,
+
+    variable_by_2_products_same_brand_brand: 0,
+    variable_by_2_products_same_brand_give_3rd_discount: 0
 }
 
 

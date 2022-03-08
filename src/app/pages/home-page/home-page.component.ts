@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { CartService } from 'src/app/core/cart/services/cart.service';
 import Products from '../../../app/config/products';
 import SwiperCore from 'swiper/core';
+import { ProductsService } from 'src/app/core/products/products.service';
 
 @Component({
   selector: 'app-home-page',
@@ -19,12 +20,13 @@ export class HomePageComponent implements OnInit {
   public SETTINGS: string[] = [];
   public SETTINGS2: string[] = [];
   
-  constructor(private $cart: CartService) { 
+  constructor(private $cart: CartService, private $products: ProductsService) { 
     this.isCartOpen$ = this.$cart.isOpen$;
   }
 
-  ngOnInit(): void {
-    this.products = Products;
+  async ngOnInit() {
+    // this.products = Products;
+    this.products = await this.$products.getProducts();
     this.SETTINGS = [];
   }
 
