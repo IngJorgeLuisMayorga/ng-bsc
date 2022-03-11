@@ -12,7 +12,7 @@
                 
                 <div class="bsc-row flex-start">
                     <div class="p-field">
-                        <label for="from_date">From Date</label>
+                        <label for="from_date">From Date </label>
                         <input id="from_date" type="date" pInputText [(ngModel)]="coupon.from_date" [ngModelOptions]="{standalone: true}"/>
                     </div>
                     <div class="p-field">
@@ -150,7 +150,7 @@
         </div>
         <div class="bsc-col col-3">
             <div class="p-field">
-                <label for="free_shipping">Free Shipping</label>
+                <label for="free_shipping">Free Shipping {{ couponFreeShipping }}</label>
                 <p-inputSwitch id="free_shipping" (onChange)="nChangeDuo($event)"
                  [(ngModel)]="couponFreeShipping" [ngModelOptions]="{standalone: true}" 
                  [disabled]="
@@ -170,7 +170,7 @@
         <div class="bsc-col col-1">
             <div class="p-field">
                 <label for="enable">Enable</label>
-                <p-inputSwitch id="enable" [(ngModel)]="coupon.enable" [ngModelOptions]="{standalone: true}"></p-inputSwitch>            
+                <p-inputSwitch id="enable" [(ngModel)]="coupon.enable " [ngModelOptions]="{standalone: true}"></p-inputSwitch>            
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Coupon } from '../../coupons/coupons.model';
 import { Product } from '../../products/models/IProduct.model';
 
 @Injectable({
@@ -17,6 +18,11 @@ export class CartService {
   private _isUpdating: BehaviorSubject<number> = new BehaviorSubject(0 as number)
   public isUpdating$ = this._isUpdating.asObservable();
 
+  
+  private _coupon: BehaviorSubject<Coupon> = new BehaviorSubject(null)
+  public coupon$ = this._coupon.asObservable();
+  public isCoupon$ = this._coupon.asObservable();
+
   constructor() { 
     this._cart.next([]);
     this._isUpdating.next(0);
@@ -28,11 +34,15 @@ export class CartService {
   }
 
   public sync(){
-    return this.cart$;
+    return this.cart$.pipe(
+      map((products: Product[]) => {
+        return products
+      })
+    );
   }
 
   public syncCartSize(){
-    return this.cart$.pipe(
+    return this.sync().pipe(
       map((products: Product[]) => {
         let cartSize = 0;
         for(let k = 0 ; k < products.length ; k++){
@@ -46,7 +56,7 @@ export class CartService {
     );
   }
   public syncCartTotal(){
-    return this.cart$.pipe(
+    return this.sync().pipe(
       map((products: Product[]) => {
         let cartSize = 0;
         for(let k = 0 ; k < products.length ; k++){
@@ -60,9 +70,63 @@ export class CartService {
       })
     );
   }
+  
+  public applyCoupon(cartTotal: number){
+
+    if(this._coupon.getValue()){
+      console.error(' ')
+      console.error(' public applyCoupon(cartTotal: number) ')
+      console.error(cartTotal)
+      console.error(this._coupon.getValue())
+      console.error((this._coupon.getValue().type === 'BY_TOTAL_BIGGER'))
+      console.error(' ')
+    }
+
+    if(this._coupon.getValue()){
+    
+      if(this._coupon.getValue().type === 'BY_PRODUCT'){
+        return cartTotal;
+      }
+      
+      else if(this._coupon.getValue().type === 'BY_TOTAL_BIGGER'){
+        const trigger = true || cartTotal > this._coupon.getValue().variable_give_discount_amount;
+        const amount = this._coupon.getValue().variable_give_discount_amount;
+        const percetange = this._coupon.getValue().variable_give_discount_percentage;
+        const freeshipping = this._coupon.getValue().free_shipping;
+        console.error({
+          amount,percetange,freeshipping, trigger
+        })
+        if(amount && trigger) return cartTotal - amount;
+        if(percetange && trigger) return cartTotal*(1 - 0.01*percetange);
+        if(freeshipping && trigger) return cartTotal;
+      }
+
+      else if(this._coupon.getValue().type === 'BY_BRAND'){
+        return cartTotal;
+      }
+
+      else if(this._coupon.getValue().type === 'BY_FIRST_N'){
+        return cartTotal;
+      }
+
+      else if(this._coupon.getValue().type === 'BY_2_PRODUCTS_SAME_BRAND'){
+        return cartTotal;
+      } 
+
+      else {
+        return cartTotal;
+      }
+
+    } else {
+      return cartTotal;
+    }
+
+    return cartTotal;
+
+  }
 
   public syncCartSizeDebugger(){
-    return this.cart$;
+    return this.sync();
   }
 
   public syncIsUpdating(){
@@ -145,11 +209,19 @@ export class CartService {
   doOpenCart(){
     this._isOpen.next(true)
   }
+
   doCloseCart(){
     this._isOpen.next(false)
   }
+
   doToogleCart(){
     if(!this._isOpen.getValue()) this.doOpenCart();
     else this.doCloseCart()
   }
+
+  setCoupon(coupon: Coupon){
+    this._coupon.next(coupon);
+    this._cart.next(JSON.parse(JSON.stringify(this._cart.getValue())));
+  }
+
 }

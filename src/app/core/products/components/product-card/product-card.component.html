@@ -5,6 +5,7 @@
 
             <div class="card-picture" (click)="goToProductPage(product.id)">
                 <div class="card-picture--front">
+                    <label *ngIf="showStepLabel"> SERUM  </label>
                     <img [src]="product?.image1_src || ''">
                 </div>
                 <div class="card-picture--back" [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (inCartlist$ | async)}"></div>
@@ -28,10 +29,12 @@
 
         </div>
         <div class="card-bottom">
-
             <h1 class="card-bottom--discounted-price">
-                {{ (
-                (product?.price || 0)*(1 - ( discount || product?.discount || 0))
+                {{ 
+                (
+
+                    (product?.price || 0)*(1 - ( 0.01*discount || 0.01*product?.discount || 0))
+                
                 | currency:'$':'symbol':'2.0'
                 ) }}
             </h1>

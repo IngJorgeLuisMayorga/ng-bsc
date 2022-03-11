@@ -787,6 +787,23 @@ strong{
     letter-spacing: 0.5px;  
     padding-top: 5px;
   }
+  h2{
+    display: none;
+  }
+
+  &.isCoupon{
+    h1{
+      text-decoration: line-through;
+      color: red;
+      font-size: 14px;
+    }
+    h2{
+      display: block;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: @color-black;
+    }
+  }
 }
 
 .msg-0{

@@ -8,8 +8,8 @@ export type Coupon = {
     discount_amount : number;
     enable: boolean;
 
-    from_date: Date;
-    to_date:Date;
+    from_date: Date | string;
+    to_date:Date  | string;
 
     type: 'BY_PRODUCT' | 'BY_TOTAL_BIGGER' | 'BY_BRAND' | 'BY_FIRST_N' | 'BY_2_PRODUCTS_SAME_BRAND';
 

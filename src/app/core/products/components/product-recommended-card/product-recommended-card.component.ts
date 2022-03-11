@@ -27,6 +27,12 @@ export class ProductRecommendedCardComponent implements OnInit {
   public cartIsUpdating$: Observable<number>;
   public cartProductItems$: Observable<number>;
 
+  @Input()
+  showStepLabel: boolean = false;
+
+  @Input()
+  colorStepLabel: string = '';
+
   constructor(
     private route: Router,
     private $cart: CartService, 

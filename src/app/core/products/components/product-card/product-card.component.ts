@@ -23,6 +23,9 @@ export class ProductCardComponent implements OnInit {
   @Input()
   mode: string = 'full';
 
+  @Input()
+  showStepLabel: boolean = false;
+
   public wishlist$: Observable<Product[]>;
   public inWishlist$: Observable<boolean>;
   public inCartlist$: Observable<boolean>;

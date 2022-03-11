@@ -38,6 +38,8 @@ export class AdminPageCouponComponent implements OnInit {
   public products: Product[] = [];
   public brands: string[] = [];
 
+  public from_date = '2022-03-10';
+
   public checked = false;
   public couponTypes = [
     'BY_PRODUCT', 
@@ -64,6 +66,17 @@ export class AdminPageCouponComponent implements OnInit {
 
     if(this.couponId !== -1){
       this.coupon = await this.$coupons.getCouponById(this.couponId);
+      this.couponType = this.coupon.type;
+      this.couponFreeShipping = this.coupon.free_shipping || this.coupon.variable_give_free_shipping;
+      this.coupon.discount_amount = this.coupon.variable_give_discount_amount;
+      this.coupon.discount_percentage = this.coupon.variable_give_discount_percentage;
+
+      const _from_date = new Date(this.coupon.from_date) as Date;
+      const _to_date = new Date(this.coupon.to_date) as Date;
+
+      this.coupon.to_date = (_to_date).toISOString().split('T')[0] as string;
+      this.coupon.from_date = (_from_date).toISOString().split('T')[0]  as string;
+
     }else {
       this.coupon = NULL_COUPON;
     }
@@ -98,13 +111,24 @@ export class AdminPageCouponComponent implements OnInit {
   }
 
   async save(){
+      const pre_coupon = JSON.parse(JSON.stringify(this.coupon));
       const coupon: Coupon = {
-        ...this.coupon,
+        ...pre_coupon,
+        type: this.couponType,
         free_shipping: this.couponFreeShipping,
+        variable_give_free_shipping: this.couponFreeShipping,
         variable_give_discount_percentage: this.coupon.discount_percentage,
         variable_give_discount_amount: this.coupon.discount_amount,
+        kpop: 'Blackpink'
       };
-      const _coupon = await this.$coupons.save(coupon, this.couponId);
+
+
+      console.warn(' ')
+      console.warn('   async save(){ ')
+      console.warn(coupon)
+      console.warn(' ')
+
+      const _coupon = await this.$coupons.save(JSON.parse(JSON.stringify(coupon) + ''), this.couponId);
       return _coupon;
   }
 

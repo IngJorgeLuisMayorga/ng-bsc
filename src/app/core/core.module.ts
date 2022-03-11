@@ -12,6 +12,7 @@ import { FilterByHomeNewsPipe } from './products/pipes/filterByHomeNews.pipe';
 import { FilterByHomeFavsPipe } from './products/pipes/filterByHomeFavs.pipe';
 import { ProductRecommendedCardComponent } from './products/components/product-recommended-card/product-recommended-card.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 const COMPONENTS = [
@@ -36,6 +37,7 @@ const PIPES = [
   exports: [...COMPONENTS, ...PIPES],
   imports: [
     CommonModule,
+    FormsModule,
     SharedModule
   ]
 })

@@ -36,6 +36,19 @@ export class ProductsService {
   }
   async getProductsRecommended(product: Product): Promise<Product[]> {
     const products = await this.$http.get<Product[]>(`${environment.server}/products/recommended/${product.id}`).toPromise();
+    products.map((_product: Product) => {
+      _product.category_skin = _product.category_skin_id as any;
+      _product.category_main_ingredient = _product.category_main_ingredient_id as any;
+      _product.category_solution = _product.category_solution_id as any;
+      _product.category_step = _product.category_step_id as any;
+      _product.category_brand = _product.category_brand_id as any;
+      return _product;
+    });
+
+    console.error(' ')
+    console.error('getProductsRecommended  ')
+    console.error(products)
+
     return products;
   }
 
