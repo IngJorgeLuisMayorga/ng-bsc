@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //server: 'http://ec2-3-131-94-227.us-east-2.compute.amazonaws.com/server-bsc/public',
-  server: 'http://127.0.0.1:8000',
+  server: 'http://ec2-3-131-94-227.us-east-2.compute.amazonaws.com/server-bsc/public',
+  //server: 'http://127.0.0.1:8000',
 };
 
 /*
