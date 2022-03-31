@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AdminPageCategoriesComponent } from './admin-page-categories/admin-page-categories.component';
+import { AdminPageCategoryComponent } from './admin-page-category/admin-page-category.component';
 import { AdminPageCouponComponent } from './admin-page-coupon/admin-page-coupon.component';
 import { AdminPageCouponsComponent } from './admin-page-coupons/admin-page-coupons.component';
 import { AdminPageOrdersComponent } from './admin-page-orders/admin-page-orders.component';
@@ -48,6 +49,10 @@ export const routes = [
         {
             path: 'categories',
             component: AdminPageCategoriesComponent,
+        },
+        {
+            path: 'categories/:id',
+            component: AdminPageCategoryComponent,
         },
         {
             path: 'payments',

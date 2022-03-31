@@ -71,4 +71,29 @@ export class AdminPageProductsComponent implements OnInit {
   }
 
 
+  nChangeVisible(product: Product){
+
+    const _product =  {
+      ...product,
+      visible: (product.visible) ? 1 : 0
+    };
+
+    const _product_category_main_ingredient_id = ((product.category_main_ingredient_id as any).id);
+    const _product_category_skin_id = ((product.category_skin_id as any).id);
+    const _product_category_solution_id = ((product.category_solution_id as any).id);
+    const _product_category_step_id = ((product.category_step_id as any).id);
+    const _product_category_extra_id = ((product.category_extra_id as any).id);
+
+    _product.category_main_ingredient_id = _product_category_main_ingredient_id + 0;
+    _product.category_skin_id = _product_category_skin_id + 0;
+    _product.category_solution_id = _product_category_solution_id + 0;
+    _product.category_step_id = _product_category_step_id + 0;
+    _product.category_extra_id = _product_category_extra_id + 0;
+    _product.category_brand_id = _product.category_brand_id ? (_product.category_brand_id as any).id : 0;
+    
+    // const _product_category_brand_id = ((product.category_brand_id as any).id);
+    // _product.category_brand_id = _product_category_brand_id + 0;
+  
+    this.$products.saveProduct(product.id, _product)
+  }
 }

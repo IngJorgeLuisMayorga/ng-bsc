@@ -198,6 +198,8 @@ export class FooterDefaultComponent implements OnInit {
     //return '';
   } 
 
+
+
   setFB_Hover(){
     this.isFB_Hover = true;
   }

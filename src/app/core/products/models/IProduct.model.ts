@@ -31,6 +31,8 @@ export interface IProduct {
         price: number;
         discount: number;
     };
+
+    visible?: boolean;
 }
 
 export type Product = {
@@ -86,6 +88,8 @@ export type Product = {
         discount: number;
     };
 
+    visible?: number;
+
 
 }
 
@@ -96,4 +100,6 @@ export type Category = {
     type: 'SKIN' | 'MAIN_INGREDIENT' | 'SOLUTION' | 'STEP' | 'BRAND' | 'EXTRA';
     picture_normal: string;
     picture_hover: string;
+    image1_src?: string;
+    image2_src?: string;
 }

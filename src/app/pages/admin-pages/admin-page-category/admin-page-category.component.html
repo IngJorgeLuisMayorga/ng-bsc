@@ -1,1 +1,61 @@
-<p>admin-page-category works!</p>
+<form *ngIf="!category" class="loading">
+    <img src="../../../../assets/Spin-1s-200px.gif">
+</form>
+
+<form *ngIf="category">
+    <div class="bsc-row x3 basic-info">
+        <div class="bsc-col wf300 photos">
+            <div class="photo-main">
+                <img *ngIf="thumb == 0" [src]="category.image1_src" style="width: 100%;">
+                <img *ngIf="thumb == 1" [src]="category.image2_src" style="width: 100%;">
+            </div>
+            <div class="photo-thumbs">
+
+                <div class="photo-thumb"  [ngClass]="{'active': thumb == 0}" (mouseenter)="thumb = 0">
+                    <input type="file" id="file-ip-1" accept="image/*" (change)="showPreview($event,0);">
+                    <label for="file-ip-1">
+                        <img [src]="category.image1_src" id="file-ip-1-preview">
+                    </label>
+                </div>
+
+                <div class="photo-thumb" [ngClass]="{'active': thumb == 1}" (mouseenter)="thumb = 1" >
+                    <input type="file" id="file-ip-2" accept="image/*" (change)="showPreview($event,1);">
+                    <label for="file-ip-2">
+                        <img [src]="category.image2_src" id="file-ip-2-preview">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="bsc-col w75" style="padding-left: 1em;">
+            <div class="bsc-col col-1">
+
+                <div class="p-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" pInputText [(ngModel)]="category.name" [ngModelOptions]="{standalone: true}"/>
+                </div>
+
+                <div class="bsc-row flex-start">
+                    <div class="bsc-col col-2">
+                        <div class="p-field">
+                            <label for="type">Type</label>
+                            <p-dropdown [options]="types" [(ngModel)]="type"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+ 
+            
+        </div>
+
+
+    </div>
+
+
+
+    <br>
+
+    <div class="bsc-row submit">
+        <button pButton type="button" label="Save" (click)="save()"></button>
+    </div>
+</form>

@@ -56,10 +56,21 @@
                                 </ng-template>
                             </p-selectButton>
 
-                           
-
                             <input (change)="setShippingCode($event.target, order.id)" placeholder="Ingresa Codigo de Envio" *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')" type="text" pInputText  [value]="order.shipping_code || ''"/>
                             <input disabled *ngIf="(order.state === 'DELIVERED' || order.state.state === 'DELIVERED')" type="text" pInputText [value]="order.shipping_code || ''">
+
+                            <p-selectButton
+                                *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')"
+                                [ngModelOptions]="{standalone: true}" 
+                                [options]="companiesOptions" 
+                                [(ngModel)]="order.company" 
+                                (onOptionClick)="onSelectCompany(order)"
+                            > <ng-template let-item>
+                                <span>{{ item.name}}</span>
+                            </ng-template>
+                            </p-selectButton>
+                            
+               
                             
                         </td>
                         <td >{{order.total}} </td>

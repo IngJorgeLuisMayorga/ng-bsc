@@ -22,6 +22,8 @@ export class AdminPageOrdersComponent implements OnInit {
 
   public orders: Order[] | null;
   public states: "ORDERED" | "SHIPPED" | "DELIVERED" | "CANCELED" | "RETURNED";
+  public companies: "COORDINADORA" | "ENVIA" | "SERVIENTREGA";
+  public companiesOptions: any[];
   public statesOptions: any[];
   public value: any;
 
@@ -40,6 +42,20 @@ export class AdminPageOrdersComponent implements OnInit {
       {icon: 'pi pi-replay', state: 'RETURNED'},
       */
   ];
+  this.companiesOptions = [
+    {
+      icon : '',
+      name: 'ENVIA'
+    },
+    {
+      icon : '',
+      name: 'COORDINADORA'
+    },
+    {
+      icon : '',
+      name: 'SERVIENTREGA'
+    },
+  ]
   }
 
   async ngOnInit() {
@@ -78,6 +94,12 @@ export class AdminPageOrdersComponent implements OnInit {
   onSelectButton(order: Order){
     if(order.state === 'DELIVERED'){
       order.delivered_at = new Date();
+    }
+  }
+
+  onSelectCompany(order: Order){
+    if(order.state === 'DELIVERED'){
+      // order.delivered_at = new Date();
     }
   }
 

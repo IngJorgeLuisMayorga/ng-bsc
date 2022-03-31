@@ -16,7 +16,8 @@ export type Order = {
     discounts: number; //Total en descuentso (cupones y descuentos de productos)
     points: number; // Puntos acumulados
 
-    state: "ORDERED" | "SHIPPED" | "DELIVERED" | "CANCELED" | "RETURNED"
+    state: "ORDERED" | "SHIPPED" | "DELIVERED" | "CANCELED" | "RETURNED";
+    company: string;
 
     ordered_at: Date; //Fecha de orden y pago
     shipped_at: Date; //Fecha de envio
