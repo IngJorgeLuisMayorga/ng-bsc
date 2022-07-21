@@ -1,0 +1,38 @@
+<div class="page">
+
+    <div class="page-header">
+        <app-header-ad></app-header-ad>
+        <app-header-default></app-header-default>
+    </div>
+
+    <div class="page-sidebar" [ngClass]="{'active': (isCartOpen$ | async) }">
+        <app-cart-sidebar *ngIf="(isCartOpen$ | async)"></app-cart-sidebar>
+    </div>
+
+    <div class="page-container">
+
+        <br>
+        <br>
+
+        <section class="section--breadcumbs">
+            <ul>
+                <li *ngFor="let breadcumb of breadcumbs" [ngClass]="{  'active' : breadcumb.path === currentPath }" >
+                    <a class="font--helvetica-medium"
+                       [routerLink]="breadcumb.path">
+                       {{ breadcumb.text }}
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section--container">
+            <ng-content></ng-content>
+        </section>
+
+    </div>
+
+    <div class="page-footer">
+        <app-footer-default></app-footer-default>
+    </div>
+
+</div>

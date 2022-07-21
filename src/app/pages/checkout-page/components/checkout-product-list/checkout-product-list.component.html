@@ -1,0 +1,35 @@
+<form class="checkout-product-list">
+
+    <div class="wrapper--head">
+        <h1><strong>¡Te faltan 114.000 para que tu envio sea gratis!</strong></h1>
+    </div>
+
+    <div class="wrapper--products line--bordered-top">
+        <ul class="checkout-products">
+            <div class="checkout-product-list">
+                <div *ngFor="let product of products; index as i">
+                    <app-product-item [product]="product" [index]="i"></app-product-item>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+    <div class="wrapper--discount">
+        <div class="discount-container">
+            <div class="input">
+                <input type="text" [(ngModel)]="coupon">
+                <h5>¿Tienes un codigo de <strong>descuento</strong> ?</h5>
+            </div>
+            <div class="label"  (click)="doCoupon()">
+                <span>Aplicar</span>
+            </div>
+        </div>
+        <div class="label-container">
+            <h5> Muestras gratis en todos los pediso BSC!</h5> 
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+        </div>
+    </div>
+
+</form>  

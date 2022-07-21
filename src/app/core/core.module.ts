@@ -13,15 +13,17 @@ import { FilterByHomeFavsPipe } from './products/pipes/filterByHomeFavs.pipe';
 import { ProductRecommendedCardComponent } from './products/components/product-recommended-card/product-recommended-card.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { CartModule } from './cart/cart.module';
+import { ProfileModule } from './profile/profile.module';
+import { ProductItemComponent } from './products/components/product-item/product-item.component';
 
 
 const COMPONENTS = [
-  CartSidebarComponent,
-  ProfileSidebarComponent,
   SearchSidebarComponent, 
   ProductCardComponent,
   ProductDuoCardComponent,
-  ProductRecommendedCardComponent
+  ProductRecommendedCardComponent,
+  ProductItemComponent
 ]
 
 const PIPES = [
@@ -32,13 +34,19 @@ const PIPES = [
   filterByIdPipe
 ]
 
+const MODULES = [
+  CartModule,
+    ProfileModule,
+]
+
 @NgModule({
   declarations: [...COMPONENTS, ...PIPES ],
-  exports: [...COMPONENTS, ...PIPES],
+  exports: [...COMPONENTS, ...PIPES, ...MODULES],
   imports: [
     CommonModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ...MODULES
   ]
 })
 export class CoreModule { }

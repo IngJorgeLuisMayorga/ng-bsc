@@ -1,0 +1,37 @@
+<div class="checkout-details">
+    <div class="details-logo--wrapper">
+        <img src="../../../../../assets/checkout/logo.svg" alt="">
+    </div>
+    <div class="details-summary--wrapper">
+        <ul>
+            <li class="line--bordered-bottom">
+                <div class="left">{{ numberProducts }} productos</div>
+                <div class="right">{{ (total) | currency:'$':'symbol':'2.0' }}</div>
+            </li>
+            <li class="line--bordered-bottom">
+                <div class="left">descuento adicional</div>
+                <div class="right">no aplica</div>
+            </li>
+            <li class="line--bordered-bottom">
+                <div class="left">envio</div>
+                <div class="right" *ngIf="(shippingStatus$ | async) === 'pending' ">por calcular</div>
+                <div class="right" *ngIf="(shippingStatus$ | async) === 'free_by_coupon' ">gratis (por cupon)</div>
+                <div class="right" *ngIf="(shippingStatus$ | async) === 'free_by_300k' ">gratis (pára mayorex a 300, despues de haber aplicado los descuentops)</div>
+            </li>
+        </ul>
+    </div>
+    <div class="details-total--wrapper line--bordered">
+        <h1 class="">
+            Total <strong>{{ (total) | currency:'$':'symbol':'2.0' }}</strong> + envío
+        </h1>
+        <h2> 
+            Puntos con esta compra: {{ (total / 1000 ) | number:'1.0-0' }}
+        </h2>
+    </div>
+    <div class="details-next--wrapper">
+        <button (click)="doContinue()">
+            Continuar
+        </button>
+    </div>
+</div>
+

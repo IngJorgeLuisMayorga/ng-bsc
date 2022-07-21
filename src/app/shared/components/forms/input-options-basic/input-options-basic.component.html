@@ -1,0 +1,17 @@
+<div class ="input-wrapper" [ngClass]="{'error': isError}">
+    <select >
+
+        <option *ngIf="default" disabled >
+            {{ default.lable}}
+        </option>
+
+        <option 
+        *ngFor="let option of options" 
+        [value]="option.value" 
+        (click)="onChange(option)">
+            {{ option.label }}
+        </option>
+
+    </select>
+    <span>{{ errorMsg }}</span>
+</div>

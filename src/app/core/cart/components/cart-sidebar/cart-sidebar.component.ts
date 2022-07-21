@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import products from 'src/app/config/products';
@@ -24,7 +25,11 @@ export class CartSidebarComponent implements OnInit {
   public cartFreeShipping = 0;
   public couponTag:any;
   
-  constructor(private cartService: CartService, private $cart: CartService, private $coupons: CouponsService) { 
+  constructor(
+    private router: Router,
+    private cartService: CartService, 
+    private $cart: CartService, 
+    private $coupons: CouponsService) { 
     this.isOpen$ = this.cartService.isOpen$;
     this.coupon$ = this.cartService.coupon$;
 
@@ -74,6 +79,11 @@ export class CartSidebarComponent implements OnInit {
     const coupones = await this.$coupons.getCoupons();
     const coupon = coupones.find(_coupon => _coupon.code.toUpperCase() === (this.couponTag as string + '').toUpperCase())
     this.$cart.setCoupon(coupon);
+  }
+
+  goToCheckout(){
+    this.doCloseCart();
+    this.router.navigateByUrl('/checkout');
   }
 
  

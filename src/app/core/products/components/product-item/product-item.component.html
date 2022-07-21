@@ -1,0 +1,43 @@
+<div class="product-item">
+
+    <div class="product-item--container">
+
+        <div class="product-item--container">
+            <div class="product--picture">
+                <img [src]="product.image1_src">
+                <div class="bubble" *ngIf="product?.discount> 0">
+                    <span> -{{ product?.discount }} </span>
+                    <span style="padding-left: 2px;"> % </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-item--container to-end line--bordered-bottom" >
+            <div class="product--name">
+                <h1>{{ product.name }} <strong *ngIf="product.category_brand"> / {{ product.category_brand.name }}</strong>
+                </h1>
+            </div>
+            <div class="product--qty-control">
+                <app-add-minus-button [value]="product.cart?.quantity" (onMin)="removeItemToCart()"
+                    (onMax)="addItemToCart()"></app-add-minus-button>
+            </div>
+            <div class="product--price">
+                <h2 *ngIf="product.cart?.quantity > 0">
+                    {{  
+                        (product.price)*
+                        (1 - 0.01*product.discount)| currency:'$':'symbol':'2.0' }}
+                </h2>
+                <h3 *ngIf="product.discount > 0">
+                    {{  
+                        (product.price)| currency:'$':'symbol':'2.0' }}
+                </h3>
+            </div>
+            <div class="product--delete" (click)="removeItem()">
+                x
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

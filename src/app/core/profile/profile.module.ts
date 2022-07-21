@@ -5,7 +5,9 @@ import { ProfileSidebarComponent } from './profile-sidebar/profile-sidebar.compo
 
 
 @NgModule({
-  declarations: [ProfileSidebarComponent],
+  declarations: [
+    ProfileSidebarComponent
+  ],
   imports: [
     CommonModule
   ]

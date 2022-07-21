@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -33,7 +34,7 @@ export class HeaderDefaultComponent implements OnInit {
 
   }
   doOpenProfileSidebar(){
-
+    this.router.navigate(['/profile']);
   }
 
   doOpenCartSidebar(){

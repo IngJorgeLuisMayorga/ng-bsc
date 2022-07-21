@@ -1,0 +1,215 @@
+/**
+    -------------------------------------------- 
+    ---  CHECKOUT PRODUCT LIST STYLES ---------- 
+    -------------------------------------------- 
+*/
+
+@import (reference) '../../../../../styles/_index.less';
+
+.checkout-product-list{
+    .font-default();
+}
+
+
+.wrapper--head{
+   h1 {
+    .font-size-xs();
+    .font-space-large();
+    padding-top: 1em;
+    padding-bottom: 1em;
+   }
+   strong{
+        .font-bold(); 
+   }
+}
+
+.wrapper--product{
+
+}
+
+.wrapper--discount{
+    display: block;
+    width: 100%;
+    .font-default();
+    
+    .discount-container{
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+        -webkit-align-content: stretch;
+        -ms-flex-line-pack: stretch;
+        align-content: stretch;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        .input{
+            display: block;
+            position: relative;
+            padding: 1em;
+            h5{
+                position: relative;
+                width: 100%;
+            
+            }
+            input{
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 44px;
+                padding-left: 1em;
+                background-color: white;
+            }
+        }
+        .label{
+            background-color: @color-black;
+            color: white;
+            padding: 0.5em 2.5em ;
+            height: 44px;
+
+            .font-space-large();
+
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-flex-wrap: nowrap;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-align-content: stretch;
+            -ms-flex-line-pack: stretch;
+            align-content: stretch;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            span{
+                
+            }
+        }
+    }
+    .label-container{}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.checkout-products{
+    display: block;
+    border-bottom: 1px solid #E1E1E1;
+    margin-bottom: 1.5em;
+}
+
+
+
+.checkout-summary {
+
+    font-family: 'Helvetica';
+    font-size: 14px;
+    font-weight: 300;
+
+    padding-bottom: 1em;
+
+    color: #535353;
+    border-bottom: 1px solid #E1E1E1;
+    margin-bottom: 1.5em;
+
+
+    display: block;
+
+    h1{
+        font-weight: 600;
+    }
+
+    li{
+        padding-bottom: 1em;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-align-content: space-between;
+        -ms-flex-line-pack: justify;
+        align-content: space-between;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+
+}
+
+
+.checkout-total {
+
+    font-family: 'Helvetica';
+    font-size: 14px;
+    font-weight: 300;
+
+    border-bottom: 1px solid #E1E1E1;
+    margin-bottom: 1.5em;
+
+    
+    padding-bottom: 1em;
+
+    color: #535353;
+
+    display: block;
+
+    h1{
+        font-weight: 600;
+    }
+
+    li{
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-align-content: space-between;
+        -ms-flex-line-pack: justify;
+        align-content: space-between;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+
+}
+
+
+

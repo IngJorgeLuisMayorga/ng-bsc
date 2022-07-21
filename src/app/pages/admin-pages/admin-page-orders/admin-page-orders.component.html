@@ -48,8 +48,7 @@
                             [ngModelOptions]="{standalone: true}" 
                             [options]="statesOptions" 
                             [(ngModel)]="order.state" 
-                            (onChange)="onSelectButton(order.state)"
-                            (onOptionClick)="onSelectButton(order)"
+                            (onChange)="onSelectButton(order)"
                             >
                                 <ng-template let-item>
                                     <i [class]="item.icon"></i>
@@ -58,6 +57,8 @@
 
                             <input (change)="setShippingCode($event.target, order.id)" placeholder="Ingresa Codigo de Envio" *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')" type="text" pInputText  [value]="order.shipping_code || ''"/>
                             <input disabled *ngIf="(order.state === 'DELIVERED' || order.state.state === 'DELIVERED')" type="text" pInputText [value]="order.shipping_code || ''">
+
+                            <button (click)="onSaveOnShipping(order)" pButton type="button" label="Save" *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')"></button>
 
                             <p-selectButton
                                 *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')"

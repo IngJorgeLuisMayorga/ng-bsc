@@ -1,8 +1,18 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Coupon } from '../../coupons/coupons.model';
 import { Product } from '../../products/models/IProduct.model';
+export interface IShippingStore {
+  city: "NONE" | "BOG" | "OTHER";
+  hasCoupon: boolean;
+  value: 0
+}
+const DefaultShippingStore:IShippingStore = {
+  city:'NONE',
+  hasCoupon: false,
+  value: 0,
+}
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +33,14 @@ export class CartService {
   public coupon$ = this._coupon.asObservable();
   public isCoupon$ = this._coupon.asObservable();
 
+  private _shipping: BehaviorSubject<IShippingStore> = new BehaviorSubject(DefaultShippingStore);
+  public shipping$ = this._shipping.asObservable();
+
   constructor() { 
     this._cart.next([]);
     this._isUpdating.next(0);
     this._isOpen.next(false);
+    this._shipping.next(DefaultShippingStore);
   }
 
   public isCartEmpty(){
@@ -89,7 +103,7 @@ export class CartService {
       }
       
       else if(this._coupon.getValue().type === 'BY_TOTAL_BIGGER'){
-        const trigger = true || cartTotal > this._coupon.getValue().variable_give_discount_amount;
+        const trigger = cartTotal > this._coupon.getValue().variable_give_discount_amount;
         const amount = this._coupon.getValue().variable_give_discount_amount;
         const percetange = this._coupon.getValue().variable_give_discount_percentage;
         const freeshipping = this._coupon.getValue().free_shipping;
@@ -152,11 +166,17 @@ export class CartService {
       products.push({...product, ...{cart:{ quantity: 1, updated_at: new Date()}}});
     }
     setTimeout(() => {
-      this._cart.next(products)
+      localStorage.setItem('cart', JSON.stringify(products));
+      this._cart.next(products);
       this._isUpdating.next(0);
       return products;
     }, 1000)
 
+  }
+
+  public setCart(products: Product[]){
+    this._cart.next(products);
+    this._isUpdating.next(0);
   }
 
   public async removeToCart(product: Product){
@@ -178,6 +198,7 @@ export class CartService {
     setTimeout(() => {
       this._cart.next(products)
       this._isUpdating.next(0);
+      localStorage.setItem('cart', JSON.stringify(products));
       return products;
     }, 1000)
  
@@ -201,6 +222,7 @@ export class CartService {
     setTimeout(() => {
       this._cart.next(products)
       this._isUpdating.next(0);
+      localStorage.setItem('cart', JSON.stringify(products));
       return products;
     }, 1000)
  
@@ -223,5 +245,33 @@ export class CartService {
     this._coupon.next(coupon);
     this._cart.next(JSON.parse(JSON.stringify(this._cart.getValue())));
   }
+
+
+  syncShippingValue(){
+    return this.shipping$.pipe(
+      map(shipping=> shipping.value)
+    )
+  }
+
+  syncShippingStatus(): Observable<'pending' | 'free_by_coupon' | 'free_by_300k' | 'valued'> {
+    return this.shipping$.pipe(
+      map(shipping=> {
+        if(shipping.city === 'NONE'){
+          return 'pending';
+        } else {
+          if(shipping.hasCoupon){
+            return 'free_by_coupon';
+          } else {
+            if(shipping.value > 0){
+              return 'free_by_300k';
+            } else {
+              return 'valued';
+            }
+          }
+        }
+      })
+    )
+  }
+
 
 }

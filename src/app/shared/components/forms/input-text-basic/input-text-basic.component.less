@@ -1,0 +1,69 @@
+@import (reference) '../../../../../styles/_index.less';
+
+.input-wrapper{
+    display: block;
+    width: 100%;
+    padding: 0px;
+    border:1px dotted @color-black;
+    input{
+        width: 100%;
+        background: none;
+        padding: none;
+        margin: none;
+        border: none;    
+    }
+    span{
+        visibility: hidden;
+        font-size: 8px;
+        width: 100%;
+        display: block;
+        position: relative;
+        text-align: right;
+    }
+    &.error{
+        border:1px dotted @color-red;
+        color: @color-red;
+        input{
+            color: @color-red !important;
+        }
+        span { 
+            color: @color-red;
+            visibility: visible;
+            padding-right: 5px;
+        }
+    }
+}
+.input-wrapper input, .input-wrapper  select{
+    
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 0px;
+    font-family: 'Helvetica';
+    color: @color-gray;
+
+    &:active{
+        outline: none !important;
+        border: none;
+    }
+    &:focus{
+        outline: none !important;
+        border: none;
+    }
+  
+}
+.input-wrapper:has(input:active){
+    outline: none !important;
+    border:1px dotted @color-black;
+}
+.input-wrapper:has(input:focus){
+    outline: none !important;
+    border:1px dotted @color-black;
+}
+.input-wrapper.error:has(input:active){
+    outline: none !important;
+    border:1px dotted @color-red;
+}
+.input-wrapper.error:has(input:focus){
+    outline: none !important;
+    border:1px dotted @color-red;
+}

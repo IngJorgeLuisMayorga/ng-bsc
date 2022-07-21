@@ -9,16 +9,16 @@ export type User = {
    nid?: string;
    
    birthdate: Date;
-   points: number;
+   points?: number;
    photo: string;
 
    phone: string;
    city: string;
    address: string;
 
-   cart: any[];
-   whislist: any[];
-   orders: any[];
+   cart?: any[];
+   whislist?: any[];
+   orders?: any[];
 
    signin_at: Date;
    password?: string;

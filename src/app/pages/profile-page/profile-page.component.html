@@ -1,0 +1,200 @@
+<app-layout-basic [breadcumbs]="breadcumbs">
+    <div class="">
+
+        <div class="profile-icon">
+            <img class="icon" src="../../../assets/profile/icon.png">
+            <h1 class="name"> {{ (user$ | async)?.name }} </h1>
+            <img class="subline" src="../../../assets/profile/subline.png">
+        </div>
+
+        <div class="profile-tabs">
+            <div class="profile-tabs--header">
+                <div class="profile-tab" [ngClass]="{ 'active': tab === 0}" (click)="setTab(0)">Mi Cuenta</div>
+                <div class="profile-tab" [ngClass]="{ 'active': tab === 1}" (click)="setTab(1)">Mis Pedidos</div>
+                <div class="profile-tab" [ngClass]="{ 'active': tab === 2}" (click)="setTab(2)">Mis Favoritos</div>
+            </div>
+            <div class="profile-tabs--content">
+                <div class="profile-tab" *ngIf="tab === 0">
+
+                    <div class="row--space-between">
+                        <div class="col col--bubble">
+                            <img class="hearts" src="../../../assets/profile/hearts.png">
+                            <h1>Bubble Lover!</h1>
+                            <h2>313 Bubble Points</h2>
+                            <button>
+                                Redimir Puntos <img src="../../../assets/profile/1_BSC.png">
+                            </button>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col col--shipping">
+                            <h1>Datos de entrega</h1>
+                            <ul>
+                                <li> <strong>Nombre</strong>  {{  (user$ | async)?.name }}</li>
+                                <li> <strong>Documento</strong>  {{  (user$ | async)?.nid }}</li>
+                                <li> <strong>Ciudad</strong>  {{  (user$ | async)?.city }}</li>
+                                <li> <strong>Dirección</strong>  {{  (user$ | async)?.address }}</li>
+                                <li> <strong>Teléfono</strong>  {{  (user$ | async)?.phone }}</li>
+                            </ul>
+                        </div>
+                        <div class="col col--favs">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="profile-tab" *ngIf="tab === 1">
+
+                    <div *ngIf="(orders$ | async) && !(order$ | async)" class="table-order">
+                        <div class="table-order--header">
+                            <div class="header">Número de Orden</div>
+                            <div class="header">Fecha</div>
+                            <div class="header">Estado</div>
+                        </div>
+                        <div class="table-order--row" *ngFor="let order of (orders$ | async) | slice:1:N ">
+                            <div class="col">
+                               <a (click)="goToOrder(order?.id)">#{{ order?.id }}</a> 
+                            </div>
+                            <div class="col">
+                                <div *ngIf="order?.state === 'ORDERED'">{{ order?.ordered_at | date }} </div>
+                                <div *ngIf="order?.state === 'SHIPPED'">{{ order?.shipped_at | date }} </div>
+                                <div *ngIf="order?.state === 'DELIVERED'">{{ order?.delivered_at | date}} </div>
+                            </div>
+                            <div class="col">
+                                <div *ngIf="order?.state === 'ORDERED'">
+                                    <img src="../../../assets/profile/ordered_svg.svg">
+                                </div>
+                                <div *ngIf="order?.state === 'SHIPPED'">
+                                    <img src="../../../assets/profile/shipped_svg.svg">
+                                </div>
+                                <div *ngIf="order?.state === 'DELIVERED'">
+                                    entregado
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-order-more">
+                            <app-pink-button
+                                [border]="true"
+                                [text]="'¡Ver más pedidos!'"
+                                [icon]="''"
+                                [hover_text]="'¡Ver más pedidos!'"
+                                [hover_icon]="''"
+                                (nClick)="more()"
+                            ></app-pink-button>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div *ngIf="(orders$ | async) && (order$ | async)" class="table-detail">
+
+                        <div *ngIf="(order$ | async) as order ">
+
+                            <div class="table-order">
+                                <div class="table-order--header">
+                                    <div class="header">Número de Orden</div>
+                                    <div class="header">Fecha</div>
+                                    <div class="header">Estado</div>
+                                </div>
+                                <div class="table-order--row" style="border: none;">
+                                    <div class="col">
+                                    <a (click)="goToOrder(order?.id)">#{{ order?.id }}</a> 
+                                    </div>
+                                    <div class="col">
+                                        <div *ngIf="order?.state === 'ORDERED'">{{ order?.ordered_at | date }} </div>
+                                        <div *ngIf="order?.state === 'SHIPPED'">{{ order?.shipped_at | date }} </div>
+                                        <div *ngIf="order?.state === 'DELIVERED'">{{ order?.delivered_at | date}} </div>
+                                    </div>
+                                    <div class="col">
+                                        <div *ngIf="order?.state === 'ORDERED'">
+                                            <img src="../../../assets/profile/ordered_svg.svg">
+                                        </div>
+                                        <div *ngIf="order?.state === 'SHIPPED'">
+                                            <img src="../../../assets/profile/shipped_svg.svg">
+                                        </div>
+                                        <div *ngIf="order?.state === 'DELIVERED'">
+                                            entregado
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="table-separator">
+                                <div class="btn-back" (click)="goToBack(order?.id)">
+                                    <i class="pi pi-chevron-left"></i>
+                                </div>
+                                <div class="btn-next" (click)="goToNext(order?.id)">
+                                    <i class="pi pi-chevron-right"></i>
+                                </div>
+                            </div>
+
+                            <div class="table-detail">
+
+                                <div class="row">
+                                    <div class="col" style="width: 350px; padding-right: 25px;">
+                                        <ul>
+                                            <li *ngFor="let product of order.products; index as i">
+                                                    <div class="row--start table-detail--product">
+                                                        <div class="col">
+                                                            <span>{{ i + 1}}</span>
+                                                            <img [src]="product.image1_src" alt="" width="100">
+                                                        </div>
+                                                        <div class="col names" style="padding-left: 50px;">
+                                                            <h1>{{ product.name }}</h1>
+                                                            <h2 *ngIf="!product.quantity || product.quantity === 0">{{  (product.price)*(1 - 0.01*product.discount)| currency:'$':'symbol':'2.0' }}</h2>
+                                                            <h2 *ngIf="product.quantity > 0" >{{ product.quantity }} x {{  (product.price)*(1 - 0.01*product.discount)| currency:'$':'symbol':'2.0' }}</h2>
+                                                        </div>
+                                                    </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <h1 class="details-header">
+                                            Datos de <strong>entrega</strong>
+                                        </h1>
+                                        <br>
+                                        <div class="col--shipping">
+                                            <ul>
+                                                <li> <strong>Nombre</strong>  {{  (user$ | async)?.name }}</li>
+                                                <li> <strong>Documento</strong>  {{  (user$ | async)?.nid }}</li>
+                                                <li> <strong>Ciudad</strong>  {{  (user$ | async)?.city }}</li>
+                                                <li> <strong>Dirección</strong>  {{  (user$ | async)?.address }}</li>
+                                                <li> <strong>Teléfono</strong>  {{  (user$ | async)?.phone }}</li>
+                                            </ul>
+                                            <br>
+                                            <div class="details-line"></div>
+                                            <br>
+                                            <ul>
+                                                <li> Puntos acumulados </li>
+                                                <li style="background-color: beige;"> <strong>313 Bubble Points</strong> </li>
+                                            </ul>
+                                            <br>
+                                            <div class="details-line"></div>
+                                            <br>
+                                            <ul>
+                                                <li> Metodo de pago </li>
+                                                <li> Bancolombia </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="profile-tab" *ngIf="tab === 2"></div>
+            </div>
+           
+        </div>
+
+
+
+    </div>
+</app-layout-basic>

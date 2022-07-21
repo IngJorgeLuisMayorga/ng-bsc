@@ -1,0 +1,7 @@
+<div *ngIf="active" style="position: absolute; right: 0; top: 0">
+    <ng-content select=".toolbar"></ng-content>
+  </div>
+
+<div [hidden]="!active" class="pane">
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,14 @@
+<div class="checkout-user-form">
+    <app-tabView>
+
+            <app-tabPanel title="Envio" color="'yellow'">
+                <app-form-basic 
+                    [formFields]="shippingFormFields" 
+                    [formSubmit]="shippingFormSubmit"
+                    (nSubmit)="doSetShipping()"
+                    (nChange)="setFormField($event)">
+                </app-form-basic>
+            </app-tabPanel>
+
+    </app-tabView>
+</div>

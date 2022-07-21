@@ -1,0 +1,46 @@
+<div class="form">
+    <ng-container *ngFor="let field of formFields">
+        <app-input-text-basic *ngIf="field.type==='text'"
+            [errorMsg]= "field.error?.message"
+            [errorCheck]="field.error?.check"
+            [placeholder]="field.placeholder"
+            [default]="field.value"
+            (nChange)="setField(field, $event)">
+        </app-input-text-basic>
+            <app-input-date-basic *ngIf="field.type==='date'"
+            [errorMsg]= "field.error?.message"
+            [errorCheck]="field.error?.check"
+            [placeholder]="field.placeholder"
+            (nChange)="setField(field, $event)">
+        </app-input-date-basic>
+        <app-input-text-basic *ngIf="field.type==='email'"
+            [errorMsg]= "field.error?.message"
+            [errorCheck]="field.error?.check"
+            [placeholder]="field.placeholder"
+            [default]="field.value"
+            (nChange)="setField(field, $event)">
+        </app-input-text-basic>
+        <app-input-text-password *ngIf="field.type==='password'"
+            [errorMsg]= "field.error?.message"
+            [errorCheck]="field.error?.check"
+            [placeholder]="field.placeholder"
+            (nChange)="setField(field, $event)">
+        </app-input-text-password>
+        <app-input-options-basic *ngIf="field.type==='options'"
+            [options]="field.options"
+            [errorMsg]= "field.error?.message"
+            [errorCheck]="field.error?.check"
+            [placeholder]="field.placeholder"
+            (nChange)="setField(field, $event)">
+        </app-input-options-basic>
+    </ng-container>
+
+    <ng-container>
+        <app-btn-basic 
+            *ngIf="formSubmit.type==='basic'"
+            [color]="formSubmit.color"
+             [placeholder]="formSubmit.placeholder"
+             (nClick)="onSubmit()"
+        ></app-btn-basic>
+    </ng-container>
+</div>

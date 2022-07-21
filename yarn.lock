@@ -167,7 +167,7 @@
     "universal-analytics" "0.4.23"
     "uuid" "8.3.1"
 
-"@angular/common@^11.0.0 || ^12.0.0-0", "@angular/common@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/common@~11.0.0", "@angular/common@11.0.9":
+"@angular/common@^11.0.0 || ^12.0.0-0", "@angular/common@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/common@>=8.0.0-0", "@angular/common@~11.0.0", "@angular/common@11.0.9":
   "integrity" "sha512-QYJx+Y7Bmqdwtyk8TZDqF6io7gPaiZnUPrS/JbV/qB1QA8Q0OVaJSRRy/d0ahsc385+OiUhT7gVnbEh92oWXmQ=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-11.0.9.tgz"
   "version" "11.0.9"
@@ -207,7 +207,7 @@
   "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/core@^11.0.0 || ^12.0.0-0", "@angular/core@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@~11.0.0", "@angular/core@11.0.9":
+"@angular/core@^11.0.0 || ^12.0.0-0", "@angular/core@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@>=8.0.0-0", "@angular/core@~11.0.0", "@angular/core@11.0.9":
   "integrity" "sha512-J0ff3UK2Cw7Z0eNLtUXrpMFvmmkvPPZWLYIwimyc1pZys7qsIVT6cy2ybGEOhbJgC6qt3fo0DoJV3pGXTalb8A=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-11.0.9.tgz"
   "version" "11.0.9"
@@ -233,7 +233,7 @@
   dependencies:
     "tslib" "^2.0.0"
 
-"@angular/platform-browser@~11.0.0", "@angular/platform-browser@11.0.9":
+"@angular/platform-browser@>=8.0.0-0", "@angular/platform-browser@~11.0.0", "@angular/platform-browser@11.0.9":
   "integrity" "sha512-snuq8SaIRuVDYJLy80kYCEuVITZZbtG3PvxamATvzpgYpAzBskToc4/7LKJk0IEVSMvKzi8eSBCDaK2f2ZJB3A=="
   "resolved" "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-11.0.9.tgz"
   "version" "11.0.9"
@@ -5907,6 +5907,13 @@
   "integrity" "sha1-yobR/ogoFpsBICCOPchCS524NCw="
   "resolved" "https://registry.npmjs.org/next-tick/-/next-tick-1.0.0.tgz"
   "version" "1.0.0"
+
+"ngx-toastr@^11.3.3":
+  "integrity" "sha512-DbLFkSZHsVPuuIIrsY1ziEhdkFUQ0V1yG1N0+1nKXGI5QBVesEDxLUVtntjzxJcWw/uUV+bKApo//tGHHORabQ=="
+  "resolved" "https://registry.npmjs.org/ngx-toastr/-/ngx-toastr-11.3.3.tgz"
+  "version" "11.3.3"
+  dependencies:
+    "tslib" "^1.9.0"
 
 "nice-try@^1.0.4":
   "integrity" "sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ=="

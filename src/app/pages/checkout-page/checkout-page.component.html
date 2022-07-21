@@ -1,0 +1,52 @@
+<app-layout-basic [breadcumbs]="breadcrumbs" (nBreadcrumbChange)="setBreadcrumb($event)">
+
+    <div class="checkout-page">
+
+        <div class="title">
+            <h1> <strong>Mi Carrito</strong> </h1>
+            <img src="../../../assets/section-title-line.png">
+        </div>
+
+        <div class="checkout-page-row">
+
+            <div class="col-1">
+                
+                <app-checkout-product-list 
+                    *ngIf="breadcrumb === breadcrumbs[1]" 
+                    [products]="(cartProducts$ | async)"
+                    [total]="(cartTotal$ | async)"
+                ></app-checkout-product-list>
+
+                <app-checkout-user-form 
+                *ngIf="breadcrumb === breadcrumbs[2]"
+                (nChange)="setUserForm($event)"
+                (nContinue)="onContinue()"
+                ></app-checkout-user-form>
+
+                <app-checkout-shipping-form 
+                [userFields]="userFormFields"
+                (nChange)="setShippingForm($event)"
+                (nContinue)="onContinue()"
+                *ngIf="breadcrumb === breadcrumbs[3]"
+                ></app-checkout-shipping-form>
+
+                <app-checkout-payment-form *ngIf="breadcrumb === breadcrumbs[4]"></app-checkout-payment-form>
+
+            </div>
+    
+            <div class="col-2">
+                
+                {{ userFormFields[0]  | json}}
+
+                <app-checkout-details
+                    [products]="(cartProducts$ | async)"
+                    [total]="(cartTotal$ | async)"
+                    (nContinue)="onContinue()"
+                ></app-checkout-details>   
+            </div>
+
+        </div>
+
+    
+    </div>
+</app-layout-basic>

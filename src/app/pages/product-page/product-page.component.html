@@ -7,8 +7,6 @@
 
     <div class="page-sidebar" [ngClass]="{'active': (isCartOpen$ | async) }">
         <app-cart-sidebar *ngIf="(isCartOpen$ | async)"></app-cart-sidebar>
-        <app-profile-sidebar *ngIf="false"></app-profile-sidebar>
-        <app-search-sidebar *ngIf="false"></app-search-sidebar>
     </div>
 
     <div class="page-container">

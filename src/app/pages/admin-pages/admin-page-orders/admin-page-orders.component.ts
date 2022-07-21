@@ -36,11 +36,8 @@ export class AdminPageOrdersComponent implements OnInit {
     this.statesOptions = [
       {icon: 'pi pi-shopping-cart', state: 'ORDERED'},
       {icon: 'pi pi-send', state: 'SHIPPED'},
-      {icon: 'pi pi-check-circle', state: 'DELIVERED'},
-      /*
-      {icon: 'pi pi-ban', state: 'CANCELED'},
-      {icon: 'pi pi-replay', state: 'RETURNED'},
-      */
+      {icon: 'pi pi-check-circle', state: 'DELIVERED'}
+    
   ];
   this.companiesOptions = [
     {
@@ -92,15 +89,78 @@ export class AdminPageOrdersComponent implements OnInit {
   }
 
   onSelectButton(order: Order){
-    if(order.state === 'DELIVERED'){
-      order.delivered_at = new Date();
+  
+    console.log(' ')
+    console.warn({order})
+    console.log(' ')
+
+    if((order.state as any).state === 'ORDERED'){
+      const isOk = window.confirm('MOVER ORDEN A "ORDERED" ')
+      if(isOk) this.onSaveOnOrder(order.id);      
     }
+
+    if((order.state as any).state === 'SHIPPED'){
+      //const isOk = window.confirm('MOVER ORDEN A "SHIPPED" ')
+      //if(isOk)  this.onSaveOnShipping();   
+    }
+
+    if((order.state as any).state === 'DELIVERED'){
+      order.delivered_at = new Date();
+       const isOk = window.confirm('MOVER ORDEN A "DELIVERED" ')
+       if(isOk)  this.onSaveOnDelivered(order.id);
+    }
+
+    if((order.state as any).state === 'CANCELED'){
+      order.delivered_at = new Date();
+       const isOk = window.confirm('MOVER ORDEN A "CANCELED" ')
+       if(isOk)  this.onSaveOnCanceled(order.id);
+    }
+
+    if((order.state as any).state === 'RETURNED'){
+      order.delivered_at = new Date();
+       const isOk = window.confirm('MOVER ORDEN A "RETURNED" ')
+       if(isOk)  this.onSaveOnReturned(order.id);
+    }
+
   }
+
+
 
   onSelectCompany(order: Order){
     if(order.state === 'DELIVERED'){
       // order.delivered_at = new Date();
     }
+  }
+
+  
+  onSaveOnOrder(orderId: number){
+    console.log(' onSaveOnOrder(orderId: number) ');
+    this.$orders.updateOrderStatus(orderId, 'ORDERED', {});
+  }
+
+  onSaveOnShipping(order: Order){
+   const isOk = window.confirm('MOVER ORDEN A "SHIPPED" ')
+   if(isOk){
+    this.$orders.updateOrderStatus(order.id, 'SHIPPED', {
+      company: order.company,
+      shipping_code: order.shipping_code,
+      shipped_at: order.shipped_at
+    });
+   }
+  }
+
+  onSaveOnDelivered(orderId: number){
+    console.log(' onSaveOnDelivered(orderId: number) ');
+    this.$orders.updateOrderStatus(orderId, 'DELIVERED', {});
+  }
+
+  onSaveOnCanceled(orderId: number){
+    console.log(' onSaveOnCanceled(orderId: number) ');
+    this.$orders.updateOrderStatus(orderId, 'CANCELED', {});
+  }
+
+  onSaveOnReturned(orderId: number){
+    this.$orders.updateOrderStatus(orderId, 'RETURNED', {});
   }
 
 }
