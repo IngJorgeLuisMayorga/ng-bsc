@@ -20,6 +20,7 @@ import { FormBasicComponent } from './components/forms/form-basic/form-basic.com
 import { InputTextPasswordComponent } from './components/forms/input-text-password/input-text-password.component';
 import { BtnBasicComponent } from './components/forms/btn-basic/btn-basic.component';
 import { InputOptionsBasicComponent } from './components/forms/input-options-basic/input-options-basic.component';
+import { FormsModule } from '@angular/forms';
 
 
 const COMPONENTS = [
@@ -59,6 +60,7 @@ const COMPONENTS = [
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule
   ]
 })

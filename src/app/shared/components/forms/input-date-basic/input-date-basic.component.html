@@ -1,4 +1,8 @@
 <div class ="input-wrapper" [ngClass]="{'error': isError}">
-    <input type="date" (change)="onChange($event)" [placeholder]="placeholder">
+    <input 
+    type="date"
+    (change)="onChange($event)" 
+    [value]="date"
+    >
     <span>{{ errorMsg }}</span>
 </div>

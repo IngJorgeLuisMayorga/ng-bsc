@@ -11,6 +11,7 @@
             [errorMsg]= "field.error?.message"
             [errorCheck]="field.error?.check"
             [placeholder]="field.placeholder"
+            [default]="field.value"
             (nChange)="setField(field, $event)">
         </app-input-date-basic>
         <app-input-text-basic *ngIf="field.type==='email'"

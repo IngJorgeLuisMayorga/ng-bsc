@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/core/users/user.model';
 import { UsersService } from 'src/app/core/users/users.service';
 import { IFormField, IFormSubmit } from 'src/app/shared/components/forms/form-basic/form-basic.component';
+import { formatDateToDDMMYYYY } from 'src/app/shared/helpers/date.helper';
 
 @Component({
   selector: 'app-checkout-user-form',
@@ -123,6 +124,27 @@ export class CheckoutUserFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    let user: User | string;
+    user = localStorage.getItem('user');
+    if(user) {
+      user = JSON.parse(user) as User;
+
+      //Login Form
+      this.userLoginFormFields[0].value = user.email;
+      this.userLoginFormFields[1].value = '';
+
+      //SignUp Form
+      this.userFormFields[0].value = user.name;
+      this.userFormFields[1].value = user.name;
+      this.userFormFields[2].value = user.email;
+      this.userFormFields[3].value = formatDateToDDMMYYYY(new Date(user.birthdate));
+      this.userFormFields[4].value = user.password;
+      this.userFormFields[5].value = user.password;
+
+      
+
+   
+    }
   }
 
   doSignIn(){
@@ -142,15 +164,8 @@ export class CheckoutUserFormComponent implements OnInit {
   }
 
   doSignUp(){
-    const user = this.userFormFields.map( item => { 
-      const keypair: {[key: string]: string} = {};
-      keypair[item.name] = item.value;
-      return keypair;
-    }).reduce((sum, val) => {
-      return {...sum, ...val}
-    }, {});
-    const isOk = Object.values(user).every(x => x);
-    if(isOk){
+    const {ok, user} = this.checkSignUpForm();
+    if(ok){
     this.$user.signup({
       id:-1,
       name: user.name + ' ' + user.lastname,
@@ -168,8 +183,7 @@ export class CheckoutUserFormComponent implements OnInit {
       created_at:new Date(),
       updated_at:new Date(),
       comments:' ',
-  })
-      .then(response => {
+    }).then(response => {
         this.nChange.emit(this.userFormFields);
         this.nContinue.emit();
       }).catch( error => {
@@ -183,6 +197,21 @@ export class CheckoutUserFormComponent implements OnInit {
 
     }
     
+  }
+
+  checkSignUpForm(){
+    const user = this.userFormFields.map( item => { 
+      const keypair: {[key: string]: string} = {};
+      keypair[item.name] = item.value;
+      return keypair;
+    }).reduce((sum, val) => {
+      return {...sum, ...val}
+    }, {});
+    const isOk = Object.values(user).every(x => x);
+    return {
+      ok :isOk,
+      user: user
+    }
   }
 
   setUserFormField(fields: IFormField[]){

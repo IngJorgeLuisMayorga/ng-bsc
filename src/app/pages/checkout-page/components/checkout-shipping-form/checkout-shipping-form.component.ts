@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/core/users/user.model';
 import { UsersService } from 'src/app/core/users/users.service';
 import { IFormField, IFormSubmit } from 'src/app/shared/components/forms/form-basic/form-basic.component';
+import departments from 'src/app/shared/jsons/departments';
 
 @Component({
   selector: 'app-checkout-shipping-form',
@@ -50,6 +51,25 @@ export class CheckoutShippingFormComponent implements OnInit {
         check: (value: any) => { return !value.includes('@'); }
       }
     },{
+      name: 'shipping',
+      type: 'options',
+      options: [{
+        label:'Envios a Bogota',
+        value: '8000'
+      },{
+        label:'Envios a Costa Atlantica',
+        value:'15000'
+      },{
+        label:'Envios a Antioquia ',
+        value:'10000'
+      }],
+      value: 'Envios a Bogota',
+      placeholder: 'Opciones Envio',
+      error: {
+        message: 'Envio Invalido',
+        check: (value: any) => { return (!value); }
+      }
+    },{
       name: 'country',
       type: 'text',
       value: 'Colombia',
@@ -61,13 +81,7 @@ export class CheckoutShippingFormComponent implements OnInit {
     },{
       name: 'department',
       type: 'options',
-      options: [{
-        label: 'Amazonas',
-        value: 'Amazonas'
-      },{
-        label: 'Bogota',
-        value: 'Bogota'
-      }],
+      options: [],
       value: 'Amazonas',
       placeholder: 'Departamento',
       error: {
@@ -76,10 +90,20 @@ export class CheckoutShippingFormComponent implements OnInit {
       }
     },
     {
+      name: 'city',
+      type: 'text',
+      value: '',
+      placeholder: 'Ciudad o Municipio',
+      error: {
+        message: 'Dirección Invalida',
+        check: (value: any) => { return (!value); }
+      }
+    },
+    {
       name: 'address',
       type: 'text',
       value: '',
-      placeholder: 'Dirección',
+      placeholder: 'Dirección de Envio',
       error: {
         message: 'Dirección Invalida',
         check: (value: any) => { return (!value); }
@@ -109,27 +133,44 @@ export class CheckoutShippingFormComponent implements OnInit {
 
   constructor(
     private $user: UsersService,
+    private toaster: ToastrService
   ) { }
 
   ngOnInit(): void {
+    
+    // Departments
+    this.shippingFormFields[5].options = departments.data.map(item => {
+      return {
+        label: item.name,
+        value: item.name
+      }
+    })
 
-
-
-    if(this.userFields[0]){
-      this.shippingFormFields[0].value = this.userFields[0].value;
+    let user: User | string;
+    user = localStorage.getItem('user');
+    if(user) {
+      user = JSON.parse(user) as User;
+      this.shippingFormFields[0].value = user.name;
+      this.shippingFormFields[1].value = user.name;
+      this.shippingFormFields[2].value = user.email;
+      this.shippingFormFields[8].value = user.phone;
     }
 
-    console.log(' ')
-    console.log(' shippingFormFields[0] ')
-    console.log(this.shippingFormFields[0])
-    console.log(' ')
-    console.log(' ')
-    console.log(' this.userFields[0] ')
-    console.log(this.userFields[0])
-    console.log(' ')
-    
-    //this.shippingFormFields[1].value = this.userFields[1].value;
-    //this.shippingFormFields[2].value = this.userFields[2].value;
+    let shipping: any = null;
+    shipping = localStorage.getItem('shipping');
+    if(shipping) {
+      shipping = JSON.parse(shipping);
+      this.shippingFormFields[0].value = shipping.name;
+      this.shippingFormFields[1].value = shipping.lastname;
+      this.shippingFormFields[2].value = shipping.email;
+      this.shippingFormFields[3].value = shipping.shipping;
+      this.shippingFormFields[4].value = shipping.country;
+      this.shippingFormFields[5].value = shipping.department; 
+      this.shippingFormFields[6].value = shipping.city;
+      this.shippingFormFields[7].value = shipping.address;
+      this.shippingFormFields[8].value = shipping.phone;
+    }
+
   }
 
   doSetShipping(){
@@ -142,9 +183,23 @@ export class CheckoutShippingFormComponent implements OnInit {
     }, {});
     const isOk = Object.values(shipping).every(x => x);
     if(isOk){
+      const shipping = {
+        name: this.shippingFormFields[0].value,
+        lastname: this.shippingFormFields[1].value,
+        email: this.shippingFormFields[2].value,
+        shipping: this.shippingFormFields[3].value,
+        country: this.shippingFormFields[4].value,
+        department: this.shippingFormFields[5].value,
+        city: this.shippingFormFields[6].value,
+        address: this.shippingFormFields[7].value,
+        phone: this.shippingFormFields[8].value
+      }
+      localStorage.setItem('shipping', JSON.stringify(shipping));
       this.nChange.emit(this.shippingFormFields);
       this.nContinue.emit();
-    }
+    } else {
+      this.toaster.error('Información de envio invalida')
+    } 
     
   }
 

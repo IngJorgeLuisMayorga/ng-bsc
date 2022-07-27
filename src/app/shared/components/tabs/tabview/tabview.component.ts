@@ -38,5 +38,8 @@ export class TabviewComponent implements OnInit, AfterContentInit  {
   isColorBlue(tab: TabPanelComponent){
     return tab.color.includes('blue');
   }
+  isColorPink(tab: TabPanelComponent){
+    return tab.color.includes('pink');
+  }
 
 }
