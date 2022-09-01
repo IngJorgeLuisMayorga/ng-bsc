@@ -14,15 +14,33 @@ export class UsersService {
   public user$: Observable<User> = this._user.asObservable();
 
   constructor(private $http: HttpClient, private toastr: ToastrService) {
+    const userStorage = localStorage.getItem('user');
+    const userObj = JSON.parse(userStorage);
+    if(userObj){
+      this._user.next(userObj)
+    }
+  }
 
+  public getUserSnap(){
+    return this._user.getValue();
   }
 
   async auth(): Promise<User> {
-    const id = 1; //15,9,6
-    const user = await this.$http.get<User>(`${environment.server}/users/${id}`).toPromise();
-    user.nid = user.nid_type + user.nid_number;
-    this._user.next(user);
-    return user;
+    const userStorage = localStorage.getItem('user');
+    const userObj:User = JSON.parse(userStorage || '');
+    if(userObj){
+      const id = userObj.id;
+      const user = await this.$http.get<User>(`${environment.server}/users/${id}`).toPromise();
+      user.nid = user.nid_type + user.nid_number;
+      this._user.next(user);
+      return user;
+    } else {
+      const id = 1;
+      const user = await this.$http.get<User>(`${environment.server}/users/${id}`).toPromise();
+      user.nid = user.nid_type + user.nid_number;
+      this._user.next(user);
+      return user;
+    }
   }
 
   async login(email: string, password: string): Promise<User> {

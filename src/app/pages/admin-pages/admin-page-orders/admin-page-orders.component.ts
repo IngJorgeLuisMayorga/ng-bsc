@@ -41,51 +41,37 @@ export class AdminPageOrdersComponent implements OnInit {
   ];
   this.companiesOptions = [
     {
-      icon : '',
       name: 'ENVIA'
     },
     {
-      icon : '',
       name: 'COORDINADORA'
     },
     {
-      icon : '',
       name: 'SERVIENTREGA'
     },
   ]
   }
 
   async ngOnInit() {
-    this.orders = await this.$orders.getAll();
+    this.orders = await (await this.$orders.getAll()).filter(order => order.shipping_ordered_at);
     this.orders.map(order => {
-
       let _state = this.statesOptions[0];
       let _order = order;
       if(order.state === 'ORDERED') _state = this.statesOptions[0];
       if(order.state === 'SHIPPED') _state = this.statesOptions[1];
       if(order.state === 'DELIVERED') _state = this.statesOptions[2];
-      
       _order.state = _state;
-      
-
+      _order.shipping_guide_company = this.companiesOptions.find(company => company.name === order.shipping_guide_company)
       return _order;
-      
-    })
-
-
+    });
   }
 
   getInvoicePDF(id: string){
     return environment.server + '/orders/pdf/' + id;
   }
 
-  setShippingCode(shippingCode: any, orderK: number){
-    const isOk = window.confirm('AGREGAR NUMERO DE GUIA')
-    if(isOk){
-      this.orders.find(order => order.id === orderK).shipping_code = shippingCode.value;
-      this.orders.find(order => order.id === orderK).shipped_at = new Date();
-      this.orders.find(order => order.id === orderK).state = this.statesOptions[2];
-    }
+  setShippingCode(shippingCode: any, order: Order){
+     order.shipping_guide_ref = shippingCode.value;
   }
 
   onSelectButton(order: Order){
@@ -105,19 +91,19 @@ export class AdminPageOrdersComponent implements OnInit {
     }
 
     if((order.state as any).state === 'DELIVERED'){
-      order.delivered_at = new Date();
+      //order.shipping_delivered_at = new Date();
        const isOk = window.confirm('MOVER ORDEN A "DELIVERED" ')
        if(isOk)  this.onSaveOnDelivered(order.id);
     }
 
     if((order.state as any).state === 'CANCELED'){
-      order.delivered_at = new Date();
+      //order.delivered_at = new Date();
        const isOk = window.confirm('MOVER ORDEN A "CANCELED" ')
        if(isOk)  this.onSaveOnCanceled(order.id);
     }
 
     if((order.state as any).state === 'RETURNED'){
-      order.delivered_at = new Date();
+      //order.delivered_at = new Date();
        const isOk = window.confirm('MOVER ORDEN A "RETURNED" ')
        if(isOk)  this.onSaveOnReturned(order.id);
     }
@@ -126,37 +112,36 @@ export class AdminPageOrdersComponent implements OnInit {
 
 
 
-  onSelectCompany(order: Order){
-    if(order.state === 'DELIVERED'){
-      // order.delivered_at = new Date();
-    }
+  onSelectCompany(order: any){
+    console.log('onSelectCompany')
+   console.log(order)
   }
 
   
   onSaveOnOrder(orderId: number){
     console.log(' onSaveOnOrder(orderId: number) ');
-    this.$orders.updateOrderStatus(orderId, 'ORDERED', {});
+    this.$orders.updateOrderStatus(orderId, 's1_ordered', {});
   }
 
   onSaveOnShipping(order: Order){
+  console.log('onSaveShipping', order)
    const isOk = window.confirm('MOVER ORDEN A "SHIPPED" ')
    if(isOk){
-    this.$orders.updateOrderStatus(order.id, 'SHIPPED', {
-      company: order.company,
-      shipping_code: order.shipping_code,
-      shipped_at: order.shipped_at
+    this.$orders.updateOrderStatus(order.id, 's2_shipped', {
+      shipping_guide_ref: order.shipping_guide_ref,
+      shipping_guide_company: (order.shipping_guide_company as any).name,
     });
    }
   }
 
   onSaveOnDelivered(orderId: number){
     console.log(' onSaveOnDelivered(orderId: number) ');
-    this.$orders.updateOrderStatus(orderId, 'DELIVERED', {});
+    this.$orders.updateOrderStatus(orderId, 's3_delivered', {});
   }
 
   onSaveOnCanceled(orderId: number){
     console.log(' onSaveOnCanceled(orderId: number) ');
-    this.$orders.updateOrderStatus(orderId, 'CANCELED', {});
+    this.$orders.updateOrderStatus(orderId, 's4_canceled', {});
   }
 
   onSaveOnReturned(orderId: number){

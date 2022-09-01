@@ -169,7 +169,10 @@ export class CheckoutShippingFormComponent implements OnInit {
       this.shippingFormFields[6].value = shipping.city;
       this.shippingFormFields[7].value = shipping.address;
       this.shippingFormFields[8].value = shipping.phone;
+      this.nChange.emit(this.shippingFormFields);
     }
+
+
 
   }
 

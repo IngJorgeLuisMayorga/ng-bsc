@@ -141,9 +141,9 @@ export class CheckoutUserFormComponent implements OnInit {
       this.userFormFields[4].value = user.password;
       this.userFormFields[5].value = user.password;
 
+      this.nChange.emit(this.userLoginFormFields);   
+      this.nContinue.emit();
       
-
-   
     }
   }
 

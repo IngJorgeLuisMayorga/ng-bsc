@@ -51,14 +51,14 @@
                             <div class="header">Fecha</div>
                             <div class="header">Estado</div>
                         </div>
-                        <div class="table-order--row" *ngFor="let order of (orders$ | async) | slice:1:N ">
+                        <div class="table-order--row" *ngFor="let order of (orders$ | async)  ">
                             <div class="col">
                                <a (click)="goToOrder(order?.id)">#{{ order?.id }}</a> 
                             </div>
                             <div class="col">
-                                <div *ngIf="order?.state === 'ORDERED'">{{ order?.ordered_at | date }} </div>
-                                <div *ngIf="order?.state === 'SHIPPED'">{{ order?.shipped_at | date }} </div>
-                                <div *ngIf="order?.state === 'DELIVERED'">{{ order?.delivered_at | date}} </div>
+                                <div *ngIf="order?.state === 'ORDERED'">{{ order?.shipping_ordered_at | date }} </div>
+                                <div *ngIf="order?.state === 'SHIPPED'">{{ order?.shipping_shipped_at | date }} </div>
+                                <div *ngIf="order?.state === 'DELIVERED'">{{ order?.shipping_delivered_at | date}} </div>
                             </div>
                             <div class="col">
                                 <div *ngIf="order?.state === 'ORDERED'">
@@ -103,9 +103,9 @@
                                     <a (click)="goToOrder(order?.id)">#{{ order?.id }}</a> 
                                     </div>
                                     <div class="col">
-                                        <div *ngIf="order?.state === 'ORDERED'">{{ order?.ordered_at | date }} </div>
-                                        <div *ngIf="order?.state === 'SHIPPED'">{{ order?.shipped_at | date }} </div>
-                                        <div *ngIf="order?.state === 'DELIVERED'">{{ order?.delivered_at | date}} </div>
+                                        <div *ngIf="order?.state === 'ORDERED'">{{ order?.shipping_ordered_at | date }} </div>
+                                        <div *ngIf="order?.state === 'SHIPPED'">{{ order?.shipping_shipped_at | date }} </div>
+                                        <div *ngIf="order?.state === 'DELIVERED'">{{ order?.shipping_delivered_at | date}} </div>
                                     </div>
                                     <div class="col">
                                         <div *ngIf="order?.state === 'ORDERED'">
@@ -158,25 +158,25 @@
                                         <br>
                                         <div class="col--shipping">
                                             <ul>
-                                                <li> <strong>Nombre</strong>  {{  (user$ | async)?.name }}</li>
-                                                <li> <strong>Documento</strong>  {{  (user$ | async)?.nid }}</li>
-                                                <li> <strong>Ciudad</strong>  {{  (user$ | async)?.city }}</li>
-                                                <li> <strong>Dirección</strong>  {{  (user$ | async)?.address }}</li>
-                                                <li> <strong>Teléfono</strong>  {{  (user$ | async)?.phone }}</li>
+                                                <li> <strong>Nombre</strong>  {{  (order$ | async)?.user_name }}</li>
+                                                <li> <strong>Documento</strong>  {{  (order$ | async)?.user_nid_number }}</li>
+                                                <li> <strong>Ciudad</strong>  {{  (order$ | async)?.shipping_city }}</li>
+                                                <li> <strong>Dirección</strong>  {{  (order$ | async)?.shipping_address }}</li>
+                                                <li> <strong>Teléfono</strong>  {{  (order$ | async)?.shipping_phone }}</li>
                                             </ul>
                                             <br>
                                             <div class="details-line"></div>
                                             <br>
                                             <ul>
                                                 <li> Puntos acumulados </li>
-                                                <li style="background-color: beige;"> <strong>313 Bubble Points</strong> </li>
+                                                <li style="background-color: beige;"> <strong>{{ (order$ | async)?.order_points }} Bubble Points</strong> </li>
                                             </ul>
                                             <br>
                                             <div class="details-line"></div>
                                             <br>
                                             <ul>
                                                 <li> Metodo de pago </li>
-                                                <li> Bancolombia </li>
+                                                <li> {{ (order$ | async)?.payment_method }} </li>
                                             </ul>
                                         </div>
                                     </div>

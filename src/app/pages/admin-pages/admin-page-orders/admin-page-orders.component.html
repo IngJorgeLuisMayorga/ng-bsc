@@ -2,48 +2,46 @@
     <img src="../../../../assets/Spin-1s-200px.gif">
 </form>
 
-
 <form *ngIf="orders && orders.length > 0">
     <div class="bsc-row orders">
-            <p-table 
-
-            [value]="orders" 
-            responsiveLayout="scroll"
-            [resizableColumns]="true" 
-            [autoLayout]="true"
-            
+            <p-table      
             dataKey="code"
-            styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
-            [value]="orders"
+            sortField="id"
+            responsiveLayout="scroll"
+            [value]="orders" 
+            [sortOrder]="-1"
             [autoLayout]="true"
-            [paginator]="true" [rows]="10" 
+            [resizableColumns]="true" 
+            [paginator]="true" 
+            [rows]="10" 
             [globalFilterFields]="['name','email','phone','nid','points','city','address']"
             [showCurrentPageReport]="true" 
             [rowsPerPageOptions]="[10,25,50]"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
-
+            styleClass="p-datatable-gridlines p-datatable-sm" styleClass="p-datatable-gridlines p-datatable-sm" 
             >
                 <ng-template pTemplate="header">
                     <tr>
                         <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon> </th>
-                        <th pSortableColumn="ordered_at">OrderedAt <p-sortIcon field="ordered_at"></p-sortIcon></th>
+                        <th pSortableColumn="shipping_ordered_at">OrderedAt <p-sortIcon field="shipping_ordered_at"></p-sortIcon></th>
                         <th>Status</th>
-                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                        <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
-                        <th pSortableColumn="points">Points <p-sortIcon field="points"></p-sortIcon></th> 
-                        <th pSortableColumn="phone">Phone <p-sortIcon field="phone"></p-sortIcon></th>
-                        <th pSortableColumn="city">City <p-sortIcon field="city"></p-sortIcon></th>
-                        <th pSortableColumn="address">Address <p-sortIcon field="address"></p-sortIcon></th>
+                        <th pSortableColumn="user_name">Email <p-sortIcon field="user_name"></p-sortIcon></th>
+                        <th pSortableColumn="order_total">Total <p-sortIcon field="order_total"></p-sortIcon></th>
+                        <th pSortableColumn="order_points">Points <p-sortIcon field="order_points"></p-sortIcon></th> 
+                        <th pSortableColumn="shipping_phone">Phone <p-sortIcon field="shipping_phone"></p-sortIcon></th>
+                        <th pSortableColumn="shipping_city">City <p-sortIcon field="shipping_city"></p-sortIcon></th>
+                        <th pSortableColumn="shipping_address">Address <p-sortIcon field="shipping_address"></p-sortIcon></th>
+                        <th pSortableColumn="payment_wompi_id"> Wompi Id <p-sortIcon field="payment_wompi_id"></p-sortIcon></th>
                         <th>Invoice (PDF)</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-order>
                     <tr>
                         <td >{{order.id}} </td>
-                        <td >{{order.ordered_at}} </td>
-                        <td >  
-                           
-                            <p-selectButton 
+                        <td >{{order.shipping_ordered_at || 'PAGO PENDIENTE'}} </td>
+                        <td > 
+
+                        <p-selectButton 
                             optionLabel="state"
                             [ngModelOptions]="{standalone: true}" 
                             [options]="statesOptions" 
@@ -53,33 +51,33 @@
                                 <ng-template let-item>
                                     <i [class]="item.icon"></i>
                                 </ng-template>
-                            </p-selectButton>
-
-                            <input (change)="setShippingCode($event.target, order.id)" placeholder="Ingresa Codigo de Envio" *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')" type="text" pInputText  [value]="order.shipping_code || ''"/>
-                            <input disabled *ngIf="(order.state === 'DELIVERED' || order.state.state === 'DELIVERED')" type="text" pInputText [value]="order.shipping_code || ''">
-
-                            <button (click)="onSaveOnShipping(order)" pButton type="button" label="Save" *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')"></button>
-
+                        </p-selectButton>
+                            <input 
+                            pInputText 
+                            type="text" 
+                            placeholder="Ingresa Codigo de Envio" 
+                            [value]="order.shipping_guide_ref || ''" 
+                            [disabled]="!(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')"
+                            (change)="setShippingCode($event.target, order)"/>
                             <p-selectButton
-                                *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')"
+                                [disabled]="!(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')"
                                 [ngModelOptions]="{standalone: true}" 
                                 [options]="companiesOptions" 
-                                [(ngModel)]="order.company" 
-                                (onOptionClick)="onSelectCompany(order)"
+                                [(ngModel)]="order.shipping_guide_company"
                             > <ng-template let-item>
                                 <span>{{ item.name}}</span>
                             </ng-template>
                             </p-selectButton>
-                            
-               
-                            
+                            <button *ngIf="(order.state === 'SHIPPED' || order.state.state === 'SHIPPED')"
+                            (click)="onSaveOnShipping(order)" pButton type="button" label="Save"></button>                             
                         </td>
-                        <td >{{order.total}} </td>
-                        <td >{{order | json}} </td>
-                        <td >{{order.points}} </td>
-                        <td >{{order.phone}}</td>
-                        <td >{{order.city}}</td>
-                        <td >{{order.address}}</td>
+                        <td >{{order.user_email }} </td>
+                        <td >{{order.order_total  | currency:'$':'symbol':'2.0' }} </td>
+                        <td >{{order.order_points}} </td>
+                        <td >{{order.order_phone}}</td>
+                        <td >{{order.shipping_city}}</td>
+                        <td >{{order.shipping_address}}</td>
+                        <td >{{order.payment_wompi_id}}</td>
                         <td>
                             <a [href]="getInvoicePDF(order.id)">PDF</a>
                         </td>

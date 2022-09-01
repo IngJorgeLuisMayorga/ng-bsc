@@ -44,6 +44,7 @@ export class ProfilePageComponent implements OnInit {
 
   async setTab(tab: number){
     this.tab = tab;
+    this.$orders.resetActiveOrder();
     //const user = await this.$users.login();
     //const orders = await this.$orders.getByUserId(user.id);
   }

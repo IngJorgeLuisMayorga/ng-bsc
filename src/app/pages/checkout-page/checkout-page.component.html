@@ -30,19 +30,26 @@
                 *ngIf="breadcrumb === breadcrumbs[3]"
                 ></app-checkout-shipping-form>
 
-                <app-checkout-payment-form *ngIf="breadcrumb === breadcrumbs[4]"></app-checkout-payment-form>
+                <app-checkout-payment-form 
+                *ngIf="breadcrumb === breadcrumbs[4]">
+                </app-checkout-payment-form>
 
             </div>
     
             <div class="col-2">
-                
-                {{ userFormFields[0]  | json}}
-
                 <app-checkout-details
+                    [user]="userFormFields"
+                    [shipping]="shippingFormFields"
                     [products]="(cartProducts$ | async)"
+                    [isFinal]="breadcrumb === breadcrumbs[4]"
                     [total]="(cartTotal$ | async)"
+                    [enabledFinishBtn]="enabledFinishBtn"
                     (nContinue)="onContinue()"
-                ></app-checkout-details>   
+                    (nFinish)="onFinish()"
+                ></app-checkout-details>  
+
+      
+
             </div>
 
         </div>

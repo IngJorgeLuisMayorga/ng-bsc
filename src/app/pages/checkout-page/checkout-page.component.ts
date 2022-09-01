@@ -8,6 +8,9 @@ import { CouponsService } from 'src/app/core/coupons/coupons.service';
 import { IProduct, Product } from 'src/app/core/products/models/IProduct.model';
 import { CartService } from 'src/app/core/cart/services/cart.service';
 import { IFormField } from 'src/app/shared/components/forms/form-basic/form-basic.component';
+import { OrdersService } from 'src/app/core/orders/orders.service';
+import { UsersService } from 'src/app/core/users/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 const MAX_FREE_SHIPPING = 3 * 100000;
 
@@ -33,14 +36,14 @@ export class CheckoutPageComponent implements OnInit {
   public cartTotalWithCoupon = 0;
   public cartFreeShipping = 0;
   public couponTag:any;
+  public enabledFinishBtn = true;
   
 
   public userFormFields: IFormField[] = [];
   public shippingFormFields: IFormField[] = [];
   public paymentFormFields: IFormField[] = [];
 
-  constructor(private router: Router, private $cart: CartService, private $coupons: CouponsService) {
-
+  constructor(private router: Router, private $user: UsersService, private $cart: CartService, private toastr: ToastrService, private $coupons: CouponsService, private $orders: OrdersService) {
     this.breadcrumbs = [
       {
         text:'Inicio',
@@ -63,9 +66,7 @@ export class CheckoutPageComponent implements OnInit {
         path: '/checkout/payment',
       },
     ];
-
     this.coupon$ = this.$cart.coupon$;
-
     this.cartProducts$ = this.$cart.sync().pipe(
       map((_products:Product[]) => _products.filter((_product:Product) =>  _product && _product.quantity > 0 && _product.cart && _product.cart.quantity > 0))
     )
@@ -80,13 +81,147 @@ export class CheckoutPageComponent implements OnInit {
     this.coupon$.subscribe( coupon => {
       this.cartTotalWithCoupon = this.$cart.applyCoupon(this.cartTotal);
     })
-
   }
 
   ngOnInit(): void {
     const cartCache = JSON.parse(localStorage.getItem('cart') || '[]');
     this.$cart.setCart(cartCache);
+
+    //Restar Tabs Navigation
+    const defaultBreadcrumb = this.breadcrumbs[1];
+    if(!this.router.url.includes(defaultBreadcrumb.path)){
+      this.router.navigateByUrl(defaultBreadcrumb.path);
+    }
+
   }
+
+
+  async onFinish(){
+
+    this.enabledFinishBtn = false;
+
+    // Get User
+    const user = await this.$user.getUserSnap();
+
+    // Get Shipping Info
+    const shipping = {
+      email: this.shippingFormFields[2].value,
+      fullName: this.shippingFormFields[0].value + this.shippingFormFields[1].value,
+      phoneNumber: this.shippingFormFields[8].value,
+      phoneNumberPrefix: '+57',
+      legalId: user.nid_number || '',
+      legalIdType: user.nid_type || 'CC',
+      addressLine1: this.shippingFormFields[7].value,
+      city: this.shippingFormFields[8].value,
+      department: this.shippingFormFields[7].value,
+      region: this.shippingFormFields[5].value,
+      country: "CO"
+    }
+
+    const payload:any = {
+      'user_id': user.id,
+      'user_nid_type' : user.nid_type,
+      'user_nid_number': user.nid_number,
+      'user_email': user.email,
+      'user_name': user.name,
+      'user_first_name': user.first_name,
+      'user_last_name': user.last_name,
+      'user_address': user.address,
+      'user_phone': shipping.phoneNumberPrefix + ' ' + shipping.phoneNumber,
+
+      //'payment_id': null,
+      //'payment_method': null,
+      //'payment_approved_at': null,
+      //'payment_wompi_id': null,
+
+      //'coupon_id':null,
+      //'coupon_discount':null,
+      
+      //'order_ref': null,
+      'order_points': this.cartTotal / 1000,
+      'order_subtotal': this.cartTotal*(1 - 0.19),
+      'order_taxes': this.cartTotal*(0.19),
+      'order_total':  this.cartTotal,
+      'order_products_json': JSON.stringify(this.cartProducts.map((product:Product) => ({
+        id: product.id, qty: product.cart.quantity, price: product.price, name: product.name
+      }))),
+ 
+      'shipping_status': 's0_pending',
+      //'shipping_guide_ref': null,
+      //'shipping_guide_company': null,
+      'shipping_phone':  shipping.phoneNumberPrefix + ' ' + shipping.phoneNumber,
+      'shipping_address': shipping.addressLine1,
+      'shipping_country': 'COLOMBIA',
+      'shipping_department': shipping.department,
+      'shipping_city': shipping.city,
+      //'shipping_ordered_at': null,
+      //'shipping_shipped_at': null,
+      //'shipping_delivered_at': null,
+
+
+    }
+
+    // Create New Order
+    const order = await this.$orders.create(payload)
+
+    // Reference
+    const reference = (new Date().toISOString().slice(0, 10)).replace(/-/g,'') + '_' + user.id + '_' + order.id;
+    payload.order_ref = reference;
+
+    // Checkout object for Wompi
+    var checkout = new (window as any).WidgetCheckout({
+      currency: 'COP',
+      amountInCents: this.cartTotal*100,
+      reference: reference,
+      publicKey: 'pub_test_HSrvLLLfQUHV9mQ0Bas1zJLG7mdF8fmd',
+      taxInCents: { 
+        // Opcional
+        vat: this.cartTotal*100*(0.19),
+        consumption: 0
+      },
+      customerData: { 
+        // Opcional
+        email:shipping.email,
+        fullName: shipping.fullName,
+        phoneNumber: shipping.phoneNumber,
+        phoneNumberPrefix: shipping.phoneNumberPrefix,
+        legalId: shipping.legalId,
+        legalIdType: shipping.legalIdType
+      },
+      shippingAddress: { 
+        // Opcional
+        addressLine1: shipping.addressLine1,
+        city: shipping.city,
+        phoneNumber: shipping.phoneNumber,
+        region: shipping.region,
+        country: shipping.country
+      }
+    })
+
+    checkout.open((result:any) => {
+
+      var transaction = result.transaction;
+      var status = transaction.status;
+      var isValid = (status === 'APPROVED');
+
+      var _payload:any = {
+        order_ref: payload.order_ref,
+        shipping_status: 's1_ordered',
+        ...transaction
+      };
+      
+      if(isValid){
+        this.$orders.patch(order.id, _payload).then(response => {
+            this.enabledFinishBtn = true;
+            this.router.navigateByUrl('/profile');
+          }
+        ).catch( error => {
+          this.toastr.error('Error procesando Pagos');
+          console.error('FALLO GUARDAR ORDER', error)
+        })
+      }
+    })   
+  } 
 
   setBreadcrumb(breadcumb: { path: string; text: string }){
     this.breadcrumb = breadcumb;

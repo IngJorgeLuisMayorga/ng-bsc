@@ -29,8 +29,11 @@
         </h2>
     </div>
     <div class="details-next--wrapper">
-        <button (click)="doContinue()">
+        <button (click)="doContinue()" *ngIf="!isFinal">
             Continuar
+        </button>
+        <button (click)="doFinish()" *ngIf="isFinal" [disabled]="!enabledFinishBtn">
+            Finalizar Compra
         </button>
     </div>
 </div>
