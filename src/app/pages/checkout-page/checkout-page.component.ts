@@ -128,10 +128,14 @@ export class CheckoutPageComponent implements OnInit {
 
   async onFinish(){
 
+    console.log(' onFinish() ')
+
     this.enabledFinishBtn = false;
 
     // Get User
     const user = await this.$user.getUserSnap();
+    console.log(' user ', user)
+
 
     // Get Shipping Info
     const shipping = {
@@ -147,6 +151,7 @@ export class CheckoutPageComponent implements OnInit {
       region: this.shippingFormFields[3].value,
       country: "CO"
     }
+    console.log(' shipping ', shipping)
 
     const payload:any = {
       'user_id': user.id,
@@ -190,9 +195,11 @@ export class CheckoutPageComponent implements OnInit {
 
 
     }
+    console.log(' payload ', payload)
 
     // Create New Order
     const order = await this.$orders.create(payload)
+    console.log(' order ', order)
 
     // Reference
     const reference = (new Date().toISOString().slice(0, 10)).replace(/-/g,'') + '_' + user.id + '_' + order.id;
@@ -228,6 +235,7 @@ export class CheckoutPageComponent implements OnInit {
       }
     })
 
+    console.log(' before checkout ')
     checkout.open((result:any) => {
 
       var transaction = result.transaction;
@@ -239,6 +247,8 @@ export class CheckoutPageComponent implements OnInit {
         shipping_status: 's1_ordered',
         ...transaction
       };
+
+      console.log(' after checkout ')
       
       if(isValid){
         this.$orders.patch(order.id, _payload).then(response => {
