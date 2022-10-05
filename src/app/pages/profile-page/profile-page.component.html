@@ -1,9 +1,15 @@
 <app-layout-basic [breadcumbs]="breadcumbs">
     <div class="">
 
-        <div class="profile-icon">
+        <div class="profile-icon" *ngIf="!isThanks">
             <img class="icon" src="../../../assets/profile/icon.png">
             <h1 class="name"> {{ (user$ | async)?.name }} </h1>
+            <img class="subline" src="../../../assets/profile/subline.png">
+        </div>
+
+        <div class="profile-icon" *ngIf="isThanks">
+            <img class="icon" src="../../../assets/profile/icon.png">
+            <h1 class="name"> Gracias por tu compra </h1>
             <img class="subline" src="../../../assets/profile/subline.png">
         </div>
 
@@ -20,7 +26,7 @@
                         <div class="col col--bubble">
                             <img class="hearts" src="../../../assets/profile/hearts.png">
                             <h1>Bubble Lover!</h1>
-                            <h2>313 Bubble Points</h2>
+                            <h2> {{ ( user$ | async ).points  }} Bubble Points</h2>
                             <button>
                                 Redimir Puntos <img src="../../../assets/profile/1_BSC.png">
                             </button>
@@ -36,6 +42,17 @@
                                 <li> <strong>Dirección</strong>  {{  (user$ | async)?.address }}</li>
                                 <li> <strong>Teléfono</strong>  {{  (user$ | async)?.phone }}</li>
                             </ul>
+                            <br>
+                            <br>
+                            <app-dark-button
+                                [icon]="'user:smile'"
+                                [text]="'¡Editar datos!'"
+                                (nClick)="editUser()"
+                            ></app-dark-button>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
                         </div>
                         <div class="col col--favs">
 
@@ -151,7 +168,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col">
+                                    <div class="col" style="position:relative; width: calc(100% - 350px);">
                                         <h1 class="details-header">
                                             Datos de <strong>entrega</strong>
                                         </h1>
@@ -178,6 +195,10 @@
                                                 <li> Metodo de pago </li>
                                                 <li> {{ (order$ | async)?.payment_method }} </li>
                                             </ul>
+                                        </div>
+
+                                        <div class="float-boxes">
+                                            <img src="../../../assets/color-boxes/yellow_box.png">
                                         </div>
                                     </div>
                                 </div>

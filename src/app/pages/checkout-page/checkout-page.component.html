@@ -2,15 +2,19 @@
 
     <div class="checkout-page">
 
-        <div class="title">
+        <div class="title"  *ngIf="breadcrumb !== breadcrumbs[5]">
             <h1> <strong>Mi Carrito</strong> </h1>
             <img src="../../../assets/section-title-line.png">
         </div>
+        <div class="title title-thanks"  *ngIf="breadcrumb === breadcrumbs[5]">
+            <img class="img-thanks" src="../../../assets/checkout/CAJAGRACIAS.jpg">
+            <h1> <strong>Gracias por tu compra bubblePoints ==> {{ bubblePoints }} </strong> </h1>
+            <img src="../../../assets/section-title-line.png">
+        </div>
 
-        <div class="checkout-page-row">
+        <div class="checkout-page-row" *ngIf="breadcrumb !== breadcrumbs[5]">
 
             <div class="col-1">
-                
                 <app-checkout-product-list 
                     *ngIf="breadcrumb === breadcrumbs[1]" 
                     [products]="(cartProducts$ | async)"
@@ -34,26 +38,117 @@
                 *ngIf="breadcrumb === breadcrumbs[4]">
                 </app-checkout-payment-form>
 
+                <app-checkout-thanks-form 
+                *ngIf="breadcrumb === breadcrumbs[5]">
+                </app-checkout-thanks-form>
+
             </div>
     
             <div class="col-2">
                 <app-checkout-details
                     [user]="userFormFields"
+                    [total]="(cartTotal$ | async)"
+                    [points]="bubblePoints"
                     [shipping]="shippingFormFields"
                     [products]="(cartProducts$ | async)"
                     [isFinal]="breadcrumb === breadcrumbs[4]"
-                    [total]="(cartTotal$ | async)"
+                    [isDone]="breadcrumb === breadcrumbs[5]"
                     [enabledFinishBtn]="enabledFinishBtn"
                     (nContinue)="onContinue()"
                     (nFinish)="onFinish()"
                 ></app-checkout-details>  
-
-      
-
             </div>
 
         </div>
 
+        <div class="checkout-page-row thanks-row" *ngIf="breadcrumb === breadcrumbs[5]">
+            <div class="thanks-headers">
+                <div class="thanks-header">
+                    <strong>Número de orden</strong><br>
+                    #{{ (order$ | async)?.id }}
+                </div>
+                <div class="thanks-header">
+                    <strong>Fecha</strong><br>
+                    {{ (order$ | async)?.updated_at | date }}
+                </div>
+                <div class="thanks-header">
+                    <strong>Estado</strong><br>
+                    <div *ngIf="(order$ | async)?.shipping_status === 's1_ordered' || (order$ | async)?.shipping_status ===  's0_pending' ">
+                        <img width="250px" src="../../../assets/profile/ordered_svg.svg">
+                    </div>
+                    <div *ngIf="(order$ | async)?.shipping_status === 's2_shipped'">
+                        <img width="250px" src="../../../assets/profile/shipped_svg.svg">
+                    </div>
+                    <div *ngIf="(order$ | async)?.shipping_status === 's3_delivered'">
+                        entregado
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-page-row" *ngIf="breadcrumb === breadcrumbs[5]">
+            <div class="col-1">
+
+                <app-checkout-product-list 
+                    *ngIf="breadcrumb === breadcrumbs[5] && (order$ | async) && (order$ | async).products" 
+                    [products]="(cartProducts$ | async)"
+                    [total]="0"
+                    [isOrder]="true"
+                ></app-checkout-product-list>
+
+            </div>
+            <div class="col-2">
+                <app-checkout-details
+                [user]="userFormFields"
+                [shipping]="shippingFormFields"
+                [products]="(cartProducts$ | async)"
+                [isFinal]="breadcrumb === breadcrumbs[4]"
+                [isDone]="breadcrumb === breadcrumbs[5]"
+                [total]="(cartTotal$ | async)"
+                [enabledFinishBtn]="enabledFinishBtn"
+                [order]="(order$ | async)"
+                [isOrder]="!!(order$ | async)"
+                [points]="bubblePoints"
+                (nContinue)="onContinue()"
+                (nFinish)="onFinish()"
+            ></app-checkout-details> 
+            </div>
+           
+        </div>
+
+        <div class="checkout-page-row" *ngIf="breadcrumb !== breadcrumbs[5] && productA && productB && productC">
+            <div class="cards">
+                <app-product-recommended-card
+                    [size]="'25%'"
+                    [product]="productA"
+                    [showStepLabel]="true"
+                    [colorStepLabel]="'#f7c0cd'"
+                ></app-product-recommended-card>
+
+                <app-product-recommended-card
+                    [size]="'25%'"
+                    [product]="productB"
+                    [showStepLabel]="true"
+                    [colorStepLabel]="'#c1e9f4'"
+                ></app-product-recommended-card>
+
+                <app-product-recommended-card
+                    [size]="'25%'"
+                    [product]="productC"
+                    [showStepLabel]="true"
+                    [colorStepLabel]="'#fff4c5'"
+                ></app-product-recommended-card>
+
+                <app-product-recommended-card
+                [size]="'25%'"
+                [product]="productD"
+                [showStepLabel]="true"
+                [colorStepLabel]="'#fff4c5'"
+            ></app-product-recommended-card>
+
+            </div>
+
+        </div>
     
     </div>
 </app-layout-basic>

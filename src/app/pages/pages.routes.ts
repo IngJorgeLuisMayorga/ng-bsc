@@ -14,6 +14,10 @@ export const PagesRoutes = [
     component: ProfilePageComponent,
   },
   {
+    path: 'profile/orders/:orderId/thanks',
+    component: ProfilePageComponent,
+  },
+  {
     path: 'products/:id',
     component: ProductPageComponent,
   },

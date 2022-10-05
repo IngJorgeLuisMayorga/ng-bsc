@@ -11,6 +11,8 @@ import { IFormField } from 'src/app/shared/components/forms/form-basic/form-basi
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { UsersService } from 'src/app/core/users/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { Order } from 'src/app/core/orders/orders.model';
+import { ProductsService } from 'src/app/core/products/products.service';
 
 const MAX_FREE_SHIPPING = 3 * 100000;
 
@@ -25,7 +27,6 @@ export class CheckoutPageComponent implements OnInit {
   public products: any[] = [];
   public breadcrumb: { path: string; text: string } = { path: '', text: ''};
   public breadcrumbs: Array<{ path: string; text: string }> = [];
-
   
   public isOpen$: Observable<boolean>;
   public coupon$: Observable<Coupon>;
@@ -38,12 +39,27 @@ export class CheckoutPageComponent implements OnInit {
   public couponTag:any;
   public enabledFinishBtn = true;
   
+  public productA: Product | null = null;
+  public productB: Product | null = null;
+  public productC: Product | null = null;
+  public productD: Product | null = null;
 
   public userFormFields: IFormField[] = [];
   public shippingFormFields: IFormField[] = [];
   public paymentFormFields: IFormField[] = [];
 
-  constructor(private router: Router, private $user: UsersService, private $cart: CartService, private toastr: ToastrService, private $coupons: CouponsService, private $orders: OrdersService) {
+  public bubblePoints = 0;
+  
+  public order$: Observable<Order>;
+
+  constructor(
+    private router: Router, 
+    private $user: UsersService, 
+    private $products: ProductsService, 
+    private $cart: CartService, 
+    private toastr: ToastrService, 
+    private $coupons: CouponsService, 
+    private $orders: OrdersService) {
     this.breadcrumbs = [
       {
         text:'Inicio',
@@ -65,6 +81,10 @@ export class CheckoutPageComponent implements OnInit {
         text: 'Pago',
         path: '/checkout/payment',
       },
+      {
+        text: 'Pedido Completado',
+        path: '/checkout/thanks',
+      },
     ];
     this.coupon$ = this.$cart.coupon$;
     this.cartProducts$ = this.$cart.sync().pipe(
@@ -81,9 +101,15 @@ export class CheckoutPageComponent implements OnInit {
     this.coupon$.subscribe( coupon => {
       this.cartTotalWithCoupon = this.$cart.applyCoupon(this.cartTotal);
     })
+    
+    this.order$ = this.$orders._activeOrder.asObservable();
   }
 
   ngOnInit(): void {
+
+    //For Demo 
+    this.$orders.setActiveOrderById(61);
+
     const cartCache = JSON.parse(localStorage.getItem('cart') || '[]');
     this.$cart.setCart(cartCache);
 
@@ -92,6 +118,10 @@ export class CheckoutPageComponent implements OnInit {
     if(!this.router.url.includes(defaultBreadcrumb.path)){
       this.router.navigateByUrl(defaultBreadcrumb.path);
     }
+
+    this.cartProducts$.subscribe(cart => {
+      if(cart) this.getRecommended(cart[0])
+    })
 
   }
 
@@ -107,14 +137,14 @@ export class CheckoutPageComponent implements OnInit {
     const shipping = {
       email: this.shippingFormFields[2].value,
       fullName: this.shippingFormFields[0].value + this.shippingFormFields[1].value,
-      phoneNumber: this.shippingFormFields[8].value,
+      phoneNumber: this.shippingFormFields[7].value,
       phoneNumberPrefix: '+57',
       legalId: user.nid_number || '',
       legalIdType: user.nid_type || 'CC',
-      addressLine1: this.shippingFormFields[7].value,
-      city: this.shippingFormFields[8].value,
-      department: this.shippingFormFields[7].value,
-      region: this.shippingFormFields[5].value,
+      addressLine1: this.shippingFormFields[6].value,
+      city: this.shippingFormFields[5].value,
+      department: this.shippingFormFields[4].value,
+      region: this.shippingFormFields[3].value,
       country: "CO"
     }
 
@@ -213,7 +243,17 @@ export class CheckoutPageComponent implements OnInit {
       if(isValid){
         this.$orders.patch(order.id, _payload).then(response => {
             this.enabledFinishBtn = true;
-            this.router.navigateByUrl('/profile');
+            this.$orders.setActiveOrderById(response.id);
+            this.router.navigateByUrl(this.breadcrumbs[5].path);
+            const email = shipping.email;
+            this.$user.getUserByEmail(email)
+            .then(user =>{
+              this.bubblePoints = 0.0 + Number(user.points);
+              console.error(' ');
+              console.error(' this.bubblePoints ');
+              console.error(this.bubblePoints);
+              console.error(' ');
+            })
           }
         ).catch( error => {
           this.toastr.error('Error procesando Pagos');
@@ -254,6 +294,17 @@ export class CheckoutPageComponent implements OnInit {
 
   setPaymentForm(paymentForm: IFormField[]){
     this.paymentFormFields = paymentForm;
+  }
+
+
+async getRecommended(productCart?: Product){
+    const product = productCart || this.$orders._activeOrder.getValue().products[0];
+    const _products: Product[] = await this.$products.getProductsRecommended(product);
+    this.productA = _products[0];
+    this.productB = _products[1];
+    this.productC = _products[2];
+    this.productD = _products[3];
+    return true;
   }
 
 }

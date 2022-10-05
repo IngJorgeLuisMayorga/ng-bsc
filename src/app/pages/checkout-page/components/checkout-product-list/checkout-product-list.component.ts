@@ -16,6 +16,9 @@ export class CheckoutProductListComponent implements OnInit {
   @Input()
   total : number;
 
+  @Input()
+  isOrder : boolean = false;
+
   public coupon: string;
   
   constructor(private $cart: CartService, private $coupons: CouponsService) { }

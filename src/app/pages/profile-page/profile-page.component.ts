@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Order } from 'src/app/core/orders/orders.model';
 import { OrdersService } from 'src/app/core/orders/orders.service';
@@ -19,9 +20,10 @@ export class ProfilePageComponent implements OnInit {
   public orders$: Observable<Order[]>;
   
   public tab: number = 0;
+  public isThanks  = false;
   public breadcumbs: Array<{ path: string; text: string }> = [];
 
-  constructor(private $users: UsersService, private $orders: OrdersService) {
+  constructor(private $users: UsersService, private $orders: OrdersService, private route: ActivatedRoute) {
     this.user$ = this.$users.user$;
     this.order$ = this.$orders.activeOrder$;
     this.orders$ = this.$orders.ordersByUser$;
@@ -38,6 +40,16 @@ export class ProfilePageComponent implements OnInit {
    }
 
   async ngOnInit() {
+    const orderId = this.route.snapshot.paramMap.get('orderId');
+    if(orderId){
+      this.isThanks = true;
+      this.setTab(1);
+      await this.$orders.setActiveOrderById(parseInt(orderId));
+      
+      setTimeout(() => {
+        this.isThanks = false;
+      }, 3000);
+    }
     const user = await this.$users.auth();
     const orders = await this.$orders.getByUserId(user.id);
   }
@@ -62,6 +74,10 @@ export class ProfilePageComponent implements OnInit {
 
   more(){
     this.N = this.N + 10;
+  }
+
+  editUser(){
+    
   }
 
 }

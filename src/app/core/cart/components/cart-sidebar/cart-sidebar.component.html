@@ -114,7 +114,7 @@
 
         <div class="sidebar-total">
 
-            <div class="total-wrapper" *ngIf="(coupon$ | async) && !(coupon$ | async).variable_give_free_shipping" [ngClass]="{ isCoupon : (coupon$ | async) }">
+            <div class="total-wrapper" *ngIf="!((coupon$ | async) && (coupon$ | async).variable_give_free_shipping)" [ngClass]="{ isCoupon : (coupon$ | async) }">
                 <h1>Total <strong>{{ cartTotal | currency:'USD':'symbol' }} </strong> <span *ngIf="cartTotal < 300000"> + envío</span> </h1>
                 <h2>Total <strong>{{ cartTotalWithCoupon | currency:'USD':'symbol' }} </strong> <span *ngIf="cartTotalWithCoupon < 300000"> + envío</span> </h2>
                 <h3>Puntos con esta compra * {{ cartTotal / 1000 | number: '1.0-0' }}

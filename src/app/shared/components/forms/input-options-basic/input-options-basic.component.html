@@ -1,5 +1,5 @@
 <div class ="input-wrapper" [ngClass]="{'error': isError}">
-    <select >
+    <select (change)="onChange($event.target)">
 
         <option *ngIf="default" disabled >
             {{ default.lable}}
@@ -7,7 +7,7 @@
 
         <option 
         *ngFor="let option of options" 
-        [value]="option.value" 
+        [value]="option.value"
         (click)="onChange(option)">
             {{ option.label }}
         </option>

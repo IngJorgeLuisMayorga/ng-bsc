@@ -8,6 +8,7 @@ export interface IFormField{
   options?: Array<{
     label: string;
     value: string;
+    price?: number;
   }>;
   error?: {
     message: string;
@@ -54,6 +55,5 @@ export class FormBasicComponent implements OnInit {
     field.value = value;
     this.nChange.emit(this.formFields);
   }
-
 
 }

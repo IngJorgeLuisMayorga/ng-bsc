@@ -14,6 +14,9 @@ export class ProductItemComponent implements OnInit {
 
   @Input()
   product!: Product;
+
+  @Input()
+  isOrder: boolean = false;
   
   constructor(
     private $cart: CartService

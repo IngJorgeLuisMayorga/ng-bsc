@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CartService } from 'src/app/core/cart/services/cart.service';
+import { Order } from 'src/app/core/orders/orders.model';
 import { Product } from 'src/app/core/products/models/IProduct.model';
+import { UsersService } from 'src/app/core/users/users.service';
 import { IFormField } from 'src/app/shared/components/forms/form-basic/form-basic.component';
 
 @Component({
@@ -23,10 +25,23 @@ export class CheckoutDetailsComponent implements OnInit {
   isFinal!: boolean;
 
   @Input()
+  isDone!: boolean;
+
+  @Input()
   total!: number;
 
   @Input()
+  points!: any;
+
+  @Input()
   enabledFinishBtn!: boolean;
+
+  @Input()
+  isOrder: boolean = false;
+
+  @Input()
+  order!: Order;
+
 
   @Output()
   nContinue = new EventEmitter();
@@ -35,14 +50,23 @@ export class CheckoutDetailsComponent implements OnInit {
   nFinish = new EventEmitter();
   
   public shippingStatus$;
+  public bubblePoints  = 0;
 
-  constructor(private $cart: CartService) { 
+  constructor(private $cart: CartService, private $user: UsersService) { 
     this.shippingStatus$ = this.$cart.syncShippingStatus();
   }
 
   ngOnInit(): void {
+
   }
 
+
+  get shippingPrice(){
+    if(!(this.shipping && this.shipping[4])){
+      return null;
+    } 
+    return this.shipping[4].options.find( option => option.value === this.shipping[4].value ).price;
+  }
 
   get numberProducts(){
     return this.products
@@ -54,7 +78,7 @@ export class CheckoutDetailsComponent implements OnInit {
   doContinue(){
     this.nContinue.emit();
   }
-  doFinish(){
+  async doFinish(){
     this.nFinish.emit();
   }
 

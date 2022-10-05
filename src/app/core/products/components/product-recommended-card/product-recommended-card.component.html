@@ -1,11 +1,17 @@
-<div class="card" [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (cartlist$ | async) > 0}">
+<div class="card" 
+    [ngClass]="{
+        'x3': size === '33.3%',
+        'x4': size === '25%',
+        'inWishlist': (inWishlist$ | async),
+        'inCartlist': (cartlist$ | async) > 0}
+    ">
 
     <div class="card-back"></div>
 
     <div class="card-front">
         <div class="card-top">
             <div class="photo">
-                <img [src]="product?.image1_src || ''">
+                <img class="photo-img" [src]="product?.image1_src || ''">
 
                 <div class="card-fav">                 
                     <div class="card-wishlist" >

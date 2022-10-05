@@ -17,11 +17,11 @@
                 <h1>{{ product.name }} <strong *ngIf="product.category_brand"> / {{ product.category_brand.name }}</strong>
                 </h1>
             </div>
-            <div class="product--qty-control">
+            <div class="product--qty-control" *ngIf="!isOrder">
                 <app-add-minus-button [value]="product.cart?.quantity" (onMin)="removeItemToCart()"
                     (onMax)="addItemToCart()"></app-add-minus-button>
             </div>
-            <div class="product--price">
+            <div class="product--price" *ngIf="!isOrder">
                 <h2 *ngIf="product.cart?.quantity > 0">
                     {{  
                         (product.price)*
@@ -32,7 +32,18 @@
                         (product.price)| currency:'$':'symbol':'2.0' }}
                 </h3>
             </div>
-            <div class="product--delete" (click)="removeItem()">
+            <div class="product--price" *ngIf="isOrder">
+                <h2>
+                    {{ product.cart?.quantity }} x {{  
+                        (product.price)*
+                        (1 - 0.01*product.discount)| currency:'$':'symbol':'2.0' }}
+                </h2>
+                <h3 *ngIf="product.discount > 0">
+                    {{  
+                        (product.price)| currency:'$':'symbol':'2.0' }}
+                </h3>
+            </div>
+            <div class="product--delete" (click)="removeItem()"  *ngIf="!isOrder">
                 x
             </div>
         </div>

@@ -14,6 +14,9 @@ import { IProduct, Product } from '../../models/IProduct.model';
 export class ProductRecommendedCardComponent implements OnInit {
 
   @Input()
+  size: string = '33.3%';
+
+  @Input()
   product: Product;
 
   public wishlist$: Observable<Product[]>;

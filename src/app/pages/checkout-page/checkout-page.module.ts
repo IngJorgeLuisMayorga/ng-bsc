@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { CheckoutPageComponent } from './checkout-page.component';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from 'src/app/core/core.module';
@@ -12,9 +12,10 @@ import { CheckoutShippingFormComponent } from './components/checkout-shipping-fo
 import { CheckoutPaymentFormComponent } from './components/checkout-payment-form/checkout-payment-form.component';
 import { CheckoutUserFormComponent } from './components/checkout-user-form/checkout-user-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CheckoutThanksFormComponent } from './components/checkout-thanks-form/checkout-thanks-form.component';
 
 @NgModule({
-  declarations: [CheckoutPageComponent, CheckoutProductListComponent, CheckoutDetailsComponent, CheckoutShippingFormComponent, CheckoutPaymentFormComponent, CheckoutUserFormComponent],
+  declarations: [CheckoutPageComponent, CheckoutProductListComponent, CheckoutDetailsComponent, CheckoutShippingFormComponent, CheckoutPaymentFormComponent, CheckoutUserFormComponent, CheckoutThanksFormComponent],
   exports: [CheckoutPageComponent],
   imports: [
     CommonModule,
@@ -23,6 +24,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CoreModule,
     LayoutsModule,
     InputTextModule
-  ]
+  ],
+  providers:[CurrencyPipe]
 })
 export class CheckoutPageModule { }

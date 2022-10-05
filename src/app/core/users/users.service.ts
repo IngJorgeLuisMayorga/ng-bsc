@@ -27,7 +27,7 @@ export class UsersService {
 
   async auth(): Promise<User> {
     const userStorage = localStorage.getItem('user');
-    const userObj:User = JSON.parse(userStorage || '');
+    const userObj = userStorage ? JSON.parse(userStorage || '') : null;
     if(userObj){
       const id = userObj.id;
       const user = await this.$http.get<User>(`${environment.server}/users/${id}`).toPromise();
@@ -91,6 +91,11 @@ export class UsersService {
     const users = await this.$http.get<User[]>(`${environment.server}/users`).toPromise();
     users.map((user: User) => user.nid = user.nid_type + user.nid_number);
     return users;
+  }
+
+  async getUserByEmail(email: string): Promise<User> {
+    const user = await this.$http.post<User>(`${environment.server}/users/by/email`,{ email: email}).toPromise();
+    return user;
   }
 
   async getUser(id: number): Promise<User> {

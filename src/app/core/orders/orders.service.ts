@@ -87,6 +87,7 @@ export class OrdersService {
   async setActiveOrderById(id: number){
     const order = await this.getByOrderId(id);
     this._activeOrder.next(order);
+    return order;
   }
   async setActiveOrderByNextId(id: number){
     const orders = this._ordersByUser.getValue();
@@ -113,7 +114,7 @@ export class OrdersService {
     const order = this.$http.post<Order>(`${environment.server}/orders`, payload).toPromise();
     return order;
   }
-  async patch(orderId:number, payload: any){
+  async patch(orderId:number, payload: any): Promise<Order>{
     const order = this.$http.patch<Order>(`${environment.server}/orders/${orderId}`, payload).toPromise();
     return order;
   }

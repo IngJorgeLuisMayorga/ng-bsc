@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/core/users/user.model';
@@ -50,25 +51,7 @@ export class CheckoutShippingFormComponent implements OnInit {
         message: 'Correo Invalido',
         check: (value: any) => { return !value.includes('@'); }
       }
-    },{
-      name: 'shipping',
-      type: 'options',
-      options: [{
-        label:'Envios a Bogota',
-        value: '8000'
-      },{
-        label:'Envios a Costa Atlantica',
-        value:'15000'
-      },{
-        label:'Envios a Antioquia ',
-        value:'10000'
-      }],
-      value: 'Envios a Bogota',
-      placeholder: 'Opciones Envio',
-      error: {
-        message: 'Envio Invalido',
-        check: (value: any) => { return (!value); }
-      }
+      //3
     },{
       name: 'country',
       type: 'text',
@@ -78,6 +61,7 @@ export class CheckoutShippingFormComponent implements OnInit {
         message: 'Pais Invalido',
         check: (value: any) => { return (!value); }
       }
+      //4
     },{
       name: 'department',
       type: 'options',
@@ -89,6 +73,7 @@ export class CheckoutShippingFormComponent implements OnInit {
         check: (value: any) => { return (!value); }
       }
     },
+    //5
     {
       name: 'city',
       type: 'text',
@@ -99,6 +84,7 @@ export class CheckoutShippingFormComponent implements OnInit {
         check: (value: any) => { return (!value); }
       }
     },
+    //6
     {
       name: 'address',
       type: 'text',
@@ -109,6 +95,7 @@ export class CheckoutShippingFormComponent implements OnInit {
         check: (value: any) => { return (!value); }
       }
     },
+    //7
     {
       name: 'phone',
       type: 'text',
@@ -133,16 +120,19 @@ export class CheckoutShippingFormComponent implements OnInit {
 
   constructor(
     private $user: UsersService,
-    private toaster: ToastrService
-  ) { }
+    private toaster: ToastrService,
+    private currencyPipe: CurrencyPipe
+    ) { }
 
   ngOnInit(): void {
     
     // Departments
-    this.shippingFormFields[5].options = departments.data.map(item => {
+    this.shippingFormFields[4].options = departments.data.map(item => {
+      const price = (item.name === 'Bogotá D.C.'  || item.name === 'Cundinamarca') ? 7000 : 12000;
       return {
-        label: item.name,
-        value: item.name
+        label: item.name + '  -  ' + this.currencyPipe.transform(price,'','$','1.0-0'),
+        value: item.name,
+        price: price
       }
     })
 
@@ -153,7 +143,7 @@ export class CheckoutShippingFormComponent implements OnInit {
       this.shippingFormFields[0].value = user.name;
       this.shippingFormFields[1].value = user.name;
       this.shippingFormFields[2].value = user.email;
-      this.shippingFormFields[8].value = user.phone;
+      this.shippingFormFields[7].value = user.phone;
     }
 
     let shipping: any = null;
@@ -163,12 +153,11 @@ export class CheckoutShippingFormComponent implements OnInit {
       this.shippingFormFields[0].value = shipping.name;
       this.shippingFormFields[1].value = shipping.lastname;
       this.shippingFormFields[2].value = shipping.email;
-      this.shippingFormFields[3].value = shipping.shipping;
-      this.shippingFormFields[4].value = shipping.country;
-      this.shippingFormFields[5].value = shipping.department; 
-      this.shippingFormFields[6].value = shipping.city;
-      this.shippingFormFields[7].value = shipping.address;
-      this.shippingFormFields[8].value = shipping.phone;
+      this.shippingFormFields[3].value = shipping.country;
+      this.shippingFormFields[4].value = shipping.department; 
+      this.shippingFormFields[5].value = shipping.city;
+      this.shippingFormFields[6].value = shipping.address;
+      this.shippingFormFields[7].value = shipping.phone;
       this.nChange.emit(this.shippingFormFields);
     }
 
@@ -190,12 +179,12 @@ export class CheckoutShippingFormComponent implements OnInit {
         name: this.shippingFormFields[0].value,
         lastname: this.shippingFormFields[1].value,
         email: this.shippingFormFields[2].value,
-        shipping: this.shippingFormFields[3].value,
-        country: this.shippingFormFields[4].value,
-        department: this.shippingFormFields[5].value,
-        city: this.shippingFormFields[6].value,
-        address: this.shippingFormFields[7].value,
-        phone: this.shippingFormFields[8].value
+        country: this.shippingFormFields[3].value,
+        department: this.shippingFormFields[4].value,
+        shipping: (this.shippingFormFields[4].value as any).price,
+        city: this.shippingFormFields[5].value,
+        address: this.shippingFormFields[6].value,
+        phone: this.shippingFormFields[7].value
       }
       localStorage.setItem('shipping', JSON.stringify(shipping));
       this.nChange.emit(this.shippingFormFields);
@@ -208,6 +197,7 @@ export class CheckoutShippingFormComponent implements OnInit {
 
   setFormField(fields: IFormField[]){
     this.shippingFormFields = fields;
+    this.nChange.emit(this.shippingFormFields);
   }
 
 

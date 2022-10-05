@@ -1,6 +1,6 @@
 <form class="checkout-product-list">
 
-    <div class="wrapper--head">
+    <div class="wrapper--head" *ngIf="!isOrder">
         <h1><strong>¡Te faltan 114.000 para que tu envio sea gratis!</strong></h1>
     </div>
 
@@ -8,13 +8,17 @@
         <ul class="checkout-products">
             <div class="checkout-product-list">
                 <div *ngFor="let product of products; index as i">
-                    <app-product-item [product]="product" [index]="i"></app-product-item>
+                    <app-product-item 
+                    [index]="i"
+                    [product]="product"
+                    [isOrder]="isOrder"
+                    ></app-product-item>
                 </div>
             </div>
         </ul>
     </div>
 
-    <div class="wrapper--discount">
+    <div class="wrapper--discount" *ngIf="!isOrder">
         <div class="discount-container">
             <div class="input">
                 <!-- <input type="text" [(ngModel)]="coupon"> -->
