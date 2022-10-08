@@ -130,6 +130,9 @@
         </div>
         <div class="sidebar-pay-btn">
             <div class="pay-btn-wrapper">
+                <button (click)="goToCheckout()" [disabled]="isCartEmpty()" [ngClass]="{'diabled':isCartEmpty() }">
+                    Pagar
+                </button>
                 <button (click)="goToCheckout()">
                     Pagar
                 </button>

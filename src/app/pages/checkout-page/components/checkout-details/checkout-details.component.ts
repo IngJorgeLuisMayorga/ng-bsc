@@ -80,6 +80,7 @@ export class CheckoutDetailsComponent implements OnInit {
   }
   async doFinish(){
     this.nFinish.emit();
+    
   }
 
 }

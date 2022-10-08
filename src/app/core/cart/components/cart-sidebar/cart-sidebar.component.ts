@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import products from 'src/app/config/products';
@@ -27,6 +28,7 @@ export class CartSidebarComponent implements OnInit {
   
   constructor(
     private router: Router,
+    private toastr: ToastrService,
     private cartService: CartService, 
     private $cart: CartService, 
     private $coupons: CouponsService) { 
@@ -82,9 +84,16 @@ export class CartSidebarComponent implements OnInit {
   }
 
   goToCheckout(){
-    this.doCloseCart();
-    this.router.navigateByUrl('/checkout');
+    if(!this.$cart.isCartEmpty()){
+      this.doCloseCart();
+      this.router.navigateByUrl('/checkout');
+    } else{
+      this.toastr.error('Error, el carrito esta vacio');
+    }
   }
+
+
+
 
  
 }
