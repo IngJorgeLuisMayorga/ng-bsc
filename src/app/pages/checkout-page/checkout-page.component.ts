@@ -267,10 +267,16 @@ export class CheckoutPageComponent implements OnInit {
           }
         ).catch( error => {
           this.toastr.error('Error procesando Pagos');
+          this.enabledFinishBtn = true;
           console.error('FALLO GUARDAR ORDER', error)
         })
+      } else {
+        this.enabledFinishBtn = true;
       }
-    })   
+    });
+
+    setTimeout(() => {this.enabledFinishBtn = true;}, 5000);
+    
   } 
 
   setBreadcrumb(breadcumb: { path: string; text: string }){
