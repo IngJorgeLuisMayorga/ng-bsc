@@ -7,6 +7,7 @@ import { User } from '../../../core/users/user.model';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { WishlistService } from 'src/app/core/wishlist/services/wishlist.service';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 interface City {
   name: string,
@@ -31,7 +32,8 @@ export class AdminPageOrdersComponent implements OnInit {
     private route: ActivatedRoute, 
     private $user: UsersService,
     private $orders: OrdersService,
-    private $wishlist: WishlistService
+    private $wishlist: WishlistService,
+    private toastr: ToastrService,
   ) {
     this.statesOptions = [
       {icon: 'pi pi-shopping-cart', state: 'ORDERED'},
@@ -126,11 +128,18 @@ export class AdminPageOrdersComponent implements OnInit {
   onSaveOnShipping(order: Order){
   console.log('onSaveShipping', order)
    const isOk = window.confirm('MOVER ORDEN A "SHIPPED" ')
-   if(isOk){
+   const hasShippingCompany = order && order.shipping_guide_company && (order.shipping_guide_company as any).name;
+
+   if(isOk && hasShippingCompany){
     this.$orders.updateOrderStatus(order.id, 's2_shipped', {
       shipping_guide_ref: order.shipping_guide_ref,
       shipping_guide_company: (order.shipping_guide_company as any).name,
     });
+
+   }
+
+   if(isOk && !hasShippingCompany){
+    this.toastr.error('NO Tienes Shipping Company')
    }
   }
 
