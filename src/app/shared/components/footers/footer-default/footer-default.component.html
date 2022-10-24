@@ -5,7 +5,8 @@
         </div>
         <div class="footer-menus">
             <div class="footer-menu" *ngFor="let menu of menus" [ngClass]="getMenuCssClass(menu)">
-                <div class="footer-menu--title">
+
+                <div class="footer-menu--title" [ngClass]="menu.color">
                     {{menu.title}}
                 </div>
                 
@@ -13,9 +14,9 @@
 
                 <div class="footer-menu--items">
                     <ul>
-                        <li *ngFor="let item of menu.items">
-                            <a class="link" href="{{ item.link }}">
-                                {{ item.name }}
+                        <li *ngFor="let item of menu.items" >
+                            <a class="link" [ngClass]="menu.color" href="{{ item.link }}" >
+                                {{ item.name }} 
                             </a>
                         </li>
                     </ul>
@@ -24,25 +25,29 @@
         </div>
     </div>
     <div class="wrapper social">
-        <img (click)="goHome()" class="logo" src="../../../../../assets/footer/BSC LOGO.png">
+
+        <div class="logo" (mouseenter) ="setLogo_Hover() "  (mouseleave) ="resetLogo_Hover()" (click)="goHome()">
+            <img [hidden]="!isLogoHover"class="hover-off" src="../../../../../assets/LOGO/LOGO ROSADO.png">
+            <img [hidden]="isLogoHover" class="hover-on" src="../../../../../assets/LOGO/LOGO BLANCO.png">
+        </div>
         
         <div class="instagram" (mouseenter) ="setInstagram_Hover() "  (mouseleave) ="resetInstagram_Hover()">
-            <img *ngIf="!isInstagram_Hover"class="hover-off" src="../../../../../assets/footer/IG BLANCO.png">
-            <img *ngIf="isInstagram_Hover" class="hover-on" src="../../../../../assets/footer/IG ROSADO.png">
+            <img *ngIf="!isInstagram_Hover"class="hover-off" src="../../../../../assets/REDES/INSTAGRAM 1CORREO.png">
+            <img *ngIf="isInstagram_Hover" class="hover-on" src="../../../../../assets/REDES/INSTAGRAM 2CORREO.png">
         </div>
 
         <div class="linea"></div>
         
         <div class="tiktok" (mouseenter) ="setTIKTOK_Hover() "  (mouseleave) ="resetTIKTOK_Hover()">
-            <img *ngIf="!isTikTok_Hover"class="hover-off" src="../../../../../assets/footer/TK BLANCO.png">
-            <img *ngIf="isTikTok_Hover" class="hover-on" src="../../../../../assets/footer/TK ROSADO.png">
+            <img *ngIf="!isTikTok_Hover"class="hover-off" src="../../../../../assets/REDES/TIKTOK 1CORREO.png">
+            <img *ngIf="isTikTok_Hover" class="hover-on" src="../../../../../assets/REDES/TIKTOK 2CORREO.png">
         </div>
 
         <div class="linea"></div>
         
         <div class="fb" (mouseenter) ="setFB_Hover() "  (mouseleave) ="resetFB_Hover()">
-            <img *ngIf="!isFB_Hover"class="hover-off" src="../../../../../assets/footer/FB BLANCO.png">
-            <img *ngIf="isFB_Hover" class="hover-on" src="../../../../../assets/footer/FB ROSADO.png">
+            <img *ngIf="!isFB_Hover"class="hover-off" src="../../../../../assets/REDES/FACEBOOK 1CORREO.png">
+            <img *ngIf="isFB_Hover" class="hover-on" src="../../../../../assets/REDES/FACEBOOK 2CORREO.png">
         </div>
 
         <h2 class="footer-derechos">

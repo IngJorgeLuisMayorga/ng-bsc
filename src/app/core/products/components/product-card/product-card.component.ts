@@ -91,14 +91,12 @@ export class ProductCardComponent implements OnInit {
   }
 
   async addToCart(){
-
     const isCartEmpty = this.$cart.isCartEmpty();
     const product = JSON.parse(JSON.stringify(this.product) + '');
     const response = await this.$cart.addToCart(product);
     if(isCartEmpty){
       setTimeout(() => this.$cart.doOpenCart(), 1000);
     }
-
   }
   async removeFromCart(){
     const product = JSON.parse(JSON.stringify(this.product) + '');

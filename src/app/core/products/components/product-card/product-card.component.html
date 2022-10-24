@@ -45,12 +45,8 @@
 
             <h1 class="card-bottom--label-name">
                 <!--  BUBBLE BOX PIEL SECA BUBBLE BOX PIEL SECA BUBBLEAB -->
-                {{ (product?.name) }} 
-
-                <br>
-
+                {{ ((product?.name).length>45)? ((product?.name) | slice:0:45)+'...':((product?.name) ) }}
                 <strong>// {{ 'BSC' }}</strong>
-
             </h1>
 
 
@@ -64,7 +60,7 @@
                     'pink': status === 'added'
                 }">
                     <span class="spinner" *ngIf="(cartIsUpdating$ | async) === product.id">
-                        <img src="http://shop.bubblesskincare.com/wp-content/uploads/2020/12/spinner-1.gif">
+                        <img src="../../../../../assets/Spin-1s-200px.gif">
                     </span>
 
                     <div class="not-spinner" (click)="addToCart()"

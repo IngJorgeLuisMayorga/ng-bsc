@@ -11,6 +11,8 @@ footer {
     background-position: center;
 
     width: 100%;
+
+    margin-top: 3em;
 }
 
 footer .wrapper {
@@ -43,6 +45,10 @@ footer .wrapper .footer-title {
         text-align: left;
         padding-bottom: 1em;
         border-bottom: 1px dotted white;
+        cursor: pointer;
+        &:hover{
+            color: @color-pink;
+        }
     }
 }
 
@@ -100,6 +106,29 @@ footer .wrapper .footer-menus {
             color: white;
             text-align: left;
             border-bottom: 1px dotted white;
+            cursor: pointer;
+            &:hover{
+                color: @color-pink;
+            }
+
+            &.pink{
+                &:hover{
+                    color: @color-pink;
+                }
+    
+            }
+            &.blue{
+                &:hover{
+                    color: @color-blue;
+                }
+    
+            }
+            &.yellow{
+                &:hover{
+                    color: @color-yellow;
+                }
+    
+            }
         }
 
 
@@ -232,6 +261,9 @@ footer .wrapper.social {
         width: 180px;
         opacity: 1;
         cursor: pointer;
+        img{
+            width: 100%;
+        }
 
         &:hover {
             opacity: 0.7;
@@ -278,8 +310,23 @@ footer .wrapper.social {
 }
 
 .link {
-    &:hover {
-        color: @color-pink !important
+    &.pink{
+        &:hover{
+            color: @color-pink !important;
+        }
+
+    }
+    &.blue{
+        &:hover{
+            color: @color-blue !important;
+        }
+
+    }
+    &.yellow{
+        &:hover{
+            color: @color-yellow !important;
+        }
+
     }
 }
 
