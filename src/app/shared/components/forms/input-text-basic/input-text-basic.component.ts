@@ -33,9 +33,12 @@ export class InputTextBasicComponent implements OnInit {
   onChange($event: any){
     const value = $event.target.value;
     this.isError = this.errorCheck(value);
+    this.nChange.emit(value);
+    /*
     if(!this.isError){
       this.nChange.emit(value);
     }
+    */
   }
 
 }

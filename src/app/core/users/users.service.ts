@@ -66,6 +66,16 @@ export class UsersService {
   }
 
   async signup(user: User): Promise<User> {
+    console.log(' ')
+    console.log(' ')
+    console.log(' user ')
+    console.log(user)
+    console.log(' ')
+    console.log(' ')
+    console.log(' ')
+    debugger;
+    return user;
+    /*
     try {
       const userResponse = await this.$http.post<User>(`${environment.server}/users/auth/signup`, {
         ...user
@@ -79,6 +89,7 @@ export class UsersService {
       this.toastr.error('Error creando usuario');
       throw error;
     }
+    */
   }
 
 

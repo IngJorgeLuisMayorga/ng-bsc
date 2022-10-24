@@ -52,7 +52,7 @@ export class CheckoutUserFormComponent implements OnInit {
       placeholder: 'Correo Eléctronico',
       error: {
         message: 'Correo Invalido',
-        check: (value: any) => { return !value.includes('@'); }
+        check: (value: any) => { return !(value.includes('@') && value.includes('.')); }
       }
     },
     {
@@ -169,6 +169,8 @@ export class CheckoutUserFormComponent implements OnInit {
     this.$user.signup({
       id:-1,
       name: user.name + ' ' + user.lastname,
+      first_name: user.name,
+      last_name: user.lastname,
       email: user.email,
       nid_type: 'CC',
       nid_number: 'NA',
@@ -200,14 +202,18 @@ export class CheckoutUserFormComponent implements OnInit {
   }
 
   checkSignUpForm(){
-    const user = this.userFormFields.map( item => { 
+    const user = this.userFormFields.
+    filter( item => 
+      !item.error.check(item.value)
+    ).
+    map( item => { 
       const keypair: {[key: string]: string} = {};
       keypair[item.name] = item.value;
       return keypair;
     }).reduce((sum, val) => {
       return {...sum, ...val}
     }, {});
-    const isOk = Object.values(user).every(x => x);
+    const isOk = Object.values(user).every(x => x) && this.userFormFields.length === Object.values(user).length;
     return {
       ok :isOk,
       user: user
