@@ -22,6 +22,7 @@ import { AdminPageProductComponent } from './admin-page-product/admin-page-produ
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
@@ -68,8 +69,8 @@ const pages = [
     InputTextareaModule,
     BrowserAnimationsModule,
     AdminPagesRoutingModule,
-    InputSwitchModule
-    AdminPagesRoutingModule
+    InputSwitchModule,
+    SelectButtonModule
   ]
 })
 export class AdminPagesModule { }

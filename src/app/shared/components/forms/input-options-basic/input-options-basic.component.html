@@ -1,0 +1,18 @@
+<div class ="input-wrapper" [ngClass]="{'error': isError, 'fill': isFill}">
+    <select (change)="onChange($event.target)">
+
+        <option *ngIf="default" disabled >
+            {{ default.lable}}
+        </option>
+
+        <option 
+        *ngFor="let option of options" 
+        [value]="option.value"
+        [disabled]="option.value === 'NA'"
+        (click)="onChange(option)">
+            {{ option.label }}
+        </option>
+
+    </select>
+    <span>{{ errorMsg }}</span>
+</div>

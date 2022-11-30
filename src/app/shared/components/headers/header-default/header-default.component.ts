@@ -1,4 +1,6 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartService } from 'src/app/core/cart/services/cart.service';
@@ -14,7 +16,9 @@ export class HeaderDefaultComponent implements OnInit {
   public cartSize$: Observable<number>;
   public cart$: Observable<any>;
 
-  constructor(private $cart: CartService) { 
+  constructor(
+    private router: Router,
+    private $cart: CartService) { 
     this.cart$ = this.$cart.sync();
     this.cartSize$ = this.$cart.syncCartSize();
   }
@@ -23,14 +27,14 @@ export class HeaderDefaultComponent implements OnInit {
   }
   
   goHome(){
-
+    this.router.navigateByUrl('/');
   }
 
   doOpenSearchSidebar(){
 
   }
   doOpenProfileSidebar(){
-
+    this.router.navigate(['/profile']);
   }
 
   doOpenCartSidebar(){

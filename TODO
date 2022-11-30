@@ -1,10 +1,17 @@
-1. PRODUCTOS AGOTADOS
-2. HOVER COMPUESTOS IMAGEN Y TEXTO (HOVER SOLO SE ESTA APLICANDO SOBRE LA IMAGE, TIENE QUE SER TODO)
-3. Productos, añadir en el modelo la propiedad Brand, y en duo
-4. ProductCardComponent añadir propiedad witdh, si no se añade se toma el 100%
-5. ProductDuo, añadir a Wishlist, por el setTimeout, se rompe luego de añadir y quitar, revisar lo de los timepos y quitarlos.
-6. Si esta Auth, en el carrito reemplazar Tu Carrito BubbleLover por el nombre de usuario. 
-7. Tener en cuenta el max de stock por producto, para cuando se hace el + y  - del carrito. No dejar agregar mas de max de stock disponible
+1. Profile, arreglar que se vea la lista de productos de las ordenes reales
+2. Que se vea el gracias por tu compra y ver el progreso de envio
+3. En Admin/orders limpiar la tabla y ver el codigo de wompi y revisar los pdf que se generen bien
+4. Probar que al cambiar el estado de envio se envie el correo y se actualicen los datos en todos lados /admin y /profile
+5. En el proceso de compra, que salga cundinamarca 7000 y el resto del pais 12.0000 y se sume al carrito ante de hacer pago
+===================================
 
+5.1 Productos Fijos (No Aleatorios)
+6. Otros fixes
+7. Cupones (Admin, Usarlos, Correos)
+===================================
+
+8. Test Usuario, comprar y que le llegue
+9. Test Admin, crear producto, editarlo, y borrarlo.
+===================================
 
       - aws s3 sync dist/ s3://ng-bsc --delete

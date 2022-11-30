@@ -1,0 +1,85 @@
+
+
+@import './colors.less';
+@import './fonts.less';
+@import './sizes.less';
+@import './sections.less';
+
+
+
+// ------------------------------------------------ //
+// -- Font Familiy -------------------------------- //
+// ------------------------------------------------ //
+
+.font-default(){
+    font-family: 'Helvetica';
+    font-size: 14px;
+    font-weight: 300;
+    color: @color-black;
+    line-height: 120%;
+}
+.font-bold(){
+  font-weight: 900;
+}
+
+strong{
+  .font-bold();
+}
+
+
+// ------------------------------------------------ //
+// -- Font Spaced --------------------------------- //
+// ------------------------------------------------ //
+
+.font-space-normal(){
+  letter-spacing: 100%;
+}
+
+.font-space-large(){
+  letter-spacing: 2px;
+}
+.font-space-normal(){
+  letter-spacing: 1px;
+}
+
+
+
+
+// ------------------------------------------------ //
+// -- Font Size ...-------------------------------- //
+// ------------------------------------------------ //
+
+.font-size-xs(){
+ font-size: 12px;
+}
+.font-size-s(){
+  font-size: 14px;
+ }
+.font-size-m(){
+ font-size: 16px;
+}
+.font-size-l(){
+  font-size: 18px;
+ }
+.font-size-xl(){
+  font-size: 24px;
+}
+
+
+
+// ------------------------------------------------ //
+// -- Misc ---------------------------------------- //
+// ------------------------------------------------ //
+.line--bordered{
+  border:1px dotted @color-black; 
+  padding: 1em;  
+}
+.line--bordered-top{
+  border-top:1px dotted @color-black;   
+  padding: 1em;
+  padding-right: 0px;  
+}
+.line--bordered-bottom{
+  border-bottom:1px dotted @color-black;  
+  padding: 1em;   
+}

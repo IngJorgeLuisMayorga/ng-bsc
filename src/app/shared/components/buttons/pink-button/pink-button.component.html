@@ -1,14 +1,16 @@
-<div class="button" (click)="doClick()" (mouseover)="setHover()" (mouseleave)="resetHover()">
+<div class="button" (click)="doClick()" (mouseover)="setHover()" (mouseleave)="resetHover()" [ngStyle]="
+    { 'border' : border ? '1px solid #333' : 'none' }
+">
 
     <div class="hover-off" *ngIf="!isHover">  
         <h5> {{ text }} </h5>
-        <img src="../../../../../assets/CARITA_BLANCO_BSC.png">
+        <img *ngIf="icon" src="../../../../../assets/CARITA_BLANCO_BSC.png">
     </div>
 
     
     <div class="hover-on" *ngIf="isHover">  
         <h5> {{ hover_text }} </h5>
-        <img src="../../../../../assets/CARITA_GRIS_BSC.png">
+        <img *ngIf="icon" src="../../../../../assets/CARITA_GRIS_BSC.png">
     </div>
 
 </div>

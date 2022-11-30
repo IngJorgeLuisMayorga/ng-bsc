@@ -1,1 +1,57 @@
-<p>admin-page-coupons works!</p>
+<div class="card">
+    <p-table #dt1 
+        dataKey="code"
+        styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
+        [value]="coupons"
+        [autoLayout]="true"  
+        [loading]="loading"  
+        [paginator]="true" [rows]="15" 
+        [globalFilterFields]="['name','price','discount','quantity']"
+        [showCurrentPageReport]="true" 
+        [rowsPerPageOptions]="[10,25,50]"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+        >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <button pButton label="Clear" class="p-button-outlined"  icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                <span class="p-input-icon-left p-ml-auto" style="position: absolute; right: 25px;">
+                    <i class="pi pi-search"></i>
+                    <input class="p-inputtext p-component p-element" pInputText type="text" (input)="dt1.filterGlobal(getTargetValue($event), 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th></th>
+                <th pSortableColumn="id">id</th>
+                <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="price">Code<p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="enable">Enable<p-sortIcon field="enable"></p-sortIcon></th>
+                <th pSortableColumn="from_date">From Date<p-sortIcon field="from_date"></p-sortIcon></th>
+                <th pSortableColumn="to_date">To Date<p-sortIcon field="to_date"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-coupon>
+            <tr>
+                
+                <td style="vertical-align:middle; min-width: 10px">
+                    <p-button type="button" icon="pi pi-pencil" styleClass="p-button-text" (click)="doOpenEdit(coupon.id)"></p-button>
+                </td>
+
+                <td style="vertical-align:middle; min-width: 10px">{{coupon.id}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{coupon.name}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{coupon.code}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{coupon.enable}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{coupon.from_date}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{coupon.to_date}}</td>
+               
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" (click)="doOpenAdd()"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+</div>

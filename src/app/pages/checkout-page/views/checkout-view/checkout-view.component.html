@@ -1,0 +1,20 @@
+<app-layout-basic #layoutBasicComponet [breadcumbs]="breadcrumbs" (nBreadcrumbChange)="setBreadcrumb($event)" >
+    <div class="checkout-page">
+
+        <div class="title" *ngIf="!title.box">
+            <h1> <strong>{{title.message}}</strong> </h1>
+            <img src="../../../assets/section-title-line.png">
+        </div>
+
+        
+        <div class="title title-thanks" *ngIf="title.box">
+            <img class="img-thanks" src="../../../assets/CAJAS/CAJA AMARILLA.svg">
+            <h1> <strong> {{ title.message }} </strong> </h1>
+            <img src="../../../assets/section-title-line.png">
+        </div>
+
+
+        <ng-content></ng-content>
+
+    </div>
+</app-layout-basic>

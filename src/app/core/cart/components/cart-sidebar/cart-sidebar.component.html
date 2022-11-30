@@ -13,14 +13,14 @@
                 <div class="sidebar-product-wrapper">
                     <div class="row">
                     <div class="col">
-                        <img [src]="product.image_src">
+                        <img [src]="product?.image1_src">
                     </div>
                     <div class="col">
 
                         <h1> {{ 'BSC' }}</h1>
 
                         <h2>{{ product.name }} </h2>
-                        <h3>{{  (product.price)*(1 - product.discount)| currency:'$':'symbol':'2.0' }}</h3>
+                        <h3>{{  (product.price)*(1 - 0.01*product.discount)| currency:'$':'symbol':'2.0' }}</h3>
                         <h3 class="tachado">{{ (product.price) | currency:'$':'symbol':'2.0' }}</h3>
 
                         <div class="ctrls-qty">
@@ -58,7 +58,7 @@
             <div class="progress-wrapper">
                 <div class="progress-wrapper--row">
                     <h5 class="sidebar--message m1" *ngIf="cartTotal < 300000">Te faltan {{ (300000 - cartTotal) | currency:'USD':'symbol' }} para que tu envio sea gratis</h5>
-                    <h5 class="sidebar--message m2" *ngIf="cartTotal >= 300000">Yei! Tienes envio gratis!</h5>
+                    <h5 class="sidebar--message m2" *ngIf="cartTotal >= 300000">Yay! Tienes envio gratis!</h5>
                 </div>
                 <div class="progress-wrapper--row">
                     <img src="../../../../../assets/header-ad-smile.png">
@@ -100,16 +100,37 @@
         </div>
 -->
 
+        <div class="sidebar-code" *ngIf="false">
+            <div class="code-wrapper">
+                
+                <input type="text" [(ngModel)]="couponTag"
+                [ngModelOptions]="{standalone: true}" placeholder="¿Tienes un código de descuento?">
+                <button 
+                    style="height: 46px; position: relative; left: 0px;"
+                    (click)="setCoupon()">Aplicar
+                </button>
+            </div>
+        </div>
+
         <div class="sidebar-total">
-            <div class="total-wrapper">
+
+            <div class="total-wrapper" *ngIf="!((coupon$ | async) && (coupon$ | async).variable_give_free_shipping)" [ngClass]="{ isCoupon : (coupon$ | async) }">
                 <h1>Total <strong>{{ cartTotal | currency:'USD':'symbol' }} </strong> <span *ngIf="cartTotal < 300000"> + envío</span> </h1>
-                <h3>Puntos con esta compra {{ cartTotal / 100 | number: '1.0-0' }}
+                <h2>Total <strong>{{ cartTotalWithCoupon | currency:'USD':'symbol' }} </strong> <span *ngIf="cartTotalWithCoupon < 300000"> + envío</span> </h2>
+                <h3>Puntos con esta compra * {{ cartTotal / 1000 | number: '1.0-0' }}
                 </h3>
             </div>
+
+            <div class="total-wrapper" *ngIf="(coupon$ | async) && (coupon$ | async).variable_give_free_shipping">
+                <h1>Total <strong>{{ cartTotalWithCoupon | currency:'USD':'symbol' }} </strong> , Envio Gratis </h1>
+                <h3>Puntos con esta compra ** {{ cartTotalWithCoupon / 1000 | number: '1.0-0' }}
+                </h3>
+            </div>
+
         </div>
         <div class="sidebar-pay-btn">
             <div class="pay-btn-wrapper">
-                <button>
+                <button (click)="goToCheckout()" [disabled]="isCartEmpty()" [ngClass]="{'diabled':isCartEmpty() }">
                     Pagar
                 </button>
             </div>

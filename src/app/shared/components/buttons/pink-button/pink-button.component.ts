@@ -14,6 +14,9 @@ export class PinkButtonComponent implements OnInit {
   @Input()
   icon: string = '';
 
+  @Input()
+  border: boolean = false;
+
   
   @Input()
   hover_text: string = '';

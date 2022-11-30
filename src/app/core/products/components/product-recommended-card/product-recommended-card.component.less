@@ -12,12 +12,17 @@
 
 
 .card{
-    width: 300px;
     height: @poster-h;
     display: block;
     box-sizing: border-box;
     padding: 2em;
     position: relative;
+    &.x3{
+      width: 300px;
+    }
+    &.x4{
+      width: 200px;
+    }
 }
 
 .card.inCartlist{
@@ -47,8 +52,10 @@
     width: 100%;
     height: 100%;
     position: relative;
-    img{
+    img.photo-img{
         width: 100%;
+        height: 260px;
+        border-bottom: 1px solid #333333;
     }
 
 }
@@ -134,7 +141,22 @@ width: fit-content;
     img{
       width: 100%;
       box-sizing: border-box;
-      padding: 8px;
+      padding: 4px;
     }
   
+  }
+
+
+  .label{
+    padding: 0.5em;
+    position: absolute;
+    background-color: rgb(193, 233, 244);
+    color: rgb(51, 51, 51);
+    bottom: 3px;
+    border: 1px solid #333333;
+    font-weight: bold;
+    border-left: none;
+    font-family: 'Helvetica';
+    font-weight: 600;
+    font-size: 14px;
   }

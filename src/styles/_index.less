@@ -8,6 +8,8 @@
 @import './theme/sizes.less';
 @import './theme/sections.less';
 
+@import './theme/_default.theme.less';
+
 
 @import '~swiper/swiper-bundle';
 
@@ -16,4 +18,18 @@
 }
 .p-button.p-button-outlined {
     color: #6c757d !important;
+}
+
+
+.top-on-top{
+    z-index: 100000000;
+}
+
+.toast-container{
+    font-family: 'Helvetica';
+}
+
+.toast-top-right {
+    top: calc(50% - 50px) !important;
+    right: calc(50% - 142px)  !important;
 }

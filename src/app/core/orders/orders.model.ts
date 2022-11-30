@@ -4,26 +4,48 @@ import { User } from "../users/user.model";
 
 export type Order = {
 
-    id: number; //Identificador de Orden de compra
-    user: User; //Informacion de usuario (si esta registrado)
+    id?: number;
+    user_id?: number;
+    user_nid_type?: string;
+    user_nid_number?: string;
+    user_email?: string;
+    user_name?: string;
+    user_first_name?: string;
+    user_last_name?: string;
 
-    phone: string; // Telefono (si no esta registrado)
-    city: string; // Ciudad (si no esta registrado)
-    address: string; // Direaccion (si no esta registrado)
-    subtotal:  number; // Subtotal (total - tax)
-    tax: number; // Taxes 
-    total: number; // Total a pagar
-    discounts: number; //Total en descuentso (cupones y descuentos de productos)
-    points: number; // Puntos acumulados
+    payment_id?: number;
+    payment_method?: string;
+    payment_approved_at?: Date;
+    payment_wompi_id?: string;
 
-    ordered_at: Date; //Fecha de orden y pago
-    shipped_at: Date; //Fecha de envio
-    delivered_at: Date; //Fecha de entrega
+    coupon_id?: number;
+    coupon_discount?: number;
+    
+    order_ref?: string;
+    order_points?: number;
+    order_subtotal?: number;
+    order_taxes?: number;
+    order_total?: number;
+    order_products_json?: any;
 
-    products: Product[]; //Lista de productos 
-    coupons: Coupon[]; //Lista de coupones 
+    shipping_status?: string;
+    shipping_guide_ref?: string;
+    shipping_guide_company?: string;
+    shipping_phone?: string;
+    shipping_address?: string;
+    shipping_country?: string;
+    shipping_department?: string;
+    shipping_city?: string;
+    
+    shipping_ordered_at?: Date;
+    shipping_shipped_at?: Date;
+    shipping_delivered_at?: Date;
 
-    payment_type: string; // Metodo de pago
-    payment_reference: string; // Referencia del metodo de pago
+    state: "ORDERED" | "SHIPPED" | "DELIVERED" | "CANCELED" | "RETURNED";
+    
+    products?: Product[]; //Lista de productos 
+    coupons?: Coupon[]; //Lista de coupones 
+
+    updated_at: Date;
 
 }

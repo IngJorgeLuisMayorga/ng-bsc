@@ -1,1 +1,59 @@
-<p>admin-page-categories works!</p>
+<div class="card">
+    <p-table #dt1 
+        dataKey="code"
+        styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
+        [value]="categories"
+        [autoLayout]="true"  
+        [loading]="loading"  
+        [paginator]="true" [rows]="15" 
+        [globalFilterFields]="['name','type']"
+        [showCurrentPageReport]="true" 
+        [rowsPerPageOptions]="[10,25,50]"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+        >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <button pButton label="Clear" class="p-button-outlined"  icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                <span class="p-input-icon-left p-ml-auto" style="position: absolute; right: 25px;">
+                    <i class="pi pi-search"></i>
+                    <input class="p-inputtext p-component p-element" pInputText type="text" (input)="dt1.filterGlobal(getTargetValue($event), 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th></th>
+                <th pSortableColumn="id">id</th>
+                <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="type">Type<p-sortIcon field="type"></p-sortIcon></th>
+                <th pSortableColumn="picture_normal">picture_normal<p-sortIcon field="picture_normal"></p-sortIcon></th>
+                <th pSortableColumn="picture_hover">picture_hover<p-sortIcon field="picture_hover"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-categories>
+            <tr>
+                
+                <td style="vertical-align:middle; min-width: 10px">
+                    <p-button type="button" icon="pi pi-pencil" styleClass="p-button-text" (click)="doOpenEdit(categories.id)"></p-button>
+                </td>
+
+                <td style="vertical-align:middle; min-width: 10px">{{categories.id}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{categories.name}}</td>
+                <td style="vertical-align:middle; min-width: 100px">{{categories.type}}</td>
+                <td style="vertical-align:middle; min-width: 100px">
+                    <img [src]="categories.picture_normal" width="50px">
+                </td>
+                <td style="vertical-align:middle; min-width: 100px">
+                    <img [src]="categories.picture_hover" width="50px">
+                </td>
+               
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" (click)="doOpenAdd()"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+</div>

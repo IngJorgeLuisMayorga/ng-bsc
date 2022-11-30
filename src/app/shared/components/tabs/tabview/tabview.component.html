@@ -1,0 +1,13 @@
+<div class="head">
+    <ul class="tabs">
+      <li *ngFor="let tab of tabs" (click)="select(tab)" class="tab" 
+        [class.blue]="isColorBlue(tab)"
+        [class.yellow]="isColorYellow(tab)"
+        [class.pink]="isColorPink(tab)"
+        [class.active]="tab.active" 
+      >
+        <a> {{ tab.title }}</a>
+      </li>
+    </ul>
+  </div>
+  <ng-content></ng-content>

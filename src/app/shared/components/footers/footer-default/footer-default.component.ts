@@ -11,6 +11,7 @@ export class FooterDefaultComponent implements OnInit {
   menus = [
     {
       title: 'PRODUCTOS',
+      color: 'pink',
       items: [
         {
           name: 'Limpiadores aceitosos',
@@ -64,6 +65,7 @@ export class FooterDefaultComponent implements OnInit {
     },
     {
       title: 'RUTINA',
+      color: 'blue',
       items: [
         {
           name: 'Básica',
@@ -81,6 +83,7 @@ export class FooterDefaultComponent implements OnInit {
     },
     {
       title: 'TIPO DE PIEL',
+      color: 'yellow',
       items: [
         {
           name: 'Seca',
@@ -110,6 +113,7 @@ export class FooterDefaultComponent implements OnInit {
     },
     {
       title: 'MARCAS',
+      color: 'pink',
       css:{
         css_class: 'marcas'
       },
@@ -148,9 +152,11 @@ export class FooterDefaultComponent implements OnInit {
         { name: 'The Plant Base', link: '' },
         { name: 'Tia’m', link: '' },
         { name: 'Tonymoly', link: '' },
+        { name: 'Adidas', link: '' },
       ]
     }, {
       title: 'PERFIL',
+      color: 'blue',
       items: [
         {
           name: 'Cuenta',
@@ -184,6 +190,7 @@ export class FooterDefaultComponent implements OnInit {
   isWP_Hover = false;
   isTikTok_Hover = false;
   isInstagram_Hover = false;
+  isLogoHover = false;
 
 
   year = new Date().getFullYear();
@@ -197,6 +204,8 @@ export class FooterDefaultComponent implements OnInit {
     return (menu.css && menu.css.css_class) ? menu.css.css_class : '';
     //return '';
   } 
+
+
 
   setFB_Hover(){
     this.isFB_Hover = true;
@@ -217,6 +226,13 @@ export class FooterDefaultComponent implements OnInit {
   }
   resetInstagram_Hover(){
     this.isInstagram_Hover = false;
+  }
+
+  setLogo_Hover(){
+    this.isLogoHover = true;
+  }
+  resetLogo_Hover(){
+    this.isLogoHover = false;
   }
 
   setWP_Hover(){

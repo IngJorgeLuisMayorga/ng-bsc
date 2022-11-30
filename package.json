@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "deploy::s3": "git add * && git commit -m 'Update All' && git push && ng build --prod --aot && aws s3 sync --delete dist/ s3://ng-bsc",
     "deploy": "ng build && node deploy",
-    "start:local": "ng serve -c=dev --port=5200",
+    "start:local": "ng serve -c=local --port=5200",
     "start:dev": "ng serve -c=dev --port=5201",
     "start:prod": "ng serve -c=prod --port=5202"
   },
@@ -26,6 +26,7 @@
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
     "dotenv": "^8.2.0",
+    "ngx-toastr": "^11.3.3",
     "primeicons": "^5.0.0",
     "primeng": "^11.4.2",
     "rxjs": "~6.6.0",

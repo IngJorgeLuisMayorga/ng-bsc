@@ -1,0 +1,20 @@
+<div class="checkout-user-form">
+    <app-tabView (nTabChange)="onTabChange($event)">
+            <app-tabPanel title="Crear Cuenta">
+                <app-form-basic
+                    [formFields]="userFormFields" 
+                    [formSubmit]="userFormSubmitSignUp"
+                    (nSubmit)="doSignUp()"
+                    (nChange)="setUserFormField($event, 'signup')">
+                </app-form-basic>
+            </app-tabPanel>
+            <app-tabPanel title="Iniciar Sesión">
+                <app-form-basic 
+                [formFields]="userLoginFormFields"
+                [formSubmit]="userFormSubmitSignIn" 
+                (nSubmit)="doSignIn()"
+                (nChange)="setUserLoginFormFields($event, 'signin')">
+            </app-form-basic>
+            </app-tabPanel>
+    </app-tabView>
+</div>

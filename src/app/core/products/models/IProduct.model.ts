@@ -31,6 +31,8 @@ export interface IProduct {
         price: number;
         discount: number;
     };
+
+    visible?: boolean;
 }
 
 export type Product = {
@@ -46,6 +48,7 @@ export type Product = {
     price: number;
     discount: number;
     quantity: number;
+    brand?: string;
 
     isDuo?: boolean;
     type?: string;
@@ -66,6 +69,29 @@ export type Product = {
     category_brand: Category;
     category_extra: Category;
 
+    cart?: {
+        quantity: number;
+        updated_at: Date;
+    }
+
+    categories?: {
+        skin: { src: string;  src_hv: string; title: string },
+        main_ingredient: { src: string; src_hv: string; title: string },
+        solution: { src: string; src_hv: string; title: string },
+        step: { src: string; src_hv: string; title: string },
+        brand: { src: string; src_hv: string; title: string },
+    }
+
+    duo?: {
+        productA_id:number;
+        productB_id:number;
+        price: number;
+        discount: number;
+    };
+
+    visible?: number;
+
+
 }
 
 
@@ -75,4 +101,6 @@ export type Category = {
     type: 'SKIN' | 'MAIN_INGREDIENT' | 'SOLUTION' | 'STEP' | 'BRAND' | 'EXTRA';
     picture_normal: string;
     picture_hover: string;
+    image1_src?: string;
+    image2_src?: string;
 }

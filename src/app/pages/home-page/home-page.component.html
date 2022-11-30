@@ -7,8 +7,6 @@
 
     <div class="page-sidebar" [ngClass]="{'active': (isCartOpen$ | async) }">
         <app-cart-sidebar *ngIf="(isCartOpen$ | async)"></app-cart-sidebar>
-        <app-profile-sidebar *ngIf="false"></app-profile-sidebar>
-        <app-search-sidebar *ngIf="false"></app-search-sidebar>
     </div>
 
     <div class="page-container">
@@ -33,7 +31,8 @@
                             [price]="product.duo.price"
                             [discount]="product.duo.discount"
                             [productA]="products | filterById : product.duo.productA_id"
-                            [productB]="products | filterById : product.duo.productB_id"></app-product-duo-card>
+                            [productB]="products | filterById : product.duo.productB_id">
+                        </app-product-duo-card>
                     </li>
                 </ul>
             </div>
@@ -56,10 +55,8 @@
         </section>
 
         <section class="section--info">
-
             <div class="section-content">
                 <ul class="info-ul">
-            
                     <li>
                         <div class="bsc-icon anim-hover">
                             <img class="anim-hover--on-hover" src="../../../../../assets/info/envios_02k.png">
@@ -70,23 +67,22 @@
                     </li>
                     <li>
                     <div class="bsc-icon anim-hover">
-                        <img class="anim-hover--on-hover" src="../../../../../assets/info/puntos_02k.png">
-                        <img class="anim-hover--off-hover" src="../../../../../assets/info/puntos_01k.png">
+                        <img class="anim-hover--on-hover" src="../../../assets/OTROS/puntos_02k.png">
+                        <img class="anim-hover--off-hover" src="../../../assets/OTROS/puntos_01k.png">
                     </div>
                     <h1>Sumas puntos BSC</h1>
                     <h2>con cada compra que hagas</h2>
                 </li>
                 <li>
                     <div class="bsc-icon anim-hover">
-                        <img class="anim-hover--on-hover" src="../../../../../assets/info/muestras_02k.png">
-                        <img class="anim-hover--off-hover" src="../../../../../assets/info/muestras_01k.png">
+                        <img class="anim-hover--on-hover" src="../../../assets/OTROS/muestras_02k.png">
+                        <img class="anim-hover--off-hover" src="../../../assets/OTROS/muestras_01k.png">
                     </div>
                     <h1>Muestras gratis</h1>
                     <h2>en todos los pedidos</h2>
                     </li>
                 </ul>
             </div>
-
         </section>
 
         <section class="section--products-slider">

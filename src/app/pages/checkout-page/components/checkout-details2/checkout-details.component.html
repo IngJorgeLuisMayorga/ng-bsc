@@ -1,0 +1,35 @@
+<div class="checkout-details">
+
+    <div class="details-logo--wrapper">
+        <img src="../../../../../assets/CAJAS/CAJA AMARILLA.svg" alt="" *ngIf="step === 'carrito'">
+        <img src="../../../../../assets/CAJAS/CAJA ROSADA.svg" alt="" *ngIf="step === 'datos'">
+        <img src="../../../../../assets/CAJAS/CAJA AZUL.svg" alt="" *ngIf="step === 'envio'">
+        <img src="../../../../../assets/CAJAS/CAJA AMARILLA.svg" alt="" *ngIf="step === 'pago'">
+        <img src="../../../../../assets/checkout/logo.svg" alt="" *ngIf="step === 'completado'">
+    </div>
+
+    <app-details-product-list
+        [products]="products"
+    ></app-details-product-list>
+    
+    <app-details-summary
+        [products]="products"
+        [shipping]="shipping"
+        [totalPrice]="total"
+        [totalQuantity]="size"
+    ></app-details-summary>
+
+    <div class="details-next--wrapper" [ngClass]="{
+        'gray': disabled,
+        'pink':  !disabled && step === 'envio',
+        'yellow': !disabled &&  step === 'datos',
+        'blue': !disabled && step === 'carrito' || step === 'pago' || step === 'completado'
+    }">
+        <button (click)="doContinue()" [disabled]="disabled">
+            <label *ngIf="step !== 'pago'"> Continuar</label>
+            <label *ngIf="step === 'pago'"> Finalizar Compra </label>
+        </button>
+    </div>
+
+</div>
+

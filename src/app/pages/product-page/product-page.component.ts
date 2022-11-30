@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartService } from 'src/app/core/cart/services/cart.service';
-import { IProduct } from 'src/app/core/products/models/IProduct.model';
+import { IProduct, Product } from 'src/app/core/products/models/IProduct.model';
+import { ProductsService } from 'src/app/core/products/products.service';
 import { WishlistService } from 'src/app/core/wishlist/services/wishlist.service';
 import Products from '../../../app/config/products';
 
@@ -17,12 +18,16 @@ export class ProductPageComponent implements OnInit {
 
   public tab = 'description';
   
-  public wishlist$: Observable<IProduct[]>;
+  public wishlist$: Observable<Product[]>;
   public inWishlist$: Observable<boolean>;
 
-  public products: IProduct[] = [];
+  public products: Product[] = [];
   public productId: number = 0;
-  public product: IProduct | null = null;
+  public product: Product | null = null;
+
+  public productA: Product | null = null;
+  public productB: Product | null = null;
+  public productC: Product | null = null;
 
   public breadcumbs: Array<{ path: string; text: string }> = [];
 
@@ -35,12 +40,12 @@ export class ProductPageComponent implements OnInit {
   public MAX_INGREDIENTS_SIZE = 400;
   public maxIngredientSize = this.MAX_INGREDIENTS_SIZE;
 
-  constructor(private route: ActivatedRoute, private $cart: CartService, private $wishlist: WishlistService) { 
+  constructor(private route: ActivatedRoute, private $cart: CartService, private $wishlist: WishlistService, private $products:ProductsService) { 
       this.isCartOpen$ = this.$cart.isOpen$;
       this.wishlist$ = this.$wishlist.sync();
 
       this.inWishlist$ = this.$wishlist.sync().pipe(
-        map((products: IProduct[]) => 
+        map((products: Product[]) => 
           {
             if((products && products.length > 0 && products.find(product => product.id === this.product.id))){
               return true;
@@ -52,10 +57,15 @@ export class ProductPageComponent implements OnInit {
       )
   }
 
-  ngOnInit(): void {
-    this.products = Products;
+  async ngOnInit() {
+    this.products = await this.$products.getProducts();
     this.productId = parseInt(this.route.snapshot.paramMap.get("id"), 10);
-    this.product = this.products.find(product => product.id === this.productId)
+    // this.product = this.products.find(product => product.id === this.productId);
+    this.product = await this.$products.getProduct(this.productId);
+    const _products: Product[] = await this.$products.getProductsRecommended(this.product);
+    this.productA = _products[0];
+    this.productB = _products[1];
+    this.productC = _products[2];
     this.breadcumbs = [
     {
       text:'Inicio',
@@ -76,7 +86,7 @@ export class ProductPageComponent implements OnInit {
     ]
 
     this.cartlist$ = this.$cart.sync().pipe(
-      map((products: IProduct[]) => 
+      map((products: Product[]) => 
         {
           if(
             products && 
@@ -110,11 +120,15 @@ export class ProductPageComponent implements OnInit {
   }
 
   sortBy(items: any[]) {
+    if(items){
     return items.sort(function( a , b){
       if(a.value.index > b.value.index ) return 1;
       if(a.value.index  < b.value.index ) return -1;
       return 0;
     });
+  } else {
+    return []
+  }
   }
 
 

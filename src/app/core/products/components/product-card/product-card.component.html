@@ -5,14 +5,21 @@
 
             <div class="card-picture" (click)="goToProductPage(product.id)">
                 <div class="card-picture--front">
-                    <img [src]="product.image_src">
+                    <img [src]="product?.image1_src || ''">
+                       
+                    <div class="label" *ngIf="showStepLabel" [ngStyle]="{backgroundColor: colorStepLabel, color: '#333333'}"> 
+                        {{ product?.category_step.name  }} 
+                    </div>
+                    
                 </div>
                 <div class="card-picture--back" [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (inCartlist$ | async)}"></div>
             </div>
 
+         
+
 
             <div class="card-discount" *ngIf="(discount || product?.discount)">
-                -{{ (discount || product.discount) * 100 | number }}%
+                -{{ (discount || 0.01*product.discount) * 100 | number }}%
             </div>
 
 
@@ -28,10 +35,12 @@
 
         </div>
         <div class="card-bottom">
-
             <h1 class="card-bottom--discounted-price">
-                {{ (
-                (product?.price || 0)*(1 - ( discount || product?.discount || 0))
+                {{ 
+                (
+
+                    (product?.price || 0)*(1 - ( 0.01*discount || 0.01*product?.discount || 0))
+                
                 | currency:'$':'symbol':'2.0'
                 ) }}
             </h1>
@@ -42,12 +51,8 @@
 
             <h1 class="card-bottom--label-name">
                 <!--  BUBBLE BOX PIEL SECA BUBBLE BOX PIEL SECA BUBBLEAB -->
-                {{ (product?.name) }} 
-
-                <br>
-
+                {{ ((product?.name).length>45)? ((product?.name) | slice:0:45)+'...':((product?.name) ) }}
                 <strong>// {{ 'BSC' }}</strong>
-
             </h1>
 
 
@@ -61,7 +66,7 @@
                     'pink': status === 'added'
                 }">
                     <span class="spinner" *ngIf="(cartIsUpdating$ | async) === product.id">
-                        <img src="http://shop.bubblesskincare.com/wp-content/uploads/2020/12/spinner-1.gif">
+                        <img src="../../../../../assets/Spin-1s-200px.gif">
                     </span>
 
                     <div class="not-spinner" (click)="addToCart()"

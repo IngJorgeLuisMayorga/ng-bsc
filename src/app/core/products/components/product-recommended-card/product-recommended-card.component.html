@@ -1,11 +1,17 @@
-<div class="card" [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (cartlist$ | async) > 0}">
+<div class="card" 
+    [ngClass]="{
+        'x3': size === '33.3%',
+        'x4': size === '25%',
+        'inWishlist': (inWishlist$ | async),
+        'inCartlist': (cartlist$ | async) > 0}
+    ">
 
     <div class="card-back"></div>
 
     <div class="card-front">
         <div class="card-top">
             <div class="photo">
-                <img [src]="product.image_src">
+                <img class="photo-img" [src]="product?.image1_src || ''">
 
                 <div class="card-fav">                 
                     <div class="card-wishlist" >
@@ -17,24 +23,29 @@
                </div>
 
 
+               <div class="label" *ngIf="showStepLabel" [ngStyle]="{backgroundColor: colorStepLabel, color: '#333333'}"> 
+                {{ product?.category_step.name  }} 
             </div>
-            <div class="label"></div>
+
+            </div>
+
+
         </div>
         <div class="card-bottom">
 
             <div class="info">
                 <h1 class="price"> 
 
-                    <strong *ngIf="product.discount" class="discount">
+                    <strong *ngIf="product && product.discount" class="discount">
                         {{ ((product.price) | currency:'$':'symbol':'2.0') }}
                    </strong> 
 
-                   <strong *ngIf="product.discount">
-                       {{ ((product.price || 0)*(1 - (product.discount || 0)) | currency:'$':'symbol':'2.0') }}
+                   <strong *ngIf="product && product.discount">
+                       {{ ((product.price || 0)*(1 - (0.01*product.discount || 0)) | currency:'$':'symbol':'2.0') }}
                   </strong> 
 
-                  <strong *ngIf="!product.discount">
-                   {{ ((product.price || 0)*(1 - (product.discount || 0)) | currency:'$':'symbol':'2.0') }}
+                  <strong *ngIf="product &&  !product.discount">
+                   {{ ((product.price || 0)*(1 - (0.01*product.discount || 0)) | currency:'$':'symbol':'2.0') }}
                    </strong> 
 
                 </h1>

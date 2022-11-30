@@ -68,19 +68,21 @@ left: 45px;">
         
         ">
             <ul class="heaver-icons-row" style="width: 100%;">
-                <li><img class="bsc-logo" src="../../../../../assets/header-bsc.png" (click)="goHome()"></li>
-                <li class="bsc-icon anim-hover" (click)="doOpenSearchSidebar()">
+                <li>
+                    <img class="bsc-logo" src="../../../../../assets/header-bsc.png" (click)="goHome()">
+                </li>
+                    <li class="bsc-icon anim-hover" (click)="doOpenSearchSidebar()">
                     <img class="anim-hover--on-hover" src="../../../../../assets/header-icon-lupa--hover.jpg">
                     <img class="anim-hover--off-hover" src="../../../../../assets/header-icon-lupa.png">
                 </li>
                 <li class="bsc-icon anim-hover" (click)="doOpenProfileSidebar()">
                     <img class="anim-hover--on-hover" src="../../../../../assets/header-icon-persona--hover.jpg">
-                    <img class="anim-hover--off-hover" src="../../../../../assets/header-icon-persona.png">
+                    <img class="anim-hover--off-hover" src="../../../../../assets/OTROS/header-icon-persona.png">
                 </li>
 
                 <li class="bsc-icon anim-hover" (click)="doOpenCartSidebar()">
                     <img class="anim-hover--on-hover" src="../../../../../assets/header-icon-cart--hover.jpg">
-                    <img class="anim-hover--off-hover" src="../../../../../assets/header-icon-cart.png">
+                    <img class="anim-hover--off-hover" src="../../../../../assets/OTROS/header-icon-cart.png">
                     <div class="notification-label" *ngIf="(cartSize$ | async)">
                         <span>{{ (cartSize$ | async) }}</span>
                     </div>

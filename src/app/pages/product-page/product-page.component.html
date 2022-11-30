@@ -7,8 +7,6 @@
 
     <div class="page-sidebar" [ngClass]="{'active': (isCartOpen$ | async) }">
         <app-cart-sidebar *ngIf="(isCartOpen$ | async)"></app-cart-sidebar>
-        <app-profile-sidebar *ngIf="false"></app-profile-sidebar>
-        <app-search-sidebar *ngIf="false"></app-search-sidebar>
     </div>
 
     <div class="page-container">
@@ -27,10 +25,10 @@
            <div class="section-row">
                <div class="section-col col-gallery">
                    <div class="gallery-col col-thumbs">
-                       <img class="thumb" [ngClass]="{'active': activeThumb === 0}" [src]="product.image_src" (click)="setThumb(0)">
-                       <img class="thumb" [ngClass]="{'active': activeThumb === 1}"[src]="product.image_src" (click)="setThumb(1)">
-                       <img class="thumb" [ngClass]="{'active': activeThumb === 2}"[src]="product.image_src" (click)="setThumb(2)">
-                       <img class="thumb" [ngClass]="{'active': activeThumb === 3}" [src]="product.image_src" (click)="setThumb(3)">
+                       <img class="thumb" [ngClass]="{'active': activeThumb === 0}" [src]="product.image1_src || ''" (click)="setThumb(0)">
+                       <img class="thumb" [ngClass]="{'active': activeThumb === 1}"[src]="product.image2_src || ''" (click)="setThumb(1)">
+                       <img class="thumb" [ngClass]="{'active': activeThumb === 2}"[src]="product.image3_src || ''" (click)="setThumb(2)">
+                       <img class="thumb" [ngClass]="{'active': activeThumb === 3}" [src]="product.image4_src || ''" (click)="setThumb(3)">
                    </div>
                    <div class="gallery-col col-picture"  [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (cartlist$ | async) > 0}">
 
@@ -39,7 +37,7 @@
                            <div class="picture-back"></div>
 
                            <div class="picture-front">
-                                <img class="picture"  [src]="product.image_src">
+                                <img class="picture"  [src]="product.image1_src || ''">
                                 <div class="card-fav" *ngIf="(inWishlist$ | async)">
                                 
 
@@ -54,7 +52,7 @@
                                </div>
                             </div>
                            <div class="card-discount">
-                            -{{ (product.discount) * 100 | number }}%
+                            -{{ (0.01*product.discount) * 100 | number }}%
                            </div>
 
                         
@@ -75,16 +73,16 @@
                    <div class="info-row row-price">
                         <h2> 
 
-                            <strong *ngIf="product.discount" class="discount">
+                            <strong *ngIf="product && product.discount" class="discount">
                                  {{ ((product.price) | currency:'$':'symbol':'2.0') }} <br>
                             </strong> 
 
-                            <strong *ngIf="product.discount">
-                                {{ ((product.price || 0)*(1 - (product.discount || 0)) | currency:'$':'symbol':'2.0') }}
+                            <strong *ngIf="product && product.discount">
+                                {{ ((product.price || 0)*(1 - (0.01*product.discount || 0)) | currency:'$':'symbol':'2.0') }}
                            </strong> 
 
-                           <strong *ngIf="!product.discount">
-                            {{ ((product.price || 0)*(1 - (product.discount || 0)) | currency:'$':'symbol':'2.0') }}
+                           <strong *ngIf="product &&  !product.discount">
+                            {{ ((product.price || 0)*(1 - (0.01*product.discount || 0)) | currency:'$':'symbol':'2.0') }}
                             </strong> 
 
                         </h2>
@@ -119,6 +117,7 @@
                                     [hover_icon]="'cart:face:gray'"
                                     (nClick)="removeAllFromCart()"
                                 ></app-pink-button>
+
                             </div>
 
                             <app-fav-button
@@ -141,9 +140,13 @@
                             </div>
                         </div>
                         <div class="tabs-content">
+
                             <div class="tab-content" *ngIf="tab === 'description'">
-                                <p class="product-description" *ngIf="product.description"> <strong>Soy antes de la coma</strong>, {{ product.description }}</p> 
+                                <p class="product-description"> 
+                                    <strong>Soy antes de la coma</strong>, {{ product.description }}
+                                </p> 
                             </div>
+
                             <div class="tab-content" *ngIf="tab === 'ingredients'">
                                 <p class="product-ingredients">
                                     {{ product.ingredients | slice: 0: maxIngredientSize }}
@@ -186,15 +189,21 @@
 
             <div class="cards">
                 <app-product-recommended-card
-                    [product]="product"
+                    [product]="productA"
+                    [showStepLabel]="true"
+                    [colorStepLabel]="'#f7c0cd'"
                 ></app-product-recommended-card>
 
                 <app-product-recommended-card
-                    [product]="product"
+                    [product]="productB"
+                    [showStepLabel]="true"
+                    [colorStepLabel]="'#c1e9f4'"
                 ></app-product-recommended-card>
 
                 <app-product-recommended-card
-                    [product]="product"
+                    [product]="productC"
+                    [showStepLabel]="true"
+                    [colorStepLabel]="'#fff4c5'"
                 ></app-product-recommended-card>
             </div>
 

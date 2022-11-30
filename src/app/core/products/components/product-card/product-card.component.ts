@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CartService } from 'src/app/core/cart/services/cart.service';
-import { IProduct } from '../../models/IProduct.model';
+import { IProduct, Product } from '../../models/IProduct.model';
 
 import { map } from 'rxjs/operators';
 import { WishlistService } from 'src/app/core/wishlist/services/wishlist.service';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class ProductCardComponent implements OnInit {
 
   @Input()
-  product!: IProduct;
+  product!: Product;  
 
   @Input()
   discount!: number;
@@ -23,11 +23,17 @@ export class ProductCardComponent implements OnInit {
   @Input()
   mode: string = 'full';
 
-  public wishlist$: Observable<IProduct[]>;
+  @Input()
+  showStepLabel: boolean = false;
+
+  @Input()
+  colorStepLabel: string = '';
+
+  public wishlist$: Observable<Product[]>;
   public inWishlist$: Observable<boolean>;
   public inCartlist$: Observable<boolean>;
 
-  public cart$: Observable<IProduct[]>;
+  public cart$: Observable<Product[]>;
   public status = 'none';
 
   public cartIsUpdating$: Observable<number>;
@@ -43,13 +49,13 @@ export class ProductCardComponent implements OnInit {
 
     this.cartIsUpdating$ = this.$cart.syncIsUpdating();
     this.cartProductItems$ = this.$cart.sync().pipe(
-      map((products: IProduct[]) => 
+      map((products: Product[]) => 
         ((products.find(product => product.id === this.product.id) || {quantity: 0}).cart?.quantity || 0)
       )
     )
 
     this.inWishlist$ = this.$wishlist.sync().pipe(
-      map((products: IProduct[]) => 
+      map((products: Product[]) => 
         {
           if((products && products.length > 0 && products.find(product => product.id === this.product.id))){
             return true;
@@ -60,7 +66,7 @@ export class ProductCardComponent implements OnInit {
       )
     )
     this.inCartlist$ = this.$cart.sync().pipe(
-      map((products: IProduct[]) => 
+      map((products: Product[]) => 
         {
           if(
             products && 
@@ -88,14 +94,12 @@ export class ProductCardComponent implements OnInit {
   }
 
   async addToCart(){
-
     const isCartEmpty = this.$cart.isCartEmpty();
     const product = JSON.parse(JSON.stringify(this.product) + '');
     const response = await this.$cart.addToCart(product);
     if(isCartEmpty){
       setTimeout(() => this.$cart.doOpenCart(), 1000);
     }
-
   }
   async removeFromCart(){
     const product = JSON.parse(JSON.stringify(this.product) + '');

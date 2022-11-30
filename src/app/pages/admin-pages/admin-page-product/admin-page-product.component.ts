@@ -150,6 +150,13 @@ export class AdminPageProductComponent implements OnInit {
       isDuo: this.checked,
       productA_id: this.productA.id,
       productB_id: this.productB.id,
+      category_skin_id: this.categorySkin.id,
+      category_main_ingredient_id: this.categoryMainIngredient.id,
+      category_solution_id: this.categorySolution.id,
+      category_step_id: this.categoryStep.id,
+      category_extra_id: this.categoryExtra.id
     });
+
+  }
 
 }

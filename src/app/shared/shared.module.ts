@@ -9,9 +9,22 @@ import { OutlineButtonComponent } from './components/buttons/outline-button/outl
 import { AddToCardButtonComponent } from './components/buttons/add-to-card-button/add-to-card-button.component';
 import { FavButtonComponent } from './components/buttons/fav-button/fav-button.component';
 import { PinkButtonComponent } from './components/buttons/pink-button/pink-button.component';
+import { RouterModule } from '@angular/router';
+import { CoreModule } from '../core/core.module';
+import { CartModule } from '../core/cart/cart.module';
+import { TabviewComponent } from './components/tabs/tabview/tabview.component';
+import { TabPanelComponent } from './components/tabs/tabpanel/tabpanel.component';
+import { InputTextBasicComponent } from './components/forms/input-text-basic/input-text-basic.component';
+import { InputDateBasicComponent } from './components/forms/input-date-basic/input-date-basic.component';
+import { FormBasicComponent } from './components/forms/form-basic/form-basic.component';
+import { InputTextPasswordComponent } from './components/forms/input-text-password/input-text-password.component';
+import { BtnBasicComponent } from './components/forms/btn-basic/btn-basic.component';
+import { InputOptionsBasicComponent } from './components/forms/input-options-basic/input-options-basic.component';
+import { FormsModule } from '@angular/forms';
 
 
 const COMPONENTS = [
+
   HeaderDefaultComponent,
   FooterDefaultComponent,
   HeaderAdComponent,
@@ -24,18 +37,31 @@ const COMPONENTS = [
   
   AddToCardButtonComponent,
   
-  FavButtonComponent
+  FavButtonComponent,
+  TabviewComponent,
+  TabPanelComponent,
+
+  BtnBasicComponent,
+  InputTextBasicComponent,
+  InputDateBasicComponent,
+  InputTextPasswordComponent,
+  InputOptionsBasicComponent,
+
+  FormBasicComponent
+
 ];
 
 @NgModule({
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
   ],
   exports: [
     ...COMPONENTS
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    RouterModule
   ]
 })
 export class SharedModule { }

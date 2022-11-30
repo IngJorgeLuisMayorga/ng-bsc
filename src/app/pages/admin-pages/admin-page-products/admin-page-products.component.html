@@ -25,6 +25,7 @@
             <tr>
                 <th></th>
                 <th pSortableColumn="id">id</th>
+                <th pSortableColumn="visible">Visible</th>
                 <th pSortableColumn="photo">Photo</th>
                 <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
                 <th pSortableColumn="price">Price<p-sortIcon field="price"></p-sortIcon></th>
@@ -43,6 +44,9 @@
                     <p-button type="button" icon="pi pi-pencil" styleClass="p-button-text" (click)="doOpenEdit(product.id)"></p-button>
                 </td>
                 <td style="vertical-align:middle; min-width: 10px">{{product.id}}</td>
+                <td style="vertical-align:middle; min-width: 10px">
+                    <p-inputSwitch (onChange)="nChangeVisible(product)" [(ngModel)]="product.visible" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+                </td>
                 <td style="vertical-align:middle; min-width: 10px"> <img src="{{product.image1_src}}" style="width: 50px; height: 50px; object-fit: cover;"/> </td>
                 <td style="vertical-align:middle; min-width: 100px">{{product.name}}</td>
                 <td style="vertical-align:middle; min-width: 100px">{{product.price*(1 - 0.01*product.discount) | currency:'$' }}</td>
@@ -51,14 +55,14 @@
                 <td style="vertical-align:middle; min-width: 100px"><img src="{{product.category_main_ingredient.picture_normal}}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
                 <td style="vertical-align:middle; min-width: 100px"><img src="{{product.category_solution.picture_normal}}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
                 <td style="vertical-align:middle; min-width: 80px"><img src="{{product.category_step.picture_normal}}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
-                <td style="vertical-align:middle; min-width: 80px"><img src="{{product.category_extra.picture_normal}}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
+                <td style="vertical-align:middle; min-width: 80px" *ngIf="product.category_extra"><img src="{{ product.category_extra.picture_normal }}" style="width: 50px; height: 50px; object-fit: cover;"/></td>
             </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
             <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" (click)="doOpenAdd()"></p-button>
         </ng-template>
         <ng-template pTemplate="paginatorright">
-            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"  (click)="doUploadCSV()"></p-button>
         </ng-template>
     </p-table>
 </div>

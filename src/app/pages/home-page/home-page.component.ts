@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CartService } from 'src/app/core/cart/services/cart.service';
-import Products from '../../../app/config/products';
-import SwiperCore from 'swiper/core';
+import { ProductsService } from 'src/app/core/products/products.service';
+import { UsersService } from 'src/app/core/users/users.service';
+import { User } from 'src/app/core/users/user.model';
 
 @Component({
   selector: 'app-home-page',
@@ -11,20 +12,26 @@ import SwiperCore from 'swiper/core';
 })
 export class HomePageComponent implements OnInit {
 
-  public products: any[] = [];
+  // Observables RXJS Data
+  public user$: Observable<User>;
   public isCartOpen$ :  Observable<boolean>;
+
+  //
+  public products: any[] = [];
   public swiperTab = 'NEWS';
 
-
+  //
   public SETTINGS: string[] = [];
   public SETTINGS2: string[] = [];
   
-  constructor(private $cart: CartService) { 
+  constructor(private $cart: CartService, private $products: ProductsService, private $user: UsersService) { 
+    this.user$ = this.$user.user$;
     this.isCartOpen$ = this.$cart.isOpen$;
   }
 
-  ngOnInit(): void {
-    this.products = Products;
+  async ngOnInit() {
+    // this.products = Products;
+    this.products = await this.$products.getProductsVisible();
     this.SETTINGS = [];
   }
 

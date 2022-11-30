@@ -361,6 +361,15 @@
       font-weight: 600;
       background-color: @color-black;
     }
+
+
+    &.diabled{
+      cursor:not-allowed;
+      &:hover{
+        color: black;
+        background-color: @color-pink;
+      }
+    }
   }
 }
 
@@ -786,6 +795,23 @@ strong{
     font-size: 10px;
     letter-spacing: 0.5px;  
     padding-top: 5px;
+  }
+  h2{
+    display: none;
+  }
+
+  &.isCoupon{
+    h1{
+      text-decoration: line-through;
+      color: red;
+      font-size: 14px;
+    }
+    h2{
+      display: block;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: @color-black;
+    }
   }
 }
 

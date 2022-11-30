@@ -108,6 +108,12 @@
                             <p-dropdown [options]="productTypes" [(ngModel)]="productType"  [ngModelOptions]="{standalone: true}"></p-dropdown>
                         </div>
                     </div>
+                    <div class="bsc-col col-2">
+                        <div class="p-field">
+                            <label for="brand">Brand</label>
+                            <input id="brand" type="text" pInputText [(ngModel)]="product.brand" [ngModelOptions]="{standalone: true}"/>
+                        </div>
+                    </div>
                 </div>
                 
             </div>

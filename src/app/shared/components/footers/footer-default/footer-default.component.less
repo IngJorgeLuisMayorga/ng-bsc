@@ -3,14 +3,16 @@
 
 footer {
 
-    font-family: 'Helvetica' ;
+    font-family: 'Helvetica';
 
     background-color: #333;
 
-    background-size    : cover;
+    background-size: cover;
     background-position: center;
 
     width: 100%;
+
+    margin-top: 3em;
 }
 
 footer .wrapper {
@@ -20,19 +22,21 @@ footer .wrapper {
     box-sizing: border-box;
     padding: 3em;
     padding-bottom: 0em;
-    &.social{
+
+    &.social {
         padding-top: 1.5em;
     }
 }
 
-footer .wrapper .footer-title{
+footer .wrapper .footer-title {
     font-size: 35px;
     font-weight: 900;
     letter-spacing: 1px;
     color: white;
     width: 100%;
     box-sizing: border-box;
-    .section-title{
+
+    .section-title {
         width: 100%;
         box-sizing: border-box;
         margin: 0px;
@@ -41,9 +45,14 @@ footer .wrapper .footer-title{
         text-align: left;
         padding-bottom: 1em;
         border-bottom: 1px dotted white;
+        cursor: pointer;
+        &:hover{
+            color: @color-pink;
+        }
     }
 }
-footer .wrapper .footer-menus{
+
+footer .wrapper .footer-menus {
 
     font-size: 35px;
     font-weight: 900;
@@ -69,19 +78,22 @@ footer .wrapper .footer-menus{
     -ms-flex-align: start;
     align-items: flex-start;
 
-    .footer-menu{
+    .footer-menu {
         width: 200px;
         font-size: 20px;
         padding: 1em 0em;
-        li{
+
+        li {
             padding: 0.5em 0em;
         }
-        a{
+
+        a {
             color: white;
             padding: 1em 0em;
             text-decoration: none;
         }
-        &--title{
+
+        &--title {
             font-family: 'Helvetica';
             font-size: 15px;
             letter-spacing: 1px;
@@ -94,16 +106,39 @@ footer .wrapper .footer-menus{
             color: white;
             text-align: left;
             border-bottom: 1px dotted white;
+            cursor: pointer;
+            &:hover{
+                color: @color-pink;
+            }
+
+            &.pink{
+                &:hover{
+                    color: @color-pink;
+                }
+    
+            }
+            &.blue{
+                &:hover{
+                    color: @color-blue;
+                }
+    
+            }
+            &.yellow{
+                &:hover{
+                    color: @color-yellow;
+                }
+    
+            }
         }
 
-        
+
     }
 
     .footer-menu.marcas {
         width: 400px;
     }
 
-    .footer-menu.marcas .footer-menu--items ul{
+    .footer-menu.marcas .footer-menu--items ul {
         width: 100%;
         display: -ms-flexbox;
         display: -webkit-flex;
@@ -125,14 +160,14 @@ footer .wrapper .footer-menus{
         align-items: flex-start;
     }
 
-    .footer-menu.marcas .footer-menu--items ul li{
+    .footer-menu.marcas .footer-menu--items ul li {
         width: 33.3333%;
     }
 
 }
 
 
-.footer-menu--items li{
+.footer-menu--items li {
     font-family: 'Helvetica';
     font-size: 11px;
     letter-spacing: 1px;
@@ -149,27 +184,42 @@ footer .wrapper .footer-menus{
     padding: 0.2em 0em !important;
 }
 
-.footer-menu:nth-child(1) { width: 139px !important ;}
+.footer-menu:nth-child(1) {
+    width: 139px !important;
+}
+
 .footer-menu:nth-child(1) .footer-menu--title {
     width: 139px;
 }
 
-.footer-menu:nth-child(2) { width: 79px !important ;}
+.footer-menu:nth-child(2) {
+    width: 79px !important;
+}
+
 .footer-menu:nth-child(2) .footer-menu--title {
     width: 76px;
 }
 
-.footer-menu:nth-child(3) { width: 124px !important ;}
+.footer-menu:nth-child(3) {
+    width: 124px !important;
+}
+
 .footer-menu:nth-child(3) .footer-menu--title {
     width: 124px;
 }
 
-.footer-menu:nth-child(4) { width: 345px !important ;}
+.footer-menu:nth-child(4) {
+    width: 345px !important;
+}
+
 .footer-menu:nth-child(4) .footer-menu--title {
     width: 345px;
 }
 
-.footer-menu:nth-child(5) { width: 100px !important ;}
+.footer-menu:nth-child(5) {
+    width: 100px !important;
+}
+
 .footer-menu:nth-child(5) .footer-menu--title {
     width: 100px;
 }
@@ -178,13 +228,13 @@ footer .wrapper .footer-menus{
 
 
 
-.footer-menus{
+.footer-menus {
     border-bottom: 1px dotted white;
-    
+
 }
 
-footer .wrapper.social{
-    
+footer .wrapper.social {
+
     display: block;
     width: 100%;
 
@@ -207,38 +257,48 @@ footer .wrapper.social{
     -ms-flex-align: end;
     align-items: flex-end;
 
-    .logo{
+    .logo {
         width: 180px;
         opacity: 1;
         cursor: pointer;
-        &:hover{
+        img{
+            width: 100%;
+        }
+
+        &:hover {
             opacity: 0.7;
         }
     }
+
     .fb {
         padding-left: 1em;
         cursor: pointer;
+
         img {
             width: 22px;
         }
     }
+
     .tiktok {
         padding-left: 1em;
         cursor: pointer;
+
         img {
             width: 22px;
         }
     }
+
     .instagram {
         padding-left: 3em;
         cursor: pointer;
+
         img {
             width: 22px;
         }
     }
 }
 
-.linea{  
+.linea {
     display: block;
     width: 1px;
     border-right: 1px dotted white;
@@ -249,16 +309,31 @@ footer .wrapper.social{
     height: 16px;
 }
 
-.link{
-    &:hover{
-        color: @color-pink !important
+.link {
+    &.pink{
+        &:hover{
+            color: @color-pink !important;
+        }
+
+    }
+    &.blue{
+        &:hover{
+            color: @color-blue !important;
+        }
+
+    }
+    &.yellow{
+        &:hover{
+            color: @color-yellow !important;
+        }
+
     }
 }
 
-.footer-derechos{
-    
+.footer-derechos {
+
     color: white;
-    
+
     font-family: 'Helvetica';
     font-size: 11px;
 
@@ -266,24 +341,24 @@ footer .wrapper.social{
     line-height: 1.25em;
     letter-spacing: 1px;
 
-    strong{
+    strong {
         font-weight: bold;
     }
 }
 
-.floating{
+.floating {
     position: fixed !important;
 
     bottom: 0px !important;
     right: 50px !important;
     z-index: 10000 !important;
-    padding:  0px !important;
+    padding: 0px !important;
     width: auto !important;
 
-    
-    display: -ms-flexbox  !important;
-    display: -webkit-flex  !important;
-    display: flex  !important;
+
+    display: -ms-flexbox !important;
+    display: -webkit-flex !important;
+    display: flex !important;
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
@@ -302,7 +377,7 @@ footer .wrapper.social{
 
 }
 
-.floating--card{
+.floating--card {
 
     width: 137.156px;
     height: 28.5px;
@@ -315,9 +390,10 @@ footer .wrapper.social{
     font-family: 'Helvetica';
     letter-spacing: 2px;
 
-    background-color:@color-black;
-    &:hover{
-        background-color: @color-pink;;
+    background-color: @color-black;
+
+    &:hover {
+        background-color: @color-pink;
     }
 
     display: -ms-flexbox;
@@ -339,47 +415,71 @@ footer .wrapper.social{
     -ms-flex-align: center;
     align-items: center;
 
-    img{
+    img {
         height: 1.25em;
         padding-right: 0.5em;
     }
 
-    h1{
+    h1 {
         color: white;
         font-weight: normal;
         padding-right: 0em;
         letter-spacing: 2px;
     }
-    &:hover h1{
-        color:@color-black;
-        font-weight: normal;
 
+    &:hover h1 {
+        color: @color-black;
+        font-weight: normal;
         letter-spacing: 2px;
     }
 
-
-    &.wp{
+    &.wp {
         padding-left: 16px !important;
     }
 
-    &.soporte{
+    &.soporte {
         margin-left: 2em;
-
-        background-color: @color-pink;
-
         h1 {
-        color: @color-black;
-        font-weight: normal;
+            color: @color-black;
+            font-weight: normal;
         }
-
-  
-
-        &:hover{
+        &:hover {
             background-color: @color-black;
-            h1{
-        font-weight: normal;
-            color: white;
+
+            h1 {
+                font-weight: normal;
+                color: white;
             }
         }
     }
+
+
+
+
+    
+    // -------------------------------- //
+    // --- WhatsaApp Color ------------ // 
+    &.wp {
+        color: @color-black;
+        background-color: @color-blue;
+        h1{
+            color: @color-black;
+        }
+        &:hover{
+            color: white;
+            background-color: @color-black;
+            h1{
+                color: white;
+            }
+        }
+    }
+    &.soporte {
+        color: @color-black;
+        background-color: @color-yellow;
+        h1{
+            color: @color-black;
+        }
+    }
+    // -------------------------------- //
+
 }
