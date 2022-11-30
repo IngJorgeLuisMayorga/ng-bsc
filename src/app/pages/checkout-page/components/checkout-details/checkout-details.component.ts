@@ -42,6 +42,8 @@ export class CheckoutDetailsComponent implements OnInit {
   @Input()
   order!: Order;
 
+  @Input()
+  step!: 'carrito' | 'datos' | 'envio' | 'pago' | 'completado';
 
   @Output()
   nContinue = new EventEmitter();
@@ -51,6 +53,7 @@ export class CheckoutDetailsComponent implements OnInit {
   
   public shippingStatus$;
   public bubblePoints  = 0;
+  public isOpenProducts = false;
 
   constructor(private $cart: CartService, private $user: UsersService) { 
     this.shippingStatus$ = this.$cart.syncShippingStatus();
@@ -61,6 +64,9 @@ export class CheckoutDetailsComponent implements OnInit {
   }
 
 
+  doOpenProducts(){
+    this.isOpenProducts = !this.isOpenProducts;
+  }
   get shippingPrice(){
     if(!(this.shipping && this.shipping[4])){
       return null;

@@ -5,12 +5,16 @@
     width: 100%;
     padding: 0px;
     border:1px dotted @color-black;
+    
+
     input{
         width: 100%;
         background: none;
         padding: none;
         margin: none;
-        border: none;    
+        border: none;   
+        .font-space-large();
+         
     }
     span{
         visibility: hidden;
@@ -32,11 +36,19 @@
             padding-right: 5px;
         }
     }
+
+
+    &.fill{
+        border:1px solid @color-black;
+        input{
+            color: @color-black;
+        }
+    }
 }
 .input-wrapper input, .input-wrapper  select{
     
     padding: 10px;
-    padding-top: 15px;
+    padding-top: 10px;
     padding-bottom: 0px;
     font-family: 'Helvetica';
     color: @color-gray;

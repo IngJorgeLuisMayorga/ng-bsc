@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/core/cart/services/cart.service';
+import { ICheckoutProduct } from 'src/app/pages/checkout-page/models/checkout-cart.model';
 import { Product } from '../../models/IProduct.model';
 
 @Component({
@@ -13,25 +15,36 @@ export class ProductItemComponent implements OnInit {
   index!: number;
 
   @Input()
-  product!: Product;
+  product!: ICheckoutProduct;
 
   @Input()
   isOrder: boolean = false;
   
   constructor(
-    private $cart: CartService
+    private $cart: CartService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
   addItemToCart(){
-    this.$cart.addToCart(this.product);
+    const product = this.$cart.getCart().find(item => item.id === this.product.id);
+    this.$cart.addToCart(product);
   }
   removeItemToCart(){
-    this.$cart.removeToCart(this.product);
+    const product = this.$cart.getCart().find(item => item.id === this.product.id);
+    this.$cart.removeToCart(product);
   }
   removeItem(){
-    this.$cart.removeAllToCart(this.product);
+    const product = this.$cart.getCart().find(item => item.id === this.product.id);
+    this.$cart.removeAllToCart(product);
+  }
+
+  goToProduct(id: number){
+    this.router.navigateByUrl('products/'+id)
+  }
+  goToBrand(brand: string){
+    this.router.navigateByUrl('brands/'+brand)
   }
 }

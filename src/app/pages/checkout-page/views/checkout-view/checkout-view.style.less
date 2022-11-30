@@ -1,0 +1,23 @@
+@import (reference) '../../../../../styles/_index.less';
+
+@checkout-details-w: 30%;
+
+.checkout-view-content{
+  display: block;
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.checkout-view-content .col-1{
+  width: calc(100% - @checkout-details-w);
+  background-color: white;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+.checkout-view-content .col-2{
+  display: block;
+  width: @checkout-details-w;
+  box-sizing: border-box;
+  padding: 2.5em;
+  padding-top: 0px;
+}

@@ -5,11 +5,17 @@
 
             <div class="card-picture" (click)="goToProductPage(product.id)">
                 <div class="card-picture--front">
-                    <label *ngIf="showStepLabel"> SERUM  </label>
                     <img [src]="product?.image1_src || ''">
+                       
+                    <div class="label" *ngIf="showStepLabel" [ngStyle]="{backgroundColor: colorStepLabel, color: '#333333'}"> 
+                        {{ product?.category_step.name  }} 
+                    </div>
+                    
                 </div>
                 <div class="card-picture--back" [ngClass]="{'inWishlist': (inWishlist$ | async),'inCartlist': (inCartlist$ | async)}"></div>
             </div>
+
+         
 
 
             <div class="card-discount" *ngIf="(discount || product?.discount)">

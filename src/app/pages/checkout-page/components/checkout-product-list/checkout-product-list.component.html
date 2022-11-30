@@ -1,14 +1,16 @@
 <form class="checkout-product-list">
-
+ 
     <div class="wrapper--head" *ngIf="!isOrder">
-        <h1><strong>¡Te faltan 114.000 para que tu envio sea gratis!</strong></h1>
+        <h1 *ngIf="(missingToFree) > 0"><strong>¡Te faltan {{ missingToFree | currency:'$':'symbol':'2.0' }} para que tu envio sea gratis!</strong></h1>
+        <h1 *ngIf="(missingToFree) <= 0"><strong>Yay! Tienes envio gratis!</strong></h1>
     </div>
 
     <div class="wrapper--products line--bordered-top">
         <ul class="checkout-products">
-            <div class="checkout-product-list">
+            <div class="checkout-product-list" *ngIf="products && products.length > 0">
                 <div *ngFor="let product of products; index as i">
-                    <app-product-item 
+                    <app-product-item
+                    *ngIf="product.quantity > 0" 
                     [index]="i"
                     [product]="product"
                     [isOrder]="isOrder"
@@ -21,19 +23,15 @@
     <div class="wrapper--discount" *ngIf="!isOrder">
         <div class="discount-container">
             <div class="input">
-                <!-- <input type="text" [(ngModel)]="coupon"> -->
-                <input type="text" >
-                <h5>¿Tienes un codigo de <strong>descuento</strong> ?</h5>
+                <input type="text" [placeholder]="'¿Tienes un cupón de descuento ?'">
             </div>
             <div class="label"  (click)="doCoupon()">
                 <span>Aplicar</span>
             </div>
         </div>
         <div class="label-container">
-            <h5> Muestras gratis en todos los pediso BSC!</h5> 
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
+            <h5> ¡Muestras <strong>gratis</strong> en todos los pedidos de BSC! </h5> 
+            <img src="../../../../../assets/OTROS/3 CORAZONES.png" alt="">
         </div>
     </div>
 

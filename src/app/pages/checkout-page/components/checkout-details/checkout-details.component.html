@@ -1,7 +1,40 @@
 <div class="checkout-details">
     <div class="details-logo--wrapper" *ngIf="!isDone">
-        <img src="../../../../../assets/checkout/logo.svg" alt="">
+        <img src="../../../../../assets/CAJAS/CAJA AMARILLA.svg" alt="" *ngIf="step === 'carrito'">
+        <img src="../../../../../assets/CAJAS/CAJA ROSADA.svg" alt="" *ngIf="step === 'datos'">
+        <img src="../../../../../assets/CAJAS/CAJA AZUL.svg" alt="" *ngIf="step === 'envio'">
+        <img src="../../../../../assets/CAJAS/CAJA AMARILLA.svg" alt="" *ngIf="step === 'pago'">
+        <img src="../../../../../assets/checkout/logo.svg" alt="" *ngIf="step === 'completado'">
     </div>
+
+    <div class="details-products--wrapper">
+        <div class="details-products--wrapper__header">
+            Detalle del pedido <i (click)="doOpenProducts()"> /\ </i>
+        </div>
+        <div class="details-products--wrapper__content" *ngIf="isOpenProducts">
+            <ul>
+                <li *ngFor="let product of products"> 
+                    <div class="col1"><img [src]="product.image1_src"></div>
+                    <div class="col2">
+                        <div class="row">
+                            <label class="product-name">{{ product.name }}</label>
+                            <label class="product-brand">{{ product.name }}</label>
+                        </div>
+                        <div class="row">
+                            <label class="product-qty">
+                                {{ product.quantity }}
+                            </label>
+                            x
+                            <label class="product-prices">
+                                {{ product.price }}
+                            </label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <div class="details-summary--wrapper">
         <ul>
             <li class="line--bordered-bottom">
@@ -9,7 +42,7 @@
                 <div class="right">{{ (total) | currency:'$':'symbol':'2.0' }}</div>
             </li>
             <li class="line--bordered-bottom">
-                <div class="left">descuento adicional</div>
+                <div class="left">descuento</div>
                 <div class="right">no aplica</div>
             </li>
             <li class="line--bordered-bottom">
@@ -35,7 +68,13 @@
     </div>
 
 
-    <div class="details-next--wrapper" *ngIf="!isOrder">
+    <div class="details-next--wrapper" *ngIf="!isOrder"
+        [ngClass]="{
+            'pink':  step === 'envio',
+            'yellow': step === 'datos',
+            'blue': step === 'carrito' || step === 'pago' || step === 'completado'
+        }"
+    >
         <button (click)="doContinue()" *ngIf="!isFinal">
             Continuar
         </button>

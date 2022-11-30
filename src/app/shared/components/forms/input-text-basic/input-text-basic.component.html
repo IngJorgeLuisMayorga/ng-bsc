@@ -1,4 +1,4 @@
-<div class ="input-wrapper" [ngClass]="{'error': isError}">
+<div class ="input-wrapper fill" [ngClass]="{'error': isError, 'fill': (value || default) && !isError}">
     <input 
     (keyup)="onChange($event)" 
     (keypress)="onChange($event)" 

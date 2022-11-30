@@ -152,6 +152,7 @@ export class FooterDefaultComponent implements OnInit {
         { name: 'The Plant Base', link: '' },
         { name: 'Tia’m', link: '' },
         { name: 'Tonymoly', link: '' },
+        { name: 'Adidas', link: '' },
       ]
     }, {
       title: 'PERFIL',

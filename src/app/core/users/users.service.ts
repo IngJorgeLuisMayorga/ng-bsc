@@ -66,30 +66,30 @@ export class UsersService {
   }
 
   async signup(user: User): Promise<User> {
-    console.log(' ')
-    console.log(' ')
-    console.log(' user ')
-    console.log(user)
-    console.log(' ')
-    console.log(' ')
-    console.log(' ')
-    debugger;
-    return user;
-    /*
     try {
+      console.log(' ')
+      console.log(' async signup(user: User): user ')
+      console.log(user)
+      console.log(' ')
+      debugger;
       const userResponse = await this.$http.post<User>(`${environment.server}/users/auth/signup`, {
         ...user
       }).toPromise();
+
       userResponse.nid = userResponse.nid_type + userResponse.nid_number;
       this._user.next(userResponse);
+
+      
+
       this.toastr.success('Usuario Creado Exitosamente');
       localStorage.setItem('user', JSON.stringify(userResponse));
+
       return userResponse;
     } catch (error) {
       this.toastr.error('Error creando usuario');
       throw error;
     }
-    */
+    
   }
 
 
@@ -113,5 +113,12 @@ export class UsersService {
     const user = await this.$http.get<User>(`${environment.server}/users/${id}`).toPromise();
     user.nid = user.nid_type + user.nid_number;
     return user;
+  }
+
+  async setUser(user: User){
+    this._user.next({
+      ...this._user.getValue(),
+      ...user
+    })
   }
 }

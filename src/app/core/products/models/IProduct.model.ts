@@ -48,6 +48,7 @@ export type Product = {
     price: number;
     discount: number;
     quantity: number;
+    brand?: string;
 
     isDuo?: boolean;
     type?: string;

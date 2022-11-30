@@ -1,0 +1,45 @@
+
+ <div class="details-summary--wrapper">
+        <ul>
+            <li class="line--bordered-bottom">
+                <div class="left">{{ totalQuantity }} productos</div>
+                <div class="right">{{ totalPrice | currency:'$':'symbol':'2.0' }}</div>
+            </li>
+            <li class="line--bordered-bottom">
+                <div class="left">Cupón</div>
+                <div class="right">no aplica</div>
+            </li>
+            <li class="line--bordered-bottom">
+                <div class="left">Envio</div>
+           
+                <div class="right">
+                        <!-- FREE BY COUPON-->
+                        <ng-template *ngIf="(shipping)?.isFreeByCoupon;else noFreeByCoupon"><div>gratis por cupon</div></ng-template>
+                        <ng-template #noFreeByCoupon>
+                            <!-- FREE BY AMOUNT > 300K -->
+                            <div *ngIf="(shipping)?.isFree; else noFreeByAmount">gratis</div>
+                            <ng-template #noFreeByAmount>
+                                <!-- SHOW PRICE FROM LIST -->
+                                <div *ngIf="((shipping)?.value && (shipping)?.value > 0);else noAmount">{{ (shipping)?.value | currency:'$':'symbol':'2.0' }}</div>
+                                <ng-template #noAmount>
+                                    <!-- SHOW PENDING -->
+                                    <div>por calcular</div> 
+                                </ng-template>
+                            </ng-template>
+                        </ng-template>
+                </div>
+            </li>
+        </ul>
+</div>
+
+<div class="details-total--wrapper line--bordered">
+        <h1 class="" *ngIf="!(shipping)?.value">
+            Total <strong>{{ (totalPrice) | currency:'$':'symbol':'2.0' }} </strong>  <ng-container *ngIf="!(totalPrice > 300000)"> + envio</ng-container>
+        </h1>
+        <h1 class="" *ngIf="(shipping)?.value">
+            Total <strong>{{ (totalPrice + (shipping)?.value) | currency:'$':'symbol':'2.0' }}</strong>
+        </h1>
+        <h2> 
+            Puntos con esta compra: {{ (totalPrice / 1000 ) | number:'1.0-0' }}
+        </h2>
+</div>

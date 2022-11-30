@@ -16,12 +16,13 @@ export class CheckoutShippingFormComponent implements OnInit {
 
 
   public shippingFormSubmit: IFormSubmit = {
-    type: 'basic',
+    type: 'none',
     color: 'yellow',
     placeholder: 'Guardar'
   }
 
   public shippingFormFields: IFormField[] = [
+    //0
     {
       name: 'name',
       type: 'text',
@@ -32,6 +33,7 @@ export class CheckoutShippingFormComponent implements OnInit {
         check: (value: any, value2?: any) => { return (value.length < 3); }
       }
     },
+    //1
     {
       name: 'lastname',
       type: 'text',
@@ -42,6 +44,7 @@ export class CheckoutShippingFormComponent implements OnInit {
         check: (value: any) => { return (value.length < 3); }
       }
     },
+    //2
     {
       name: 'email',
       type: 'email',
@@ -118,6 +121,9 @@ export class CheckoutShippingFormComponent implements OnInit {
   @Input()
   userFields!: IFormField[];
 
+  @Input()
+  showPrices: boolean = true;
+
   constructor(
     private $user: UsersService,
     private toaster: ToastrService,
@@ -127,14 +133,20 @@ export class CheckoutShippingFormComponent implements OnInit {
   ngOnInit(): void {
     
     // Departments
-    this.shippingFormFields[4].options = departments.data.map(item => {
+    this.shippingFormFields[4].options = [
+      ...[{
+        label: 'Seleccionar Departamento',
+        value: 'NA',
+        price: 0
+      }],
+      ...departments.data.map(item => {
       const price = (item.name === 'Bogotá D.C.'  || item.name === 'Cundinamarca') ? 7000 : 12000;
       return {
-        label: item.name + '  -  ' + this.currencyPipe.transform(price,'','$','1.0-0'),
+        label: this.showPrices ? item.name + '  -  ' + this.currencyPipe.transform(price,'','$','1.0-0') : item.name,
         value: item.name,
         price: price
       }
-    })
+    })]
 
     let user: User | string;
     user = localStorage.getItem('user');
@@ -143,6 +155,10 @@ export class CheckoutShippingFormComponent implements OnInit {
       this.shippingFormFields[0].value = user.name;
       this.shippingFormFields[1].value = user.name;
       this.shippingFormFields[2].value = user.email;
+      this.shippingFormFields[3].value = 'Colombia';
+      this.shippingFormFields[4].value = user.department;
+      this.shippingFormFields[5].value = user.city;
+      this.shippingFormFields[6].value = user.address;
       this.shippingFormFields[7].value = user.phone;
     }
 

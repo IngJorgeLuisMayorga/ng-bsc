@@ -29,6 +29,7 @@ export class InputOptionsBasicComponent implements OnInit {
   errorCheck:  (value: any) => boolean = () => { return false};
 
   public isError = false;
+  public isFill = false;
 
 
   constructor() { }
@@ -42,5 +43,7 @@ export class InputOptionsBasicComponent implements OnInit {
     if(!this.isError){
       this.nChange.emit(value);
     }
+
+    this.isFill = true;
   }
 }

@@ -43,6 +43,18 @@ export class CartService {
     this._shipping.next(DefaultShippingStore);
   }
 
+  public initLoad(){
+    if(this.isCartEmpty()){
+      const productsStr = localStorage.getItem('cart');
+      if(productsStr) {
+        const products = JSON.parse(productsStr)
+        if(products && products.length > 0){
+          this._cart.next(products);
+        }
+      }
+    }
+  }
+
   public isCartEmpty(){
     return this._cart.getValue().length === 0;
   }
@@ -179,6 +191,11 @@ export class CartService {
     this._isUpdating.next(0);
   }
 
+  
+  public getCart(){
+    return this._cart.getValue();
+  }
+
   public async removeToCart(product: Product){
 
 
@@ -204,8 +221,7 @@ export class CartService {
  
   }
   public async removeAllToCart(product: Product){
-
-
+    
     this._isUpdating.next(product.id);
     let products = JSON.parse(JSON.stringify(this._cart.getValue()) + '')
     let productInCart = products.find((_product: Product) => _product.id === product.id);

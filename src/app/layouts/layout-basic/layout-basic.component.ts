@@ -1,19 +1,20 @@
 import { Route } from '@angular/compiler/src/core';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, ResolveEnd, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartService } from 'src/app/core/cart/services/cart.service';
 import { IProduct, Product } from 'src/app/core/products/models/IProduct.model';
 import { ProductsService } from 'src/app/core/products/products.service';
 import { WishlistService } from 'src/app/core/wishlist/services/wishlist.service';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 
 @Component({
   selector: 'app-layout-basic',
   templateUrl: './layout-basic.component.html',
   styleUrls: ['./layout-basic.component.less']
 })
-export class LayoutBasicComponent implements OnInit {
+export class LayoutBasicComponent implements OnInit,OnDestroy {
 
   @Input()
   breadcumbs: Array<{ path: string; text: string }> = [{ text:'Inicio',path: '/'}];
@@ -30,25 +31,42 @@ export class LayoutBasicComponent implements OnInit {
   public currentPath  = '';
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private $cart: CartService, private $wishlist: WishlistService, private $products:ProductsService) { 
+  constructor(
+    public $breadcrumbs: BreadcrumbsService,
+    public $router: Router,
+    public $route: ActivatedRoute,
+    public $cart: CartService, 
+    public $wishlist: WishlistService, 
+    public $products:ProductsService
+  ) { 
     this.isCartOpen$ = this.$cart.isOpen$;
     this.wishlist$ = this.$wishlist.sync();
-    router.events.subscribe((val) => {
-      if(val instanceof NavigationEnd){
-        this.currentPath = val.url;
-        this.onChangeBreadcrumb();
-      }
-  });
+    
   }
 
   ngOnInit(): void {
-    this.onChangeBreadcrumb()
+    const path = window.location.href.split(window.location.host)[1];
+    this.currentPath = path;
+    this.$breadcrumbs.setBreadcrumbByRoute(path);
   }
 
-  onChangeBreadcrumb(){
+  ngOnDestroy(): void {
+  
+  }
+
+  public onChangeBreadcrumb(){
     const breadcrumb = this.breadcumbs.find(breadcumb => breadcumb.path === this.currentPath  );
     if(breadcrumb) this.nBreadcrumbChange.emit(breadcrumb);
   }
+
+  public goToBreadcrumb(breadcrumb: { path: string; text: string }){
+    this.currentPath = breadcrumb.path;
+    this.$breadcrumbs.setBreadcrumbByRoute(breadcrumb.path);
+    this.$router.navigateByUrl(breadcrumb.path);
+  }
+
+
+
 
 
 }

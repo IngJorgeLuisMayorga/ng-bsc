@@ -9,6 +9,7 @@
     margin-top: 15px;
     margin-right: 0px;
     margin-left: 0px;
+    .font-space-large();
 }
 
 .input-wrapper select *{
@@ -17,5 +18,22 @@
     border-radius: 0px !important;
     padding: 15px !important;
     box-sizing: border-box;
+}
+
+.input-wrapper.fill{
+    border:1px solid @color-black;
+    select{
+        color: @color-black;
+    }
+}
+
+.input-wrapper .error{
+    border:1px solid @color-black;
+    input{
+        color: @color-black;
+    }
+}
+
+.input-wrapper select option{
 
 }

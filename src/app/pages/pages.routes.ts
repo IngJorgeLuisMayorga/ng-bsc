@@ -20,13 +20,5 @@ export const PagesRoutes = [
   {
     path: 'products/:id',
     component: ProductPageComponent,
-  },
-  {
-    path: 'checkout',
-    component: CheckoutPageComponent,
-  },
-  {
-    path: 'checkout/:step',
-    component: CheckoutPageComponent,
-  },
+  }
 ];

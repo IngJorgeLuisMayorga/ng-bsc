@@ -26,6 +26,9 @@ export class ProductCardComponent implements OnInit {
   @Input()
   showStepLabel: boolean = false;
 
+  @Input()
+  colorStepLabel: string = '';
+
   public wishlist$: Observable<Product[]>;
   public inWishlist$: Observable<boolean>;
   public inCartlist$: Observable<boolean>;

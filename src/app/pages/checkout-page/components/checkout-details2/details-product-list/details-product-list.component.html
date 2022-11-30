@@ -1,0 +1,37 @@
+<div class="details-products--wrapper">
+    <div (click)="doToogleProducts()" class="details-products--wrapper__header">
+        Detalle del pedido 
+        <i  class="fa fa-chevron-down" aria-hidden="true"></i>
+    </div>
+    <div class="details-products--wrapper__content" *ngIf="isOpenProducts">
+        <ul>
+            <li *ngFor="let product of products"> 
+                <div *ngIf="product.quantity > 0" style="display:inline-flex">
+                    <div class="col1"><img [src]="product.photo"></div>
+                    <div class="col2">
+                        <div class="row">
+                            <label class="product--name">
+                                <h1>{{ product.title }}
+                                    <strong *ngIf="product.brand"  > 
+                                        / {{product.brand }}
+                                    </strong>
+                                    <strong *ngIf="!product.brand"  > 
+                                        / NO BRAND
+                                    </strong>
+                                </h1>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="product--qty">
+                                {{ product.quantity }}
+                            </label> x <label class="product--price">
+                                {{ product.price }}
+                            </label>
+                            <div class="product--delete" (click)="removeItem(product)">x</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

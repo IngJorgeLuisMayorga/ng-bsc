@@ -17,8 +17,7 @@
         <section class="section--breadcumbs">
             <ul>
                 <li *ngFor="let breadcumb of breadcumbs" [ngClass]="{  'active' : breadcumb.path === currentPath }" >
-                    <a class="font--helvetica-medium"
-                       [routerLink]="breadcumb.path">
+                    <a class="font--helvetica-medium" (click)="goToBreadcrumb(breadcumb)">
                        {{ breadcumb.text }}
                     </a>
                 </li>

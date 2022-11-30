@@ -20,6 +20,7 @@ export class InputTextBasicComponent implements OnInit {
   errorCheck:  (value: any) => boolean = () => { return false};
 
   public isError = false;
+  public value = '';
 
 
   @Output()
@@ -32,6 +33,7 @@ export class InputTextBasicComponent implements OnInit {
 
   onChange($event: any){
     const value = $event.target.value;
+    this.value = value;
     this.isError = this.errorCheck(value);
     this.nChange.emit(value);
     /*

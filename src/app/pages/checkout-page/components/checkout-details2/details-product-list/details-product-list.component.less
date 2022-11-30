@@ -1,0 +1,103 @@
+
+@import (once) '../../../../../../styles/_index.less';
+
+
+
+.details-products--wrapper__header{
+    display: inline-flex;
+    color: @color-black;
+    font-weight: 600;
+    .font-space-large();
+    padding-top: 25px;
+
+        &:hover{
+            opacity: 0.5;
+        }
+    
+        cursor: pointer;
+    i{
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 10px;
+        padding-left: 52px;
+        position: relative;
+        top: 4px; 
+        cursor: pointer; 
+    
+    }
+}
+.details-products--wrapper__content{
+    display: inline-flex;
+    color: @color-black;
+    font-weight: 300;
+    .font-space-large();
+    li{
+        display: inline-flex;
+    }
+    img{
+        width: 80px;
+        padding-right: 10px;
+        padding-top: 15px;
+    }
+    label{
+        //width: calc(100% - 60px);
+    }
+    .row{
+        display: inline-flex;
+    }
+}
+
+
+.product--name{
+    display: block;
+    box-sizing: border-box;
+    padding:0em;
+    padding-top: 15px;
+    width: auto;
+    padding-left: 0px;
+    font-weight: 300;
+    .font-size-xs();
+    .font-space-large();
+
+    label, strong{
+        &:hover{
+            //.font-bold();
+            opacity: 0.5;
+            cursor: pointer;
+        }
+    }
+  
+}
+
+.product--price{
+    width: auto;
+    display: block;
+    box-sizing: border-box;
+    padding:0em;
+    padding-top: 0px;
+    font-weight: 600;
+    color: @color-black;
+
+    .font-space-normal();
+
+    h2{
+        .font-size-l();
+        .font-bold();
+    }
+    h3{
+        padding-top: 5px;
+        text-decoration: line-through;
+        .font-size-s();
+    }
+}
+
+
+.product--delete{
+    cursor: pointer;
+    padding-top: 0px;
+    .font-size-m();
+     position: relative;
+     left: 50px;
+    &:hover{
+        opacity: 0.5;
+    }
+}

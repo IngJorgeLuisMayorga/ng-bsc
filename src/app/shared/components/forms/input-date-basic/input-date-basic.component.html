@@ -1,4 +1,4 @@
-<div class ="input-wrapper" [ngClass]="{'error': isError}">
+<div class ="input-wrapper" [ngClass]="{'error': isError, 'fill': (date) && !isError}">
     <input 
     type="date"
     (change)="onChange($event)" 

@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from 'src/app/core/cart/services/cart.service';
 import { CouponsService } from 'src/app/core/coupons/coupons.service';
 import { Product } from 'src/app/core/products/models/IProduct.model';
+import { filter, map }  from  'rxjs/operators';
+import { Observable } from 'rxjs';
+import { ICheckoutProduct } from '../../models/checkout-cart.model';
 
 @Component({
   selector: 'app-checkout-product-list',
@@ -11,17 +14,21 @@ import { Product } from 'src/app/core/products/models/IProduct.model';
 export class CheckoutProductListComponent implements OnInit {
 
   @Input()
-  products : Product[];
+  products :  ICheckoutProduct[];
 
   @Input()
   total : number;
+
+  @Input()
+  missingToFree : number;
 
   @Input()
   isOrder : boolean = false;
 
   public coupon: string;
   
-  constructor(private $cart: CartService, private $coupons: CouponsService) { }
+  constructor(private $cart: CartService, private $coupons: CouponsService) {
+  }
 
   ngOnInit(): void {
   }

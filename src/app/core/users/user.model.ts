@@ -16,6 +16,7 @@ export type User = {
    photo: string;
 
    phone: string;
+   department?: string;
    city: string;
    address: string;
 

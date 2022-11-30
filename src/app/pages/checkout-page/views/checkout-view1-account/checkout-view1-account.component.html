@@ -1,0 +1,26 @@
+<app-checkout-view [title]="title">
+    <div class="checkout-view-content">
+            <div class="col-1">
+                <app-checkout-user-form
+                    #userFormComponent
+                    (nChange)="onChange($event)"
+                ></app-checkout-user-form>
+                <div *ngIf="!(checkoutCart$ | async)?.products;" >
+                    <h1>EMPTY CART PRODUCTS</h1>
+                </div>
+            </div>
+            <div class="col-2">
+                <app-checkout-details2
+                    *ngIf="(checkoutCart$ | async)"
+                    [step]="'datos'"
+                    [user]="(checkoutCart$ | async)?.user"
+                    [shipping]="(checkoutCart$ | async)?.shipping"
+                    [products]="(checkoutCart$ | async)?.products"
+                    [total]="(checkoutCart$ | async)?.total"
+                    [points]="0"
+                    [disabled]="disabled"
+                    (nContinue)="onContinueBtn()"
+            ></app-checkout-details2>  
+            </div>
+        </div>
+</app-checkout-view>

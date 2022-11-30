@@ -86,7 +86,7 @@ export class CartSidebarComponent implements OnInit {
   goToCheckout(){
     if(!this.$cart.isCartEmpty()){
       this.doCloseCart();
-      this.router.navigateByUrl('/checkout');
+      this.router.navigateByUrl('/checkout/cart');
     } else{
       this.toastr.error('Error, el carrito esta vacio');
     }
