@@ -13,6 +13,9 @@ export class DetailsProductListComponent implements OnInit {
   @Input()
   products!: ICheckoutProduct[];
 
+  @Input()
+  showDetailsDropdown: boolean = false;
+
   public isOpenProducts: boolean = false;
 
   constructor(private $cart:CartService) { }

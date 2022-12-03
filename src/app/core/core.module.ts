@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { CartModule } from './cart/cart.module';
 import { ProfileModule } from './profile/profile.module';
 import { ProductItemComponent } from './products/components/product-item/product-item.component';
+import { OrdersModule } from './orders/orders.module';
 
 
 const COMPONENTS = [
@@ -37,6 +38,7 @@ const PIPES = [
 const MODULES = [
   CartModule,
     ProfileModule,
+    OrdersModule,
 ]
 
 @NgModule({

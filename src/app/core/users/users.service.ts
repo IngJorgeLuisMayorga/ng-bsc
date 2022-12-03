@@ -45,17 +45,13 @@ export class UsersService {
 
   async login(email: string, password: string): Promise<User> {
       try {
-        console.warn(' ')
-        console.warn(' login ')
-        console.warn({ email, password })
-        console.warn(' ')
-        console.warn(' ')
         const userResponse = await this.$http.post<User>(`${environment.server}/users/auth/signin`, {
           email: email,
           password: password
         }).toPromise();
         userResponse.nid = userResponse.nid_type + userResponse.nid_number;
         this._user.next(userResponse);
+        console.log({userResponse})
         this.toastr.success('Usuario Loggeado Exitosamente');
         localStorage.setItem('user', JSON.stringify(userResponse));
         return userResponse;

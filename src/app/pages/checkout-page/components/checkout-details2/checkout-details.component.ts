@@ -32,6 +32,12 @@ export class CheckoutDetails2Component implements OnInit {
   disabled!: boolean;
 
   @Input()
+  isOrder: boolean = false;
+
+  @Input()
+  order: Order = null;
+
+  @Input()
   step!: 'carrito' | 'datos' | 'envio' | 'pago' | 'completado';
 
   @Output()

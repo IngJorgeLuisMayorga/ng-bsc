@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ICheckoutProduct } from 'src/app/pages/checkout-page/models/checkout-cart.model';
 import { environment } from 'src/environments/environment';
 import { Product } from '../products/models/IProduct.model';
 import { User } from '../users/user.model';
@@ -117,6 +118,23 @@ export class OrdersService {
   async patch(orderId:number, payload: any): Promise<Order>{
     const order = this.$http.patch<Order>(`${environment.server}/orders/${orderId}`, payload).toPromise();
     return order;
+  }
+
+  async getProductsByIds(ids: number[]): Promise<ICheckoutProduct[]>{
+    const products = await this.$http.get<Product[]>(`${environment.server}/products/by/ids/${ids.join(',')}`).toPromise();
+    return products.map(item => {
+      return {
+        id: item.id,
+        description: item.description,
+        brand: item.brand,
+        quantity: item.quantity,
+        price: item.price,
+        discount: item.discount,
+        title: item.name,
+        photo: item.image1_src,
+        total: item.quantity * (1 - item.discount/100) * (item.price)
+      }
+    })
   }
 
 }

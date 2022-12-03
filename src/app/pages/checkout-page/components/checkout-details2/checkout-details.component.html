@@ -1,6 +1,6 @@
 <div class="checkout-details">
 
-    <div class="details-logo--wrapper">
+    <div class="details-logo--wrapper" *ngIf="!isOrder">
         <img src="../../../../../assets/CAJAS/CAJA AMARILLA.svg" alt="" *ngIf="step === 'carrito'">
         <img src="../../../../../assets/CAJAS/CAJA ROSADA.svg" alt="" *ngIf="step === 'datos'">
         <img src="../../../../../assets/CAJAS/CAJA AZUL.svg" alt="" *ngIf="step === 'envio'">
@@ -9,6 +9,7 @@
     </div>
 
     <app-details-product-list
+        *ngIf="!isOrder"
         [products]="products"
     ></app-details-product-list>
     
@@ -19,7 +20,8 @@
         [totalQuantity]="size"
     ></app-details-summary>
 
-    <div class="details-next--wrapper" [ngClass]="{
+    <div class="details-next--wrapper" *ngIf="!isOrder" 
+    [ngClass]="{
         'gray': disabled,
         'pink':  !disabled && step === 'envio',
         'yellow': !disabled &&  step === 'datos',
@@ -30,6 +32,16 @@
             <label *ngIf="step === 'pago'"> Finalizar Compra </label>
         </button>
     </div>
+
+
+    <div  *ngIf="isOrder && order && user" >
+        <app-details-order-shipping-info
+            [order]="order"
+            [user]="user"
+        ></app-details-order-shipping-info>
+    </div>
+
+
 
 </div>
 

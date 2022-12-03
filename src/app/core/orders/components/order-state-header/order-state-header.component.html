@@ -1,0 +1,30 @@
+<div class="order-state-header">
+
+    <div class="header-contents">
+    <div class="header-content order-number">
+            <strong>Número de orden</strong> <br>
+            <label>#{{ id }}</label>
+        </div>
+        <div class="header-content order-date">
+            <strong>Fecha</strong> <br>
+            <label>
+                <div *ngIf="order?.shipping_status === 's1_ordered'">{{ order?.shipping_ordered_at | date }} </div>
+                <div *ngIf="order?.shipping_status === 's2_shipped'">{{ order?.shipping_shipped_at | date }} </div>
+                <div *ngIf="order?.shipping_status === 's3_delivered'">{{ order?.shipping_delivered_at | date}} </div>
+            </label>
+        </div>
+        <div class="header-content order-state">
+            <strong>Estado</strong> <br>
+            <div class="img-wrapper" *ngIf="order?.state === 'ORDERED'">
+                <img src="../../../../../assets/profile/ordered_svg.svg">
+            </div>
+            <div class="img-wrapper" *ngIf="order?.state === 'SHIPPED'">
+                <img src="../../../../../assets/profile/shipped_svg.svg">
+            </div>
+            <div class="img-wrapper" *ngIf="order?.state === 'DELIVERED'">
+                entregado
+            </div>
+        </div>
+    </div>
+
+</div>

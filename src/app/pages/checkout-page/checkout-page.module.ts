@@ -23,6 +23,7 @@ import { CheckoutViewComponent } from './views/checkout-view/checkout-view.compo
 import { CheckoutDetails2Component } from './components/checkout-details2/checkout-details.component';
 import { DetailsProductListComponent } from './components/checkout-details2/details-product-list/details-product-list.component';
 import { DetailsSummaryComponent } from './components/checkout-details2/details-summary/details-summary.component';
+import { DetailsOrderShippingInfoComponent } from './components/checkout-details2/details-order-shipping-info/details-order-shipping-info.component';
 
 export const Routes = [
   //  Home Page Component
@@ -43,7 +44,7 @@ export const Routes = [
         path:'payment', component: CheckoutView3PaymentComponent
       },
       {
-        path:'finish', component: CheckoutView4FinishComponent
+        path:'finish/order/:orderId', component: CheckoutView4FinishComponent
       },
     ]
   },
@@ -65,7 +66,7 @@ export const Routes = [
     CheckoutView3PaymentComponent,
      CheckoutView4FinishComponent,
      CheckoutDetails2Component, 
-     CheckoutViewComponent, DetailsProductListComponent, DetailsSummaryComponent],
+     CheckoutViewComponent, DetailsProductListComponent, DetailsSummaryComponent, DetailsOrderShippingInfoComponent],
   exports: [CheckoutPageComponent],
   imports: [
     CommonModule,

@@ -20,7 +20,7 @@ import { ICheckoutCart } from '../../models/checkout-cart.model';
 })
 export class CheckoutViewComponent implements OnInit, OnDestroy {
 
-  public breadcrumbs = Breadcrumbs;
+
   public cartSubs: Subscription;
   public checkoutCart$: Observable<ICheckoutCart>;
   
@@ -31,6 +31,9 @@ export class CheckoutViewComponent implements OnInit, OnDestroy {
 
   @Input()
   title: { message: string; box?: 'yellow' | 'pink' | 'blue' | 'none'} = { message: ''};
+
+  @Input()
+  breadcrumbs:  { text: string; path: string;}[] = Breadcrumbs;
 
   constructor(
     public $router: Router, 
@@ -55,7 +58,7 @@ export class CheckoutViewComponent implements OnInit, OnDestroy {
     // Checkout Cart
     this.cartSubs = this.checkoutCart$.subscribe(cart => { 
       if(cart){
-        this.cartPayload = cart
+        this.cartPayload = JSON.parse(JSON.stringify(cart) + '');
       }
     });
   }
@@ -66,7 +69,10 @@ export class CheckoutViewComponent implements OnInit, OnDestroy {
 
 
   onContinue(){
-    this.$breadcrumbs.nextBreadcrumb()
+    const isFinal = this.$breadcrumbs.nextBreadcrumb();
+    if(isFinal) {
+      this.onFinish()
+    }
   }
 
 
@@ -76,7 +82,7 @@ export class CheckoutViewComponent implements OnInit, OnDestroy {
     console.log(' onFinish() ')
 
     // Get Cart
-    const cart = this.cartPayload;
+    const cart = JSON.parse(JSON.stringify(this.cartPayload) + '');
 
     // Get User
     const user = cart.user;
@@ -112,7 +118,7 @@ export class CheckoutViewComponent implements OnInit, OnDestroy {
       'order_subtotal': cart.total - cart.taxes,
       'order_taxes': cart.taxes,
       'order_total':  cart.total,
-      'order_products_json': JSON.stringify(cart.products.map((product) => ({
+      'order_products_json': JSON.stringify(cart.products.map((product: any) => ({
         id: product.id, qty: product.quantity, price: product.price, name: product.title
       }))),
  
@@ -137,7 +143,7 @@ export class CheckoutViewComponent implements OnInit, OnDestroy {
     console.log(' Debugging::payload ')
     console.log(payload)
     console.log(' ')
-    debugger;
+
   
     // Checkout object for Wompi
     var checkout = new (window as any).WidgetCheckout({
@@ -169,11 +175,11 @@ export class CheckoutViewComponent implements OnInit, OnDestroy {
       }
     });
 
-/*
+
     checkout.open((result:any) => {
       this.onWompiResponse(result, payload, order.id);
     });
-*/
+
 
   }
 
@@ -184,6 +190,7 @@ export class CheckoutViewComponent implements OnInit, OnDestroy {
       console.log(' ')
       console.log(' onWompiResponse ')
       console.log(' ')
+      console.log({result, payload, orderId})
 
       var transaction = result.transaction;
       var status = transaction.status;
@@ -209,7 +216,7 @@ export class CheckoutViewComponent implements OnInit, OnDestroy {
       this.$users.setUser(user);
       
       // Navigate to Thanks Page
-      this.$router.navigateByUrl('/');
+      this.$router.navigateByUrl('/checkout/finish/order/'+order.id);
       
   }
 

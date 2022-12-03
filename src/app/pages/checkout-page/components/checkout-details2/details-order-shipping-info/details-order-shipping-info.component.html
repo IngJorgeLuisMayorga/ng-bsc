@@ -1,0 +1,37 @@
+<div class="order-details-wrapper" *ngIf="order">
+
+        <div class="order-details--title">
+            <h2>
+                Datos de <strong>entrega</strong>
+            </h2>
+        </div>
+
+        <ul class="order-details--info">
+            <li>
+                <strong>Nombre:</strong> {{ order?.user_name }}
+            </li>
+            <li>
+                <strong>Documento:</strong> {{ order?.user_nid_number }}
+            </li>
+            <li>
+                <strong>Ciudad:</strong> {{ order?.shipping_city }}
+            </li>
+            <li>
+                <strong>Dirección:</strong> {{ order?.shipping_address }}
+            </li>
+            <li>
+                <strong>Teléfono:</strong> {{ order?.shipping_phone }}
+            </li>
+        </ul>
+
+        <h3 class="order-details--points-title">
+            Puntos acumulados
+        </h3>
+
+        <div class="order-details--points-bullet">
+            <img src="../../../../../../assets/checkout/points_icon.png">
+            <strong> {{ points }} Bubble Points</strong>
+        </div>
+
+
+</div>

@@ -20,9 +20,6 @@ export default [
       path: '/checkout/payment',
     },
     /*
-    {
-      text: 'Pedido Completado',
-      path: '/checkout/finish',
-    },
+  
     */
   ];

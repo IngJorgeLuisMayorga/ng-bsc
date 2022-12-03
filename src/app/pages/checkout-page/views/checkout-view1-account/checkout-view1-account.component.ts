@@ -8,6 +8,7 @@ import { IFormField } from 'src/app/shared/components/forms/form-basic/form-basi
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { CheckoutUserFormComponent } from '../../components/checkout-user-form/checkout-user-form.component';
 import { CheckoutViewComponent } from '../checkout-view/checkout-view.component';
+import Breadcrumbs from '../../helpers/breadcrumbs';
 
 @Component({
   selector: 'app-checkout-view1-account',
@@ -18,12 +19,14 @@ export class CheckoutView1AccountComponent extends CheckoutViewComponent {
 
 
   public title = { message: 'Mi Cuenta' };
+  public breadcrumbs: { text: string; path: string; }[] = Breadcrumbs.slice(0,3);
 
   public tab = 'signup';
   public disabled = true;
   public init = false;
 
   @ViewChild(CheckoutUserFormComponent) userFormComponent : CheckoutUserFormComponent;
+  @ViewChild('checkoutView') checkoutView!: CheckoutViewComponent;
 
   constructor(
     public $router: Router, 

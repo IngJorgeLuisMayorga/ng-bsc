@@ -1,10 +1,35 @@
-<app-checkout-view [title]="title">
+<app-checkout-view #checkoutView [breadcrumbs]="breadcrumbs" [title]="title" >
+    
+    <div class="checkout-view-header">
+        <app-order-state-header
+            [order]="order"
+        ></app-order-state-header>    
+    </div>
+
     <div class="checkout-view-content">
             <div class="col-1">
-                THIS IS FINISH
+
                 <div *ngIf="!(checkoutCart$ | async)?.products;" >
                     <h1>EMPTY CART PRODUCTS</h1>
                 </div>
+
+                <div>
+                    <div *ngFor="let product of products; let i = index">
+                        <app-product-item 
+                            [index]="i"
+                            [isOrder]="true"
+                            [product]="product"
+                        ></app-product-item>
+                    </div>
+                </div>
+
+                <div>
+                    <app-dark-button
+                        [text]="'Ver mas pedidos'"
+                        (nClick)="goToSeeMore()"
+                    ></app-dark-button>
+                </div>
+
             </div>
             <div class="col-2">
                 <app-checkout-details2
@@ -13,9 +38,12 @@
                     [shipping]="(checkoutCart$ | async)?.shipping"
                     [products]="(checkoutCart$ | async)?.products"
                     [total]="(checkoutCart$ | async)?.total"
-                    [points]="0"
+                    [points]="(checkoutCart$ | async)?.user.points"
+                    [isOrder]="true"
+                    [order]="order"
                     (nContinue)="onContinue()"
             ></app-checkout-details2>  
             </div>
-        </div>
+    </div>
+
 </app-checkout-view>

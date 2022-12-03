@@ -22,6 +22,8 @@ export class CheckoutView0CartComponent extends CheckoutViewComponent {
   
   public title = { message: 'Mi Carrito' };
 
+  public breadcrumbs: { text: string; path: string; }[] = Breadcrumbs.slice(0,2);
+
   constructor(
     public $router: Router, 
     public $toastr: ToastrService,
@@ -32,7 +34,6 @@ export class CheckoutView0CartComponent extends CheckoutViewComponent {
   ) { 
     super($router, $toastr, $orders, $users, $breadcrumbs, $cart);
   }
-
 
 
 }

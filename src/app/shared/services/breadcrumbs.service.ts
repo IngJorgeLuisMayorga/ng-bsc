@@ -61,13 +61,16 @@ export class BreadcrumbsService {
     const breadcrumb = this.getBreadcrumb();
     const i = breadcrumbs.findIndex(item => item.path === breadcrumb.path);
     let next = null;
+    let isFinal = false;
     if(i + 1 === breadcrumbs.length){
       next = breadcrumbs[breadcrumbs.length - 1];
+      isFinal = true;
     } else {
       next = breadcrumbs[i + 1];
     }
     this.setBreadcrumb(next);
     this.router.navigateByUrl(next.path);
+    return isFinal;
   }
   prevBreadcrumb(){
     console.log(' prev ')

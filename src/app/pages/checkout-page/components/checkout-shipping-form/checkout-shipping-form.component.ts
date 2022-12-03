@@ -152,8 +152,8 @@ export class CheckoutShippingFormComponent implements OnInit {
     user = localStorage.getItem('user');
     if(user) {
       user = JSON.parse(user) as User;
-      this.shippingFormFields[0].value = user.name;
-      this.shippingFormFields[1].value = user.name;
+      this.shippingFormFields[0].value = user.first_name;
+      this.shippingFormFields[1].value = user.last_name;
       this.shippingFormFields[2].value = user.email;
       this.shippingFormFields[3].value = 'Colombia';
       this.shippingFormFields[4].value = user.department;
@@ -166,8 +166,8 @@ export class CheckoutShippingFormComponent implements OnInit {
     shipping = localStorage.getItem('shipping');
     if(shipping) {
       shipping = JSON.parse(shipping);
-      this.shippingFormFields[0].value = shipping.name;
-      this.shippingFormFields[1].value = shipping.lastname;
+      this.shippingFormFields[0].value = shipping.first_name;
+      this.shippingFormFields[1].value = shipping.last_name;
       this.shippingFormFields[2].value = shipping.email;
       this.shippingFormFields[3].value = shipping.country;
       this.shippingFormFields[4].value = shipping.department; 

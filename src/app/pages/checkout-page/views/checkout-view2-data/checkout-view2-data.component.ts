@@ -7,6 +7,7 @@ import { UsersService } from 'src/app/core/users/users.service';
 import { IFormField } from 'src/app/shared/components/forms/form-basic/form-basic.component';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { CheckoutShippingFormComponent } from '../../components/checkout-shipping-form/checkout-shipping-form.component';
+import breadcrumbs from '../../helpers/breadcrumbs';
 import { CheckoutViewComponent } from '../checkout-view/checkout-view.component';
 
 @Component({
@@ -17,9 +18,10 @@ import { CheckoutViewComponent } from '../checkout-view/checkout-view.component'
 export class CheckoutView2DataComponent extends CheckoutViewComponent  {
 
   public title = { message: 'Mis Datos' };
-
+  public breadcrumbs: { text: string; path: string; }[] = breadcrumbs.slice(0,4);
   public form: any[] = [];
   @ViewChild(CheckoutShippingFormComponent) shippingFormComponent : CheckoutShippingFormComponent;
+  @ViewChild('checkoutView') checkoutView!: CheckoutViewComponent;
 
   constructor(
     public $router: Router, 
@@ -32,7 +34,11 @@ export class CheckoutView2DataComponent extends CheckoutViewComponent  {
     super($router, $toastr, $orders, $users, $breadcrumbs, $cart);
   }
 
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    this.checkoutView.breadcrumbs = this.checkoutView.breadcrumbs.slice(0,3);
+  }
+
 
   onChange( form: IFormField[]){
     this.form = form;
@@ -53,9 +59,11 @@ export class CheckoutView2DataComponent extends CheckoutViewComponent  {
   }
 
   onContinueBtn(){
-    if(!this.form[4].value){
+    
+    if(!this.form[4] || !this.form[4].value){
       return '';
     }
+
     this.$cart.setShipping(
       {
         firstname: this.form[0].value,
