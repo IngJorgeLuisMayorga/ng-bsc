@@ -3,7 +3,7 @@
 
 
 .order-details-wrapper{
-    padding-top: 1em;
+    padding-top: 5em;
     padding-bottom: 1em;
 
     .font-default();
@@ -16,12 +16,34 @@
 }
 .order-details--info{
 
-    .font-size-s();
-    .font-space-normal();
+    .font-default();
+    .font-size-xs();
+    .font-space-large();
 
     padding-bottom: 1em;
     border-bottom: 1px dotted @color-black;
     margin-bottom: 1em;
 }
-.order-details--points-title{}
-.order-details--points-bullet{}
+.order-details--points-title{
+    
+}
+.order-details--points-bullet{
+    
+    .font-default();
+    .font-size-xs();
+    .font-space-large();
+
+    font-weight: 300;
+
+    img{
+        top: 5px;
+        position: relative;
+        width: 30px;
+        left: -8px;
+    }
+
+    strong{
+        position: relative;
+        left: -8px;
+    }
+}

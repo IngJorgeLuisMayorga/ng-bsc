@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-outline-button',
@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OutlineButtonComponent implements OnInit {
 
+  @Input()
+  text: string = '';
+
+  @Input()
+  icon: string = '';
+
+  @Output()
+  nClick  = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  doClick(){
+    this.nClick.emit();
+  }
 }

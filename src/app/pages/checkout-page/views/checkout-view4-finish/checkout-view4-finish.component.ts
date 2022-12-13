@@ -50,6 +50,9 @@ export class CheckoutView4FinishComponent extends CheckoutViewComponent {
     super($router, $toastr, $orders, $users, $breadcrumbs, $cart);
   }
 
+  get products2(){
+    return [...this.products, ...this.products];
+  }
   async ngOnInit() {
     
 
@@ -79,6 +82,10 @@ export class CheckoutView4FinishComponent extends CheckoutViewComponent {
   }
 
   goToSeeMore(){
-    
+    this.$router.navigateByUrl('/profile')
+  }
+
+  goToHome(){
+    this.$router.navigateByUrl('/')
   }
 }

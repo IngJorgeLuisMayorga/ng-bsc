@@ -14,7 +14,7 @@
                 </div>
 
                 <div>
-                    <div *ngFor="let product of products; let i = index">
+                    <div *ngFor="let product of products2; let i = index">
                         <app-product-item 
                             [index]="i"
                             [isOrder]="true"
@@ -23,12 +23,19 @@
                     </div>
                 </div>
 
-                <div>
+                <div style="display:flex; padding-top: 10px;">
                     <app-dark-button
-                        [text]="'Ver mas pedidos'"
+                        style="width: 200px; display:block;" 
+                        [text]="'¡Ver mis pedidos!'"
                         (nClick)="goToSeeMore()"
                     ></app-dark-button>
+                    <app-outline-button
+                    style="margin-left:1.5em;width: 200px; display:block;" 
+                    [text]="'¡Volver al inicio!'"
+                    (nClick)="goToHome()"
+                ></app-outline-button>
                 </div>
+
 
             </div>
             <div class="col-2">
